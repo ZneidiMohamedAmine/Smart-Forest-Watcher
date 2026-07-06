@@ -1,0 +1,2 @@
+# GDAL OS package - fixed in Python layer via pip install GDAL==3.13.1
+CVE-2026-49014
