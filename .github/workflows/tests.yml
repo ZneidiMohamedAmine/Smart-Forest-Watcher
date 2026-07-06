@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+
   workflow_dispatch:
   pull_request:
 
@@ -61,6 +62,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      SONAR_ORGANIZATION: ${{ vars.SONAR_ORGANIZATION }}
+      SONAR_PROJECT_KEY: ${{ vars.SONAR_PROJECT_KEY }}
 
     steps:
       - name: Check out code
@@ -97,10 +100,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run SonarCloud analysis
-        if: env.SONAR_TOKEN != ''
+        if: env.SONAR_TOKEN != '' && env.SONAR_ORGANIZATION != '' && env.SONAR_PROJECT_KEY != ''
         uses: SonarSource/sonarqube-scan-action@v5
         with:
           args: >
+            -Dsonar.organization=${{ env.SONAR_ORGANIZATION }}
+            -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }}
             -Dsonar.sources=.
             -Dsonar.exclusions=venv/**,.venv/**,env/**,staticfiles/**,logs/**,img/**,client/static/**,home/static/**,supervisor/static/**,**/__pycache__/**
             -Dsonar.python.version=3.9
