@@ -138,6 +138,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
+          no-cache: true 
           load: true
           provenance: false
           sbom: false
