@@ -30,7 +30,7 @@ def client_login(request):
     form_client = ClientLoginForm()
     return render(request, 'website/client.html', {'form_client': form_client})
 
-@require_http_methods(["POST"])
+
 def sign_out_client(request):
     if request.session.get('client_authenticated'):
         request.session.flush()
@@ -56,7 +56,7 @@ def supervisor_login(request):
 
 
 
-@require_http_methods(["POST"])
+
 def sign_out(request):
     if request.session.get('supervisor_authenticated'):
         request.session.flush()
