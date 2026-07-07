@@ -28,9 +28,30 @@ IN_DOCKER = os.environ.get("IN_DOCKER", "0") == "1"
 if ON_WINDOWS:
     VENV_BASE = os.environ.get("VIRTUAL_ENV", os.path.join(BASE_DIR, "venv"))
     OSGEO_PATH = os.path.join(VENV_BASE, "Lib", "site-packages", "osgeo")
-    os.environ["PATH"] = OSGEO_PATH + ";" + os.environ["PATH"]
-    os.environ["PROJ_LIB"] = os.path.join(OSGEO_PATH, "data", "proj")
-    GDAL_LIBRARY_PATH = os.path.join(OSGEO_PATH, "gdal.dll")
+    if os.path.exists(OSGEO_PATH):
+        os.environ["PATH"] = OSGEO_PATH + ";" + os.environ["PATH"]
+        os.environ["PROJ_LIB"] = os.path.join(OSGEO_PATH, "data", "proj")
+        GDAL_LIBRARY_PATH = os.path.join(OSGEO_PATH, "gdal.dll")
+    else:
+        # Fallback to system GDAL installation
+        SYSTEM_GDAL_PATH = r"C:\Program Files\GDAL"
+        if os.path.exists(SYSTEM_GDAL_PATH):
+            if hasattr(os, "add_dll_directory"):
+                os.add_dll_directory(SYSTEM_GDAL_PATH)
+            os.environ["PATH"] = SYSTEM_GDAL_PATH + ";" + os.environ["PATH"]
+            
+            proj_lib_path = os.path.join(SYSTEM_GDAL_PATH, "projlib")
+            if os.path.exists(proj_lib_path):
+                os.environ["PROJ_LIB"] = proj_lib_path
+                
+            import glob
+            dlls = glob.glob(os.path.join(SYSTEM_GDAL_PATH, "gdal*.dll"))
+            if dlls:
+                GDAL_LIBRARY_PATH = dlls[0]
+            else:
+                GDAL_LIBRARY_PATH = None
+        else:
+            GDAL_LIBRARY_PATH = None
 else:
     GDAL_LIBRARY_PATH = os.environ.get("GDAL_LIBRARY_PATH", "/usr/lib/x86_64-linux-gnu/libgdal.so.36")
 
