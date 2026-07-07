@@ -1,8 +1,11 @@
 from django.urls    import path
 from .              import views
+from .              import notifications
 from camera_management import views as cam_views
 
 urlpatterns = [
+    path('api/notifications', notifications.list_notifications, name='api_list_notifications'),
+    path('api/notifications/send', notifications.send_notification, name='api_send_notification'),
     path('<int:project_id>/', views.index1, name='dashboard_client'),
     path('node_detail/<int:project_id>/<int:node_id>/', views.node_detail, name='node_detail'),
     path('node_list/<int:project_id>/', views.node_list, name='node_list'),

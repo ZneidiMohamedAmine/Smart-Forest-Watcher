@@ -82,3 +82,31 @@ class Client(models.Model):
 #update user
 #delete user
 #validation     
+
+
+class MobileNotification(models.Model):
+    user_id = models.EmailField(db_index=True)
+    title = models.CharField(max_length=255)
+    body = models.TextField(blank=True)
+    data = models.JSONField(default=dict, blank=True)
+    camera = models.ForeignKey(
+        'camera_management.Camera',
+        on_delete=models.SET_NULL,
+        related_name='mobile_notifications',
+        null=True,
+        blank=True,
+    )
+    detection = models.ForeignKey(
+        'camera_management.Detection',
+        on_delete=models.SET_NULL,
+        related_name='mobile_notifications',
+        null=True,
+        blank=True,
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-id']
+
+    def __str__(self):
+        return f'{self.user_id} - {self.title}'

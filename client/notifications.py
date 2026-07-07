@@ -1,4 +1,5 @@
 import json
+from urllib.parse import urlsplit
 
 from django.conf import settings
 from django.http import JsonResponse
@@ -26,6 +27,10 @@ def _absolute_media_url(path, request=None):
     if not path:
         return ''
     if path.startswith(('http://', 'https://')):
+        parsed = urlsplit(path)
+        media_prefix = settings.MEDIA_URL.rstrip('/') + '/'
+        if request and parsed.path.startswith(media_prefix):
+            return request.build_absolute_uri(parsed.path)
         return path
     if request:
         return request.build_absolute_uri(path)
@@ -36,9 +41,10 @@ def _absolute_media_url(path, request=None):
 
 
 def _notification_image_url(notification, request=None):
-    url = (notification.data or {}).get('image_url') or ''
-    if not url and notification.detection_id and notification.detection.image:
+    if notification.detection_id and notification.detection.image:
         url = notification.detection.image.url
+    else:
+        url = (notification.data or {}).get('image_url') or ''
     return _absolute_media_url(url, request)
 
 
@@ -52,6 +58,7 @@ def _serialize_notification(n, request=None):
         'camera_id': n.camera.camera_id if n.camera else None,
         'camera_name': n.camera.name if n.camera else None,
         'detection_id': n.detection_id,
+        'project': (n.data or {}).get('project'),
         'image_url': _notification_image_url(n, request),
         'confidence': (n.data or {}).get('confidence'),
         'detected_at': (n.data or {}).get('detected_at'),
@@ -73,8 +80,8 @@ def send_mobile_notification(user_id, title, body='', data=None, camera=None, de
     return {'notification_id': notification.id}
 
 
-def notify_client_for_detection(detection):
-    """Create a mobile notification for the client assigned to this camera detection."""
+"""def notify_client_for_detection(detection):
+
     camera = detection.camera
     project = camera.project
     client = project.client if project else None
@@ -88,7 +95,6 @@ def notify_client_for_detection(detection):
         f"Confidence: {detection.confidence_score * 100:.1f}%\n"
         f"Time: {detection.detected_at:%Y-%m-%d %H:%M UTC}"
     )
-    image_path = detection.image.url if detection.image else ''
     data = {
         'source': 'camera',
         'camera_id': camera.camera_id,
@@ -96,7 +102,6 @@ def notify_client_for_detection(detection):
         'parcelle': parcelle_name,
         'project': project.name,
         'confidence': detection.confidence_score,
-        'image_url': _absolute_media_url(image_path),
         'detected_at': detection.detected_at.isoformat(),
     }
     return send_mobile_notification(
@@ -108,7 +113,7 @@ def notify_client_for_detection(detection):
         detection=detection,
     )
 
-
+"""
 @csrf_exempt
 @require_http_methods(['POST', 'OPTIONS'])
 def send_notification(request):

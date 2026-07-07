@@ -7,7 +7,7 @@ Auth   : api_key field (matched against Camera.api_key in DB)
 
 Expected multipart/form-data body:
   camera_id       string   — matches Camera.camera_id
-  api_key         string   — secret shared with the Pi
+  api_key         string   — secret shared  with the Pi
   confidence      float    — YOLO detection confidence (0.0 – 1.0)
   bounding_boxes  JSON str — list of {x1,y1,x2,y2} dicts (optional)
   image           file     — JPEG / PNG of the annotated frame

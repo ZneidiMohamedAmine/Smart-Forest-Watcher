@@ -25,21 +25,26 @@ def send_camera_alert(detection_id: int):
     from camera_management.models import Detection   # late import avoids circular
     try:
         detection = Detection.objects.select_related(
-            'camera__parcelle__project__client'
+            'camera__project__client',
+            'camera__parcelle',
         ).get(pk=detection_id)
     except Detection.DoesNotExist:
         return
 
     camera  = detection.camera
-    project = camera.parcelle.project
+    project = camera.project or (camera.parcelle.project if camera.parcelle else None)
+    if not project:
+        return
+
     client  = project.client
+    parcelle_name = camera.parcelle.name if camera.parcelle else 'Unknown'
 
     # ── 2. WebSocket push ────────────────────────────────────────────────────
     payload = json.dumps({
         "type":         "camera_alert",
         "camera_id":    camera.camera_id,
         "camera_name":  camera.name,
-        "parcelle":     camera.parcelle.name,
+        "parcelle":     parcelle_name,
         "project":      project.name,
         "confidence":   detection.confidence_score,
         "image_url":    detection.image.url,
@@ -56,7 +61,7 @@ def send_camera_alert(detection_id: int):
     subject  = f"🔥 Fire Detected — {camera.name} ({project.name})"
     message  = (
         f"Fire was detected by camera '{camera.name}' "
-        f"in parcelle '{camera.parcelle.name}', project '{project.name}'.\n\n"
+        f"in parcelle '{parcelle_name}', project '{project.name}'.\n\n"
         f"Confidence: {detection.confidence_score * 100:.1f}%\n"
         f"Detected at: {detection.detected_at:%Y-%m-%d %H:%M UTC}\n\n"
         f"Please check the dashboard immediately."

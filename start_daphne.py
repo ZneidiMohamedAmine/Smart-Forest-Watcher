@@ -5,6 +5,8 @@ from daphne.cli import CommandLineInterface
 
 #* Définir la variable d'environnement pour les paramètres Django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
+port = os.environ.get("PORT", "8001")
+bind = os.environ.get("BIND", "0.0.0.0")
 
 
 #* Initialiser Django avant d'importer d'autres modules
@@ -12,6 +14,6 @@ import django
 django.setup()
 
 #* Passer les arguments de la ligne de commande à Daphne
-sys.argv = ["daphne", "-p", "8000", "-b" ,"0.0.0.0",  "project.asgi:application"]
+sys.argv = ["daphne", "-p", port, "-b", bind, "project.asgi:application"]
 CommandLineInterface.entrypoint()
 
