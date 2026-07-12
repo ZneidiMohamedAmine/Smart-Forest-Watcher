@@ -32,7 +32,7 @@ msgpack==1.1.2
 numpy==2.0.2
 packaging==25.0
 paho-mqtt==2.1.0
-pillow==12.2.0
+pillow==12.3.0
 pluggy==1.6.0
 prompt_toolkit==3.0.51
 psycopg2==2.9.9
