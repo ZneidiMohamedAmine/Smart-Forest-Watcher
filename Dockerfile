@@ -55,6 +55,8 @@ RUN apt-get -o Acquire::Retries=10 -o Acquire::http::Timeout=300 -o Acquire::htt
         libgomp1 \
         libpq5 \
         netcat-openbsd \
+        gdal-bin \
+        libgdal-dev \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /install /usr/local
