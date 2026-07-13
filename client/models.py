@@ -5,6 +5,7 @@ from django.core.exceptions         import ValidationError
 from django.core.mail               import send_mail
 from django.template.loader         import render_to_string
 from django.utils.html              import strip_tags
+from django.utils.crypto            import get_random_string
 
 #crée table client dans DB
 class Client(models.Model):
@@ -28,7 +29,7 @@ class Client(models.Model):
                 raise ValidationError(f"Username {self.username} already exists.")
 
             #! Générer un mot de passe sécurisé pour l'envoi
-            gen_password = BaseUserManager().make_random_password()
+            gen_password = get_random_string(length=12)
             self.password = make_password(gen_password)
             self.user = User.objects.create_user(username=self.username, email=self.email, password=gen_password)
             password_to_send = gen_password
