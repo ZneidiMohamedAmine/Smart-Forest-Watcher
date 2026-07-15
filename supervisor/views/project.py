@@ -1,4 +1,6 @@
 import json
+import traceback
+from django.contrib.gis.geos.error import GEOSException
 from supervisor.models.node         import Node
 from django.db.models               import Count, Value
 from django.contrib.gis.geos        import Polygon
@@ -200,7 +202,7 @@ def parcelle_create(request):
                 else:
                     existing_parcelles = Parcelle.objects.all()
                     for existing_parcelle in existing_parcelles:
-                        if polygon.equals_exact(existing_parcelle.polygon, tolerance=1e-9):
+                        if existing_parcelle.polygon and polygon.equals_exact(existing_parcelle.polygon, tolerance=1e-9):
                             return JsonResponse({'error': {'name': [{'message': 'A parcel with these coordinates already exists.', 'code': 'unique'}]}}, status=400)
 
                     parcelle = form.save(commit=False)
@@ -212,11 +214,18 @@ def parcelle_create(request):
                     'id': p.id,
                     'name': p.name,
                     'coordinates': list(p.polygon.coords[0])
-                } for p in Parcelle.objects.filter(project=parcelle.project)]
+                } for p in Parcelle.objects.filter(project=parcelle.project) if p.polygon]
 
                 return JsonResponse({'message': message, 'parcels': parcels}, status=200)
+            except GEOSException as e:
+                traceback.print_exc()
+                return JsonResponse({'error': {'coordinates': [{'message': f'Geometry error: {e}', 'code': 'invalid'}]}}, status=400)
             except (ValueError, TypeError) as e:
-                return JsonResponse({'error': {'coordinates': [{'message': 'Invalid coordinates format.', 'code': 'invalid'}]}}, status=400)
+                traceback.print_exc()
+                return JsonResponse({'error': {'coordinates': [{'message': f'Invalid coordinates format: {e}', 'code': 'invalid'}]}}, status=400)
+            except Exception as e:
+                traceback.print_exc()
+                return JsonResponse({'error': {'coordinates': [{'message': f'Unexpected error: {e}', 'code': 'invalid'}]}}, status=500)
         else:
             errors = form.errors.get_json_data()
             return JsonResponse({'error': errors}, status=400)
@@ -231,7 +240,7 @@ def parcelle_create(request):
                 'id': parcelle.id,
                 'name': parcelle.name,
                 'coordinates': list(parcelle.polygon.coords[0])
-            } for parcelle in parcelles]
+            } for parcelle in parcelles if parcelle.polygon]
             project_data.append({
                 'project': {
                     'id': project.id,
@@ -262,7 +271,7 @@ def get_parcelles_for_project(request):
             'id': parcelle.id,
             'name': parcelle.name,
             'coordinates': list(parcelle.polygon.coords[0])
-        } for parcelle in parcelles]
+        } for parcelle in parcelles if parcelle.polygon]
         return JsonResponse({'parcelles': parcelle_data}, status=200)
     else:
         return JsonResponse({'error': 'No project ID provided.'}, status=400)
@@ -339,6 +348,8 @@ def get_parcelles_with_nodes_for_project(request):
         parcelles = Parcelle.objects.filter(project_id=project_id)
         parcelle_data = []
         for parcelle in parcelles:
+            if not parcelle.polygon:
+                continue
             nodes = Node.objects.filter(parcelle=parcelle)
             node_data = [{
                 'id': node.id,

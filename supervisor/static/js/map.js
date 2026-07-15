@@ -256,27 +256,115 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // --- SUBMISSION HANDLERS ---
         document.getElementById('nextButtonPolygon')?.addEventListener('click', () => {
-            const name = document.getElementById('id_name_polygon')?.value;
+            const name = document.getElementById('id_name_polygon')?.value?.trim();
             const projectId = projectSelect?.value;
+
+            // Validate name
+            if (!name) {
+                Swal.fire({ icon: 'warning', title: 'Missing Name', text: 'Please enter a name for the parcel before adding it.', confirmButtonColor: '#3085d6' });
+                return;
+            }
+
+            // Validate project
+            if (!projectId) {
+                Swal.fire({ icon: 'warning', title: 'No Project', text: 'No project is selected.', confirmButtonColor: '#3085d6' });
+                return;
+            }
+
             const layers = drawnItemsPolygon.getLayers();
             if (!layers.length) {
                 Swal.fire({ icon: 'warning', title: 'Missing Polygon', text: 'Please draw a polygon first.', confirmButtonColor: '#3085d6' });
                 return;
             }
-            const coords = layers[layers.length - 1].getLatLngs()[0].map(l => [l.lat, l.lng]);
-            coords.push(coords[0]);
+            
+            // Find the unsaved polygon layer (layers that were just drawn, not loaded from db)
+            const newLayers = layers.filter(layer => !layer.feature || !layer.feature.properties || !layer.feature.properties.id);
+            if (!newLayers.length) {
+                Swal.fire({ icon: 'warning', title: 'No New Polygon', text: 'Please draw a new polygon on the map first.', confirmButtonColor: '#3085d6' });
+                return;
+            }
+            const coords = newLayers[newLayers.length - 1].getLatLngs()[0].map(l => [l.lat, l.lng]);
+            coords.push(coords[0]); // Close the polygon ring
+
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]');
+            if (!csrfToken) {
+                Swal.fire({ icon: 'error', title: 'Security Error', text: 'CSRF token not found. Please refresh the page.', confirmButtonColor: '#d33' });
+                return;
+            }
+
             fetch(url, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value },
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-CSRFToken': csrfToken.value },
                 body: `name=${encodeURIComponent(name)}&coordinates=${JSON.stringify(coords)}&project=${projectId}`
-            }).then(r => r.json()).then(data => {
+            })
+            .then(r => r.json())
+            .then(data => {
                 if (data.message) {
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: `Polygon "${name}" Added!`,
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true
+                    });
+                    
+                    // Clear name input for next polygon
+                    const nameInput = document.getElementById('id_name_polygon');
+                    if (nameInput) nameInput.value = '';
+
+                    // Reload all parcels on the map to show saved state
+                    fetchParcellesForProject(projectId);
+                } else if (data.error) {
+                    let errMsg = 'Failed to add polygon.';
+                    if (data.error.name && data.error.name[0]) {
+                        errMsg = data.error.name[0].message;
+                    } else if (data.error.coordinates && data.error.coordinates[0]) {
+                        errMsg = data.error.coordinates[0].message;
+                    }
+                    Swal.fire({ icon: 'error', title: 'Could Not Save Polygon', text: errMsg, confirmButtonColor: '#d33' });
+                }
+            })
+            .catch(err => {
+                console.error('Add Polygon network/server error:', err);
+                Swal.fire({ icon: 'error', title: 'Server Error', text: `An error occurred: ${err.message}. Check the server console for details.`, confirmButtonColor: '#d33' });
+            });
+        });
+
+        document.getElementById('finishButtonPolygon')?.addEventListener('click', () => {
+            const projectId = projectSelect?.value;
+            if (!projectId) {
+                Swal.fire({ icon: 'warning', title: 'No Project', text: 'No active project selected.', confirmButtonColor: '#3085d6' });
+                return;
+            }
+
+            const layers = drawnItemsPolygon.getLayers();
+            const unsavedLayers = layers.filter(layer => !layer.feature || !layer.feature.properties || !layer.feature.properties.id);
+            if (unsavedLayers.length > 0) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Unsaved Polygon',
+                    text: 'You have a drawn polygon that has not been added. Please click "Add Polygon" to save it, or delete it before finishing.',
+                    confirmButtonColor: '#3085d6'
+                });
+                return;
+            }
+
+            // Check if there are any parcels saved in the database
+            fetch(`/dashboard_super/get_parcelles_for_project/?project_id=${projectId}`)
+                .then(r => r.json()).then(data => {
+                    if (!data.parcelles || data.parcelles.length === 0) {
+                        Swal.fire({ icon: 'warning', title: 'No Polygons', text: 'Please add at least one polygon before finishing.', confirmButtonColor: '#3085d6' });
+                        return;
+                    }
+                    
+                    // Transition to the Add Assets modal
                     bootstrap.Modal.getInstance(document.getElementById('projectMapModal'))?.hide();
                     resetAssetModal();
                     new bootstrap.Modal(document.getElementById('displayParcelsModal')).show();
                     loadParcelsOnDisplayMap(projectId);
-                }
-            });
+                });
         });
 
         document.getElementById('nextButtonMarker')?.addEventListener('click', () => {
