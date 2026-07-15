@@ -1,14 +1,13 @@
 name: forest-fire-prediction
 
 x-app: &app
-  build:
-    context: .
-    dockerfile: Dockerfile
-  image: forest-fire-prediction:latest
+  image: ghcr.io/zneidimohamedamine/smart-forest-watcher:latest
+  pull_policy: always
   env_file:
     - config.env
   environment:
     DJANGO_ENV: docker
+    DJANGO_SETTINGS_MODULE: project.settings.production
     IN_DOCKER: "1"
     DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-django-insecure-docker-change-me}
     DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-localhost,127.0.0.1,0.0.0.0,web}
@@ -22,7 +21,6 @@ x-app: &app
     CELERY_BROKER_URL: redis://redis:6379/0
     CELERY_RESULT_BACKEND: redis://redis:6379/0
   volumes:
-    - .:/app
     - staticfiles:/app/staticfiles
     - logs:/app/logs
   networks:

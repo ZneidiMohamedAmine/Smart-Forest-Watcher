@@ -17,7 +17,7 @@ jobs:
   pytest:
     runs-on: ubuntu-latest
     container:
-      image: python:3.9-alpine
+      image: python:3.11-alpine
 
     steps:
       - name: Check out code
@@ -74,7 +74,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.9"
+          python-version: "3.11"
 
       - name: Prepare Linux dependency audit file
         run: |
@@ -108,7 +108,7 @@ jobs:
             -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }}
             -Dsonar.sources=.
             -Dsonar.exclusions=venv/**,.venv/**,env/**,staticfiles/**,logs/**,img/**,client/static/**,home/static/**,supervisor/static/**,**/__pycache__/**
-            -Dsonar.python.version=3.9
+            -Dsonar.python.version=3.11
 
   publish-image:
     needs:

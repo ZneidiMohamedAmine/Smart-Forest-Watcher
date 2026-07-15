@@ -1,4 +1,4 @@
-FROM python:3.9-slim-bookworm AS builder
+FROM python:3.11-slim-bookworm AS builder
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -32,7 +32,7 @@ RUN python -m pip install --upgrade pip setuptools wheel \
     && python -m pip install --prefer-binary --prefix=/install -r requirements-linux.txt
 
 
-FROM python:3.9-slim-bookworm AS runtime
+FROM python:3.11-slim-bookworm AS runtime
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -41,7 +41,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PIP_RETRIES=10 \
     DEBIAN_FRONTEND=noninteractive \
     IN_DOCKER=1 \
-    GDAL_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/libgdal.so.36 \
+    GDAL_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/libgdal.so.32 \
     PATH="/usr/local/bin:$PATH"
 
 WORKDIR /app
@@ -55,6 +55,8 @@ RUN apt-get -o Acquire::Retries=10 -o Acquire::http::Timeout=300 -o Acquire::htt
         libgomp1 \
         libpq5 \
         netcat-openbsd \
+        gdal-bin \
+        libgdal-dev \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /install /usr/local
