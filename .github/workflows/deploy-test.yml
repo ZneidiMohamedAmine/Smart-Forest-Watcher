@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Write key
         run: |
-          printf '%s' "${{ secrets.SERVER_SSH_KEY }}" > key
+          echo "${{ secrets.SERVER_SSH_KEY }}" > key
           chmod 600 key
           
       - name: Test native SSH
