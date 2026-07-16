@@ -9,112 +9,145 @@ x-app: &app
     DJANGO_ENV: docker
     DJANGO_SETTINGS_MODULE: project.settings.production
     IN_DOCKER: "1"
-    DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-django-insecure-docker-change-me}
-    DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-localhost,127.0.0.1,0.0.0.0,web}
-    POSTGRES_DB: ${POSTGRES_DB:-fire_detection}
-    POSTGRES_USER: ${POSTGRES_USER:-postgres}
-    POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-123456789}
+
     POSTGRES_HOST: db
     POSTGRES_PORT: "5432"
+
     REDIS_HOST: redis
     REDIS_PORT: "6379"
+
     CELERY_BROKER_URL: redis://redis:6379/0
     CELERY_RESULT_BACKEND: redis://redis:6379/0
+
   volumes:
     - staticfiles:/app/staticfiles
     - logs:/app/logs
+
   networks:
     - fire-network
+
   restart: unless-stopped
 
+
 services:
+
   web:
     <<: *app
     container_name: fire_web
+
     command: >
-      sh -c "python manage.py migrate --noinput &&
-             python manage.py collectstatic --noinput &&
-             daphne -b 0.0.0.0 -p 8000 project.asgi:application"
+      sh -c "
+      python manage.py migrate --noinput &&
+      python manage.py collectstatic --noinput &&
+      daphne -b 0.0.0.0 -p 8000 project.asgi:application
+      "
+
     ports:
       - "8000:8000"
+
     depends_on:
       db:
         condition: service_healthy
       redis:
         condition: service_healthy
+
     healthcheck:
       test: ["CMD-SHELL", "nc -z localhost 8000"]
       interval: 30s
       timeout: 5s
       retries: 5
-      start_period: 30s
+      start_period: 40s
+
 
   celery:
     <<: *app
     container_name: fire_celery
-    command: celery -A project worker --loglevel=info
+
+    command:
+      celery -A project worker --loglevel=info
+
     depends_on:
       db:
         condition: service_healthy
       redis:
         condition: service_healthy
-    healthcheck:
-      test: ["CMD-SHELL", "celery -A project inspect ping -d celery@$$HOSTNAME || exit 1"]
-      interval: 60s
-      timeout: 10s
-      retries: 5
-      start_period: 30s
+
 
   celery-beat:
     <<: *app
     container_name: fire_celery_beat
-    command: celery -A project beat --loglevel=info --schedule=/app/logs/celerybeat-schedule
+
+    command:
+      celery -A project beat --loglevel=info --schedule=/app/logs/celerybeat-schedule
+
     depends_on:
       db:
         condition: service_healthy
       redis:
         condition: service_healthy
 
+
   db:
     image: postgis/postgis:15-3.4
     container_name: fire_db
+
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-fire_detection}
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-123456789}
-    ports:
-      - "5432:5432"
+      POSTGRES_DB: ${POSTGRES_DB:?missing POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER:?missing POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?missing POSTGRES_PASSWORD}
+
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
     networks:
       - fire-network
+
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"
+        ]
       interval: 10s
       timeout: 5s
       retries: 5
+
     restart: unless-stopped
+
 
   redis:
     image: redis:7-alpine
     container_name: fire_redis
-    command: redis-server --appendonly yes
-    ports:
-      - "6379:6379"
+
+    command:
+      redis-server --appendonly yes
+
     volumes:
       - redis_data:/data
+
     networks:
       - fire-network
+
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test:
+        [
+          "CMD",
+          "redis-cli",
+          "ping"
+        ]
+
       interval: 10s
       timeout: 5s
       retries: 5
+
     restart: unless-stopped
+
+
 
 networks:
   fire-network:
     driver: bridge
+
 
 volumes:
   postgres_data:
