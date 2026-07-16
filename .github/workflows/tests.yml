@@ -188,7 +188,7 @@ jobs:
             hostname
             pwd
             docker --version
-          docker compose version
-          cd /opt/smart-forest-watcher
-          docker compose pull
-          docker compose up -d
+            docker compose version
+            cd /opt/smart-forest-watcher
+            docker compose pull
+            docker compose up -d
