@@ -8,6 +8,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check SSH key
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > /tmp/key
+          chmod 600 /tmp/key
+          ssh-keygen -lf /tmp/key
       - name: SSH deploy test
         uses: appleboy/ssh-action@v1.2.0
         with:
