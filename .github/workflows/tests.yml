@@ -162,3 +162,28 @@ jobs:
         run: |
           docker push "${IMAGE_NAME}:latest"
           docker push "${IMAGE_NAME}:${GITHUB_SHA}"
+
+  deploy:
+    needs:
+      - publish-image
+  
+    runs-on: ubuntu-latest
+  
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+  
+    steps:
+      - name: Deploy to OVH server
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+  
+          script: |
+            cd /opt/smart-forest-watcher
+  
+            docker compose pull
+  
+            docker compose up -d
+  
+            docker image prune -f
