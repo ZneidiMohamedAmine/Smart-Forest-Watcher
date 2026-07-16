@@ -8,6 +8,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Validate SSH key
+        run: |
+          echo "${{ secrets.SERVER_SSH_KEY }}" > /tmp/key
+          chmod 600 /tmp/key
+          head -1 /tmp/key
+          tail -1 /tmp/key
+          ssh-keygen -lf /tmp/key
       - name: Test SSH connection
         uses: appleboy/ssh-action@v1.2.0
         with:
