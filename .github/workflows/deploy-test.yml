@@ -8,11 +8,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Write key
+      - name: Check key fingerprint
         run: |
-          echo "${{ secrets.SERVER_SSH_KEY }}" > key
-          chmod 600 key
-          
+          echo "${{ secrets.SERVER_SSH_KEY }}" > /tmp/key
+          chmod 600 /tmp/key
+          ssh-keygen -lf /tmp/key
+            - name: Write key
+              run: |
+                echo "${{ secrets.SERVER_SSH_KEY }}" > key
+                chmod 600 key
+            
       - name: Test native SSH
         run: |
           ssh -vvv \
