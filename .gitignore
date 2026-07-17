@@ -35,3 +35,5 @@ logs/
 # IDEs
 .idea/
 .vscode/
+
+camera_management/models_weights/*.pt

@@ -25,7 +25,8 @@ import json
 from django.http                  import JsonResponse
 from channels.db                  import database_sync_to_async
 from .models                      import Camera, Detection
-from .workers.alert_worker        import send_camera_alert
+from .workers.inference_worker import run_server_inference
+
 
 CONFIDENCE_THRESHOLD = 0.50    # ignore detections below this level
 
@@ -93,7 +94,7 @@ async def receive_detection(request):
     detection = await save_detection()
 
     # ── Trigger async alert ──────────────────────────────────────────────────
-    send_camera_alert.delay(detection.id)
+    run_server_inference.delay(detection.id)
 
     return JsonResponse({
         'message':      'Detection saved',

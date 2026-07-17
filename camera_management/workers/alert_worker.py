@@ -41,14 +41,17 @@ def send_camera_alert(detection_id: int):
 
     # ── 2. WebSocket push ────────────────────────────────────────────────────
     payload = json.dumps({
-        "type":         "camera_alert",
-        "camera_id":    camera.camera_id,
-        "camera_name":  camera.name,
-        "parcelle":     parcelle_name,
-        "project":      project.name,
-        "confidence":   detection.confidence_score,
-        "image_url":    detection.image.url,
-        "detected_at":  detection.detected_at.isoformat(),
+        "type":               "camera_alert",
+        "camera_id":          camera.camera_id,
+        "camera_name":        camera.name,
+        "parcelle":           parcelle_name,
+        "project":            project.name,
+        "confidence":         detection.confidence_score,
+        "image_url":          detection.image.url,
+        "annotated_image_url": detection.annotated_image.url if detection.annotated_image else detection.image.url,
+        "is_confirmed":       detection.is_confirmed,
+        "server_confidence":  detection.server_confidence,
+        "detected_at":        detection.detected_at.isoformat(),
     })
 
     channel_layer = get_channel_layer()
@@ -56,7 +59,6 @@ def send_camera_alert(detection_id: int):
         CAMERA_GROUP,
         {"type": "camera_message", "text": payload}
     )
-
     # ── 3. Email alert ───────────────────────────────────────────────────────
     subject  = f"🔥 Fire Detected — {camera.name} ({project.name})"
     message  = (

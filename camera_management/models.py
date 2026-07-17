@@ -35,6 +35,10 @@ class Detection(models.Model):
     bounding_boxes   = models.JSONField(blank=True, null=True)
     image            = models.ImageField(upload_to='detections/')
     detected_at      = models.DateTimeField(auto_now_add=True)
+    server_confidence = models.FloatField(null=True, blank=True)   # yolo26m score
+    annotated_image   = models.ImageField(upload_to='detections/annotated/', null=True, blank=True)
+    is_confirmed      = models.BooleanField(null=True, blank=True) # None=pending, True=confirmed, False=rejected
+
 
     def __str__(self):
         return f"🔥 Fire @ {self.camera.name}  |  conf={self.confidence_score:.2f}  |  {self.detected_at:%Y-%m-%d %H:%M}"
