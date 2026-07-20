@@ -28,7 +28,7 @@ def index(request):
 def get_all_assets(request):
     projects = Project.objects.prefetch_related(
         Prefetch(
-            'parcelle_set',
+            'parcelle',
             queryset=Parcelle.objects.prefetch_related(
                 Prefetch(
                     'nodes',
