@@ -1,0 +1,5 @@
+ultralytics>=8.4.0  # first version shipping YOLO26 weights
+mlflow>=2.14.0
+onnx>=1.16.0
+onnxruntime>=1.18.0
+PyYAML>=6.0
