@@ -67,6 +67,13 @@ RUN rm -rf /usr/local/lib/python3.11/site-packages/setuptools* \
     && python -m pip install --force-reinstall "setuptools>=78.1.1" "msgpack==1.2.1" \
     && rm -rf /root/.cache/pip
 
+# TEMP DIAGNOSTIC: surface every setuptools/msgpack metadata dir found anywhere
+# in the image as a workflow annotation, so it's visible without repo login.
+# Remove once the Trivy false-positive/duplicate-install mystery is solved.
+RUN echo "::warning::setuptools_dist=$(find / -xdev -iname 'setuptools-*' -path '*dist-info*' 2>/dev/null | paste -sd ';' -)" \
+    && echo "::warning::msgpack_dist=$(find / -xdev -iname 'msgpack-*' -path '*dist-info*' 2>/dev/null | paste -sd ';' -)" \
+    && echo "::warning::pip_show=$(python -m pip show setuptools msgpack 2>&1 | paste -sd '|' -)"
+
 RUN mkdir -p /app/logs /app/staticfiles /app/img
 
 EXPOSE 8000
