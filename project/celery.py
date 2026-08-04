@@ -12,7 +12,7 @@ app = Celery('project')
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
 # Auto-discover les tâches dans les apps Django
-app.autodiscover_tasks(['supervisor.tasks.calcul_fwi', 'supervisor.tasks.Pediction_ml'])
+app.autodiscover_tasks(['supervisor.tasks.calcul_fwi', 'supervisor.tasks.Pediction_ml', 'client'])
 
 # Beat Schedule : exécute une tâche toutes les 5 minutes
 '''app.conf.beat_schedule = {

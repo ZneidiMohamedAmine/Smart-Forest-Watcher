@@ -2,9 +2,6 @@ from django.contrib.auth.models     import User, BaseUserManager
 from django.db                      import models
 from django.contrib.auth.hashers    import make_password, check_password
 from django.core.exceptions         import ValidationError
-from django.core.mail               import send_mail
-from django.template.loader         import render_to_string
-from django.utils.html              import strip_tags
 from django.utils.crypto            import get_random_string
 
 #crée table client dans DB
@@ -46,18 +43,8 @@ class Client(models.Model):
         super().save(*args, **kwargs)
 
         if is_new:
-            context = {
-                'client': self,
-                'password': password_to_send,
-                'image_url': 'https://smartforgreen.com/wp-content/uploads/2023/07/featured_page.png'
-                }
-            subject = 'Welcome to Smart For Green'
-            html_message = render_to_string('message.html', context)
-            plain_message = strip_tags(html_message)
-            from_email = 'From <mohamedhedigharbi101@gmail.com>'
-            to = self.email
-
-            send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+            from client.tasks import send_client_welcome_email
+            send_client_welcome_email.delay(self.email, self.firstName, self.lastName, password_to_send)
 
     def delete(self, *args, **kwargs):
         if self.user:

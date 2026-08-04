@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 
-from .models import MobileNotification
+from .models import MobileNotification, Client
 
 
 def _cors(response):
@@ -80,10 +80,9 @@ def send_mobile_notification(user_id, title, body='', data=None, camera=None, de
     return {'notification_id': notification.id}
 
 
-"""def notify_client_for_detection(detection):
-
+def notify_client_for_detection(detection):
     camera = detection.camera
-    project = camera.project
+    project = camera.project or (camera.parcelle.project if camera.parcelle else None)
     client = project.client if project else None
     if not client or not client.email:
         return None
@@ -113,7 +112,7 @@ def send_mobile_notification(user_id, title, body='', data=None, camera=None, de
         detection=detection,
     )
 
-"""
+
 @csrf_exempt
 @require_http_methods(['POST', 'OPTIONS'])
 def send_notification(request):
@@ -159,4 +158,37 @@ def list_notifications(request):
     )
     return _cors(JsonResponse({
         'notifications': [_serialize_notification(n, request) for n in rows],
+    }))
+
+
+@csrf_exempt
+@require_http_methods(['GET', 'OPTIONS'])
+def client_summary(request):
+    if request.method == 'OPTIONS':
+        return _cors(JsonResponse({}))
+
+    user_id = (request.GET.get('user_id') or '').strip()
+    if not user_id:
+        return _cors(JsonResponse({'error': 'user_id query param required'}, status=400))
+
+    try:
+        client = Client.objects.get(email=user_id)
+    except Client.DoesNotExist:
+        return _cors(JsonResponse({'projects': [], 'cameras': []}))
+
+    from camera_management.models import Camera
+
+    projects = list(client.project_set.values_list('name', flat=True))
+    cameras = list(
+        Camera.objects
+        .filter(project__client=client)
+        .values('camera_id', 'name', 'project__name')
+    )
+
+    return _cors(JsonResponse({
+        'projects': projects,
+        'cameras': [
+            {'camera_id': c['camera_id'], 'name': c['name'], 'project': c['project__name']}
+            for c in cameras
+        ],
     }))
