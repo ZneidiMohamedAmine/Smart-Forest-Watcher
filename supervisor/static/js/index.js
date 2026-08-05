@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
             observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-bs-theme'] });
 
             const displayLayerGroup = new L.LayerGroup().addTo(window.map);
+            const nodeMarkers = {};
             
             const cameraIcon = L.divIcon({
                 html: '<div style="background-color: white; border-radius: 50%; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.5); border: 2px solid #ddd; font-size: 20px;">📷</div>',
@@ -152,6 +153,9 @@ document.addEventListener('DOMContentLoaded', function() {
                                     const popupHTML = generatePopupContent(n, n.last_data || {}, project.project_name);
                                     marker.bindPopup(popupHTML);
                                     displayLayerGroup.addLayer(marker);
+                                    
+                                    if (!nodeMarkers[n.ref]) nodeMarkers[n.ref] = [];
+                                    nodeMarkers[n.ref].push({ marker, nodeInfo: n, projectName: project.project_name });
                                 }
                             });
 
@@ -173,6 +177,41 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (bounds.length > 0) {
                         map.fitBounds(bounds, { padding: [50, 50], maxZoom: 15 });
                     }
+
+                    // --- WebSocket Live Updates ---
+                    const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+                    
+                    // 1. Keep TTN connection alive
+                    const mqttSocket = new WebSocket(protocol + window.location.host + '/ws/mqtt/');
+                    mqttSocket.onopen = () => console.log('MQTT WebSocket connected (keeping TTN ingest alive)');
+                    
+                    // 2. Receive live data updates for map
+                    const dataSocket = new WebSocket(protocol + window.location.host + '/ws/data/');
+                    dataSocket.onmessage = function (event) {
+                        const wsData = JSON.parse(event.data);
+                        if (wsData.message === 'MQTT data received') {
+                            const nodeData = wsData.data;
+                            
+                            // Find markers for this node (case-insensitive)
+                            let currentMarkers = nodeMarkers[nodeData.device_id];
+                            if (!currentMarkers && nodeData.device_id) {
+                                const lowerId = nodeData.device_id.toLowerCase();
+                                const foundKey = Object.keys(nodeMarkers).find(k => k && k.toLowerCase() === lowerId);
+                                if (foundKey) currentMarkers = nodeMarkers[foundKey];
+                            }
+                            
+                            if (currentMarkers) {
+                                currentMarkers.forEach(({ marker, nodeInfo, projectName }) => {
+                                    // Update FWI values to ensure generatePopupContent uses the latest
+                                    nodeData.fwi_predit = nodeData.fwi_predit || nodeInfo.last_data?.fwi_predit;
+                                    nodeData.fwi = nodeData.fwi || nodeInfo.last_data?.fwi;
+                                    
+                                    const updatedContent = generatePopupContent(nodeInfo, nodeData, projectName);
+                                    marker.setPopupContent(updatedContent);
+                                });
+                            }
+                        }
+                    };
                 })
                 .catch(err => console.error("Error loading assets for global map: ", err));
 
