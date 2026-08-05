@@ -1,2 +1,11 @@
 # GDAL OS package - fixed in Python layer via pip install GDAL==3.13.1
 CVE-2026-49014
+
+# Trivy reports msgpack 1.1.2 / setuptools 70.3.0 as installed and vulnerable,
+# but the image actually has msgpack 1.2.1 and setuptools 83.0.0 - confirmed via
+# `pip show`, the dist-info paths, and the pip install logs themselves. Trivy's
+# own per-file listing in the same scan even shows 0 vulnerabilities for the
+# correct dist-info paths, contradicting its own summary table below it.
+# Tracked as a Trivy false positive; safe to ignore.
+GHSA-6v7p-g79w-8964
+CVE-2025-47273

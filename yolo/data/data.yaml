@@ -1,0 +1,14 @@
+# D-Fire dataset config (https://github.com/gaia-solutions-on-demand/DFireDataset)
+# D-Fire ships YOLO-format labels already (normalized bbox txt files),
+# so this is mostly path plumbing once the dataset is present under yolo/data/D-Fire/.
+#
+# NOTE: verify the class index order (0/1) against the actual label files you pull --
+# the repo's README doesn't pin this down explicitly, so double check a few .txt
+# annotations against their images before trusting this mapping.
+path: ../data/D-Fire   # relative to this file
+train: train/images
+val: test/images       # D-Fire ships train/ and test/ splits, no separate val/
+
+names:
+  0: smoke
+  1: fire

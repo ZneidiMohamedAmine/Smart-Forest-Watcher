@@ -1,0 +1,1143 @@
+id,gouvernorat_libelle,delegation_libelle,localite_libelle,latitude,longitude
+585,Kébili,Souk El Ahad,Souk El Ahad,33.707500,8.971300
+586,Kébili,Souk El Ahad,Zarat,33.709800,8.973600
+587,Kébili,Souk El Ahad,Debebcha,33.712100,8.975900
+588,Kébili,Souk El Ahad,Chebika,33.714400,8.978200
+589,Kébili,Souk El Ahad,El Golaa,33.716700,8.980500
+590,Kébili,Souk El Ahad,Beni Mrahil,33.719000,8.982800
+591,Kébili,Souk El Ahad,El Mansoura,33.721300,8.985100
+592,Kébili,Souk El Ahad,Mezaria,33.723600,8.987400
+593,Kébili,Souk El Ahad,Bou Abdallah,33.725900,8.989700
+594,Kébili,Souk El Ahad,Henchir Hamed,33.728200,8.992000
+595,Kébili,Souk El Ahad,Touazine,33.730500,8.994300
+596,Kébili,Souk El Ahad,El Ouaha,33.732800,8.996600
+597,Kébili,Souk El Ahad,El Hamra,33.735100,8.998900
+598,Kébili,Souk El Ahad,El Hamma,33.737400,9.001200
+599,Kébili,Souk El Ahad,El Ghrarifia,33.739700,9.003500
+600,Kébili,Faouar,Faouar,33.742000,9.005800
+601,Kébili,Faouar,Nouail,33.744300,9.008100
+602,Kébili,Faouar,El Guelta,33.746600,9.010400
+603,Kébili,Faouar,Oum Souigh,33.748900,9.012700
+604,Kébili,Faouar,Gharsa Ouled Yahia,33.751200,9.015000
+605,Kébili,Faouar,Chnini,33.753500,9.017300
+606,Kébili,Faouar,Gheribet,33.755800,9.019600
+607,Kébili,Faouar,Taraoulet,33.758100,9.021900
+608,Kébili,Faouar,El Borma,33.760400,9.024200
+609,Kébili,Faouar,Tella,33.762700,9.026500
+610,Kébili,Faouar,Sif El Melah,33.765000,9.028800
+611,Kébili,Kébili Nord,Kébili Nord,33.767300,9.031100
+612,Kébili,Kébili Nord,Beni Kheddache,33.769600,9.033400
+613,Kébili,Kébili Nord,Ben Ghilouf,33.771900,9.035700
+614,Kébili,Kébili Nord,Douz Chaambi,33.774200,9.038000
+615,Kébili,Kébili Nord,Jorf,33.776500,9.040300
+616,Kébili,Kébili Nord,Ras El Ma,33.778800,9.042600
+617,Kébili,Kébili Nord,Sabria,33.781100,9.044900
+618,Kébili,Kébili Nord,Sidi Mansour,33.783400,9.047200
+619,Kébili,Kébili Nord,Souk Lahad,33.785700,9.049500
+620,Kébili,Kébili Nord,Zaafrane,33.788000,9.051800
+621,Kébili,Kébili Sud,Kébili Sud,33.790300,9.054100
+622,Kébili,Kébili Sud,Oasis Douz,33.792600,9.056400
+623,Kébili,Kébili Sud,Ghlissia,33.794900,9.058700
+624,Kébili,Kébili Sud,Jemna,33.797200,9.061000
+625,Kébili,Kébili Sud,Toureg Hammada,33.799500,9.063300
+626,Kébili,Kébili Sud,El Ghnem,33.801800,9.065600
+627,Kébili,Kébili Sud,Tenbib,33.804100,9.067900
+628,Kébili,Kébili Sud,Zibane,33.806400,9.070200
+629,Kébili,Kébili Sud,Cherif,33.808700,9.072500
+630,Kébili,Kébili Sud,Ras El Aoued,33.811000,9.074800
+631,Kébili,Kébili Sud,Kébili El Alaa,33.813300,9.077100
+632,Kébili,Douz Nord,Douz Nord,33.815600,9.079400
+633,Kébili,Douz Nord,Blidet,33.817900,9.081700
+634,Kébili,Douz Nord,Oulad Mahmoud,33.820200,9.084000
+635,Kébili,Douz Nord,Zaafrane,33.822500,9.086300
+636,Kébili,Douz Nord,El Golaa,33.824800,9.088600
+637,Kébili,Douz Sud,Douz Sud,33.827100,9.090900
+638,Kébili,Douz Sud,Noueil,33.829400,9.093200
+639,Kébili,Douz Sud,Kébili Centre,33.831700,9.095500
+640,Kébili,Douz Sud,Hassine,33.834000,9.097800
+641,Kébili,Douz Sud,Jemna,33.836300,9.100100
+642,Kébili,Douz Sud,Toureg Hammada,33.838600,9.102400
+643,Kébili,Douz Sud,El Ghnem,33.840900,9.104700
+644,Kébili,Douz Sud,Tenbib,33.843200,9.107000
+645,Kébili,Douz Sud,Zibane,33.845500,9.109300
+646,Kébili,Douz Sud,Cherif,33.847800,9.111600
+647,Kébili,Douz Sud,Ras El Aoued,33.850100,9.113900
+648,Kébili,Douz Sud,Kébili El Alaa,33.852400,9.116200
+651,Mahdia,Bou Merdes,Bou Merdes,35.485900,10.976100
+652,Mahdia,Chebba,Chebba,35.234800,11.114400
+653,Mahdia,Chorbane,Chorbane,35.245600,11.056200
+654,Mahdia,El Jem,El Jem,35.296100,10.706900
+655,Mahdia,Hebira,Hebira,35.341500,10.501400
+656,Mahdia,Ksour Essef,Ksour Essef,35.416400,10.999300
+657,Mahdia,Mahdia,Mahdia Ville,35.504700,11.062200
+658,Mahdia,Mahdia,Rejiche,35.247900,11.058500
+659,Mahdia,Melloulèche,Melloulèche,35.250200,11.060800
+660,Mahdia,Ouled Chamekh,Ouled Chamekh,35.257100,11.067700
+661,Mahdia,Sidi Alouane,Sidi Alouane,35.424200,10.801400
+662,Mahdia,Souassi,Souassi,35.416400,11.016000
+663,Mahdia,Zalba,Zalba,35.357500,11.044200
+664,Monastir,Bekalta,Bekalta,35.648100,10.938100
+665,Monastir,Bembla,Bembla,35.737400,10.802500
+666,Monastir,Beni Hassen,Beni Hassen,35.652300,10.567900
+667,Monastir,Jemmal,Jemmal,35.640600,10.761200
+668,Monastir,Jemmal,El Fadhloun,35.737400,10.807100
+669,Monastir,Ksar Hellal,Ksar Hellal,35.633600,10.891400
+670,Monastir,Ksibet el Mediouni,Ksibet el Mediouni,35.746600,10.811700
+671,Monastir,Moknine,Moknine,35.627400,10.893300
+672,Monastir,Monastir,Monastir Ville,35.776100,10.826100
+673,Monastir,Monastir,Skanes,35.789000,10.811000
+674,Monastir,Ouerdanine,Ouerdanine,35.639700,10.770600
+675,Monastir,Sahline,Sahline,35.766400,10.699700
+676,Monastir,Sayada-Lamta-Bou Hjar,Sayada,35.633600,10.896400
+677,Monastir,Sayada-Lamta-Bou Hjar,Lamta,35.631900,10.891700
+678,Monastir,Sayada-Lamta-Bou Hjar,Bou Hjar,35.626600,10.896900
+679,Monastir,Téboulba,Téboulba,35.647400,10.924800
+680,Monastir,Zéramdine,Zéramdine,35.657100,10.797000
+681,Sidi Bouzid,Bir El Hafey,Bir El Hafey,35.105000,9.370800
+682,Sidi Bouzid,Cebbala Ouled Asker,Cebbala,34.854200,9.474400
+683,Sidi Bouzid,Cebbala Ouled Asker,Ouled Asker,34.830200,9.445700
+684,Sidi Bouzid,Jilma,Jilma,35.283600,9.366900
+685,Sidi Bouzid,Meknassy,Meknassy,34.574100,9.620500
+686,Sidi Bouzid,Mezzouna,Mezzouna,34.582100,9.822500
+687,Sidi Bouzid,Ouled Haffouz,Ouled Haffouz,34.973400,9.665000
+688,Sidi Bouzid,Regueb,Regueb,34.859600,9.797100
+689,Sidi Bouzid,Sidi Ali Ben Aoun,Sidi Ali Ben Aoun,35.035100,9.030500
+690,Sidi Bouzid,Sidi Bouzid Est,Sidi Bouzid Ville,35.038800,9.484900
+691,Sidi Bouzid,Sidi Bouzid Est,El Hencha,35.083300,9.446400
+692,Sidi Bouzid,Sidi Bouzid Ouest,Sidi Bouzid Ville Ouest,35.038800,9.484900
+693,Sidi Bouzid,Sidi Bouzid Ouest,El Gtar,35.066700,9.516700
+694,Sidi Bouzid,Souk Jedid,Souk Jedid,35.156700,9.458300
+695,Bizerte,Bizerte Nord,Ain Mariem,37.274700,9.873900
+696,Bizerte,Bizerte Nord,Bizerte Centre,37.278000,9.878500
+697,Bizerte,Bizerte Nord,La Corniche,37.281300,9.883100
+698,Bizerte,Bizerte Nord,Ras Jebel,37.207400,10.116500
+699,Bizerte,Bizerte Sud,El Alia,37.241400,9.864600
+700,Bizerte,Bizerte Sud,Menzel Jemil,37.237600,9.920700
+701,Bizerte,Bizerte Sud,Menzel Abderrahmane,37.242200,9.925300
+702,Bizerte,Ghar El Melh,Ghar El Melh,37.165900,10.182100
+703,Bizerte,Joumine,Joumine,37.049700,9.575600
+704,Bizerte,Mateur,Mateur,37.040100,9.666400
+705,Bizerte,Menzel Bourguiba,Menzel Bourguiba,37.153200,9.791800
+706,Bizerte,Raf Raf,Raf Raf,37.187200,10.208600
+707,Bizerte,Sejnane,Sejnane,37.056400,9.235600
+708,Bizerte,Tinja,Tinja,37.166700,9.750000
+709,Bizerte,Utique,Utique,37.130000,9.800000
+710,Bizerte,Zarzouna,Zarzouna,37.274700,9.873900
+711,Ariana,Ariana Ville,Cité Belvédère 2,36.862500,10.195500
+712,Ariana,Ariana Ville,Cité Du Soleil,36.865200,10.201200
+713,Ariana,Ariana Ville,Cité El Intissar 1,36.867800,10.206900
+714,Ariana,Ariana Ville,Cité Ennasr 1,36.870500,10.212600
+715,Ariana,Ariana Ville,Cité Ennasr 2,36.873200,10.218300
+716,Ariana,Ariana Ville,Cité Essoghra,36.875900,10.224000
+717,Ariana,Ariana Ville,Cité Ettaamir,36.878600,10.229700
+718,Ariana,Ariana Ville,Cité Ettaamine,36.881300,10.235400
+719,Ariana,Ariana Ville,Cité Ezzouhour 1,36.884000,10.241100
+720,Ariana,Ariana Ville,Cité Ezzouhour 2,36.886700,10.246800
+721,Ariana,Ariana Ville,Cité Ezzouhour 3,36.889400,10.252500
+722,Ariana,Ariana Ville,Cité Ezzouhour 4,36.892100,10.258200
+723,Ariana,Ariana Ville,Cité Ezzouhour 5,36.894800,10.263900
+724,Ariana,Ariana Ville,Cité Ezzouhour 6,36.897500,10.269600
+725,Ariana,Ariana Ville,Cité Jawhara,36.900200,10.275300
+726,Ariana,Ariana Ville,Cité Jardins,36.902900,10.281000
+727,Ariana,Ariana Ville,Cité Rommana,36.905600,10.286700
+728,Ariana,Ettadhamen,Ettadhamen Ville,36.908300,10.292400
+729,Ariana,Ettadhamen,Cité Ettadhamen Nord,36.911000,10.298100
+730,Ariana,Ettadhamen,Cité Ettadhamen Sud,36.913700,10.303800
+731,Ariana,Ettadhamen,Cité Ennasr 1,36.916400,10.309500
+732,Ariana,Ettadhamen,Cité Ennasr 2,36.919100,10.315200
+733,Ariana,Ettadhamen,Cité Erriadh,36.921800,10.320900
+734,Ariana,Ettadhamen,Cité El Amel,36.924500,10.326600
+735,Ariana,Ettadhamen,Cité Ezzouhour,36.927200,10.332300
+736,Ariana,Kalaat Landalous,Kalaat Landalous Ville,36.929900,10.338000
+737,Ariana,Kalaat Landalous,Cité Erriadh,36.932600,10.343700
+738,Ariana,Kalaat Landalous,Cité El Amel,36.935300,10.349400
+739,Ariana,Kalaat Landalous,Cité Ezzouhour,36.938000,10.355100
+740,Ariana,Mnihla,Mnihla Ville,36.940700,10.360800
+741,Ariana,Mnihla,Cité Ettadhamen,36.943400,10.366500
+742,Ariana,Mnihla,Cité Ennasr 1,36.946100,10.372200
+743,Ariana,Mnihla,Cité Ennasr 2,36.948800,10.377900
+744,Ariana,Mnihla,Cité Erriadh,36.951500,10.383600
+745,Ariana,Mnihla,Cité El Amel,36.954200,10.389300
+746,Ariana,Mnihla,Cité Ezzouhour,36.956900,10.395000
+747,Ariana,Raoued,Raoued Ville,36.959600,10.400700
+748,Ariana,Raoued,Cité Erriadh,36.962300,10.406400
+749,Ariana,Raoued,Cité El Amel,36.965000,10.412100
+750,Ariana,Raoued,Cité Ennasr 1,36.967700,10.417800
+751,Ariana,Raoued,Cité Ennasr 2,36.970400,10.423500
+752,Ariana,Raoued,Cité Ettadhamen,36.973100,10.429200
+753,Ariana,Raoued,Cité Ezzouhour,36.975800,10.434900
+754,Ariana,Soukra,Soukra Ville,36.978500,10.440600
+755,Ariana,Soukra,Cité Erriadh,36.981200,10.446300
+756,Ariana,Soukra,Cité El Amel,36.983900,10.452000
+757,Ariana,Soukra,Cité Ennasr 1,36.986600,10.457700
+758,Ariana,Soukra,Cité Ennasr 2,36.989300,10.463400
+759,Ariana,Soukra,Cité Ettadhamen,36.992000,10.469100
+760,Ariana,Soukra,Cité Ezzouhour,36.994700,10.474800
+761,Tunis,Bab El Bhar,Avenue Bourguiba,36.796300,10.181500
+762,Tunis,Bab El Bhar,Avenue de Carthage,36.798900,10.187200
+763,Tunis,Bab El Bhar,Place de Barcelone,36.801600,10.192900
+764,Tunis,Bab El Bhar,Le Passage,36.804300,10.198600
+765,Tunis,Bab El Bhar,Cité El Khadra,36.806900,10.204300
+766,Tunis,Bab Souika,Bab Saadoun,36.809600,10.210000
+767,Tunis,Bab Souika,Bab El Khadra,36.812300,10.215700
+768,Tunis,Bab Souika,Cité Bab Menara,36.815000,10.221400
+769,Tunis,Bab Souika,Cité Ettadhamen,36.817600,10.227100
+770,Tunis,Bab Souika,Cité Ennasr,36.820300,10.232800
+771,Tunis,Bab Souika,Cité El Intilaka,36.823000,10.238500
+772,Tunis,Bab Souika,Cité Ibn Sina,36.825600,10.244200
+773,Tunis,Bab Souika,Cité El Omrane,36.828300,10.249900
+774,Tunis,Carthage,Carthage Hannibal,36.830900,10.255600
+775,Tunis,Carthage,Carthage Dermech,36.833600,10.261300
+776,Tunis,Carthage,Cité Erraoudha,36.836300,10.267000
+777,Tunis,Carthage,Cité El Amel,36.838900,10.272700
+778,Tunis,Carthage,Cité du Stade,36.841600,10.278400
+779,Tunis,Cité El Khadra,Cité Ennasr 1,36.844300,10.284100
+780,Tunis,Cité El Khadra,Cité Ennasr 2,36.846900,10.289800
+781,Tunis,Cité El Khadra,Cité Ettadhamen,36.849600,10.295500
+782,Tunis,Cité El Khadra,Cité El Amel,36.852300,10.301200
+783,Tunis,Cité El Khadra,Cité Erriadh,36.854900,10.306900
+784,Tunis,Cité El Khadra,Cité Ezzouhour,36.857600,10.312600
+785,Tunis,El Menzah,El Menzah 1,36.860300,10.318300
+786,Tunis,El Menzah,El Menzah 2,36.862900,10.324000
+787,Tunis,El Menzah,El Menzah 3,36.865600,10.329700
+788,Tunis,El Menzah,El Menzah 4,36.868300,10.335400
+789,Tunis,El Menzah,El Menzah 5,36.870900,10.341100
+790,Tunis,El Menzah,El Menzah 6,36.873600,10.346800
+791,Tunis,El Menzah,El Menzah 7,36.876300,10.352500
+792,Tunis,El Menzah,El Menzah 8,36.878900,10.358200
+793,Tunis,El Menzah,El Menzah 9,36.881600,10.363900
+794,Tunis,El Menzah,Cité Ennasr 1,36.884300,10.369600
+795,Tunis,El Menzah,Cité Ennasr 2,36.886900,10.375300
+796,Tunis,El Menzah,Cité Erriadh,36.889600,10.381000
+797,Tunis,El Menzah,Cité El Amel,36.892300,10.386700
+798,Tunis,El Menzah,Cité Ezzouhour,36.894900,10.392400
+799,Tunis,El Omrane,El Omrane Superieur,36.897600,10.398100
+800,Tunis,El Omrane,El Omrane Inférieur,36.900300,10.403800
+801,Tunis,El Omrane,Cité Ennasr,36.902900,10.409500
+802,Tunis,El Omrane,Cité Ettadhamen,36.905600,10.415200
+803,Tunis,El Omrane,Cité Erriadh,36.908300,10.420900
+804,Tunis,El Omrane,Cité El Amel,36.910900,10.426600
+805,Tunis,El Omrane,Cité Ezzouhour,36.913600,10.432300
+806,Tunis,La Goulette,La Goulette Nord,36.916300,10.438000
+807,Tunis,La Goulette,La Goulette Sud,36.918900,10.443700
+808,Tunis,La Goulette,Khereddine,36.921600,10.449400
+809,Tunis,La Goulette,Le Kram,36.924300,10.455100
+810,Tunis,La Goulette,Sidi Dhrif,36.926900,10.460800
+811,Tunis,La Marsa,La Marsa Ville,36.929600,10.466500
+812,Tunis,La Marsa,Sidi Daoud,36.932300,10.472200
+813,Tunis,La Marsa,Gammarth,36.934900,10.477900
+814,Tunis,La Marsa,El Aouina,36.937600,10.483600
+815,Tunis,La Marsa,Cité El Wafa,36.940300,10.489300
+816,Tunis,La Marsa,Cité Ennasr,36.942900,10.495000
+817,Tunis,La Marsa,Cité Ettadhamen,36.945600,10.500700
+818,Tunis,La Marsa,Cité Erriadh,36.948300,10.506400
+819,Tunis,Le Bardo,Le Bardo Ville,36.950900,10.512100
+820,Tunis,Le Bardo,Cité El Mahrajène,36.953600,10.517800
+821,Tunis,Le Bardo,Cité Ennasr,36.956300,10.523500
+822,Tunis,Le Bardo,Cité Ettadhamen,36.958900,10.529200
+823,Tunis,Le Bardo,Cité Erriadh,36.961600,10.534900
+824,Tunis,Le Bardo,Cité El Amel,36.964300,10.540600
+825,Tunis,Le Bardo,Cité Ezzouhour,36.966900,10.546300
+826,Tunis,Séjoumi,Séjoumi Ville,36.969600,10.552000
+827,Tunis,Séjoumi,Cité El Amel,36.972300,10.557700
+828,Tunis,Séjoumi,Cité Ennasr,36.974900,10.563400
+829,Tunis,Séjoumi,Cité Ettadhamen,36.977600,10.569100
+830,Tunis,Séjoumi,Cité Erriadh,36.980300,10.574800
+831,Tunis,Séjoumi,Cité Ezzouhour,36.982900,10.580500
+832,Tunis,Sidi El Béchir,Sidi El Béchir Ville,36.985600,10.586200
+833,Tunis,Sidi El Béchir,Cité El Amel,36.988300,10.591900
+834,Tunis,Sidi El Béchir,Cité Ennasr,36.990900,10.597600
+835,Tunis,Sidi El Béchir,Cité Ettadhamen,36.993600,10.603300
+836,Tunis,Sidi El Béchir,Cité Erriadh,36.996300,10.609000
+837,Tunis,Sidi El Béchir,Cité Ezzouhour,36.998900,10.614700
+838,Tunis,Sidi Hassine,Sidi Hassine Ville,37.001600,10.620400
+839,Tunis,Sidi Hassine,Cité El Amel,37.004300,10.626100
+840,Tunis,Sidi Hassine,Cité Ennasr,37.006900,10.631800
+841,Tunis,Sidi Hassine,Cité Ettadhamen,37.009600,10.637500
+842,Tunis,Sidi Hassine,Cité Erriadh,37.012300,10.643200
+843,Tunis,Sidi Hassine,Cité Ezzouhour,37.014900,10.648900
+844,Béja,Béja Nord,Béja Centre,36.725600,9.184100
+845,Béja,Béja Nord,Cité Ennasr,36.727900,9.186400
+846,Béja,Béja Nord,Cité El Amal,36.730200,9.188700
+847,Béja,Béja Nord,Cité El Habib,36.732500,9.191000
+848,Béja,Béja Nord,Cité El Hana,36.734800,9.193300
+849,Béja,Béja Nord,Cité Erriadh,36.737100,9.195600
+850,Béja,Béja Nord,Cité Essoualmia,36.739400,9.197900
+851,Béja,Béja Nord,Cité Ennour,36.741700,9.200200
+852,Béja,Béja Nord,Cité Ezzouhour,36.744000,9.202500
+853,Béja,Béja Nord,Cité Romana,36.746300,9.204800
+854,Béja,Béja Sud,Béja Sud,36.748600,9.207100
+855,Béja,Béja Sud,Cité Taieb Mhiri,36.750900,9.209400
+856,Béja,Béja Sud,Cité Zouhour,36.753200,9.211700
+857,Béja,Béja Sud,Cité El Ward,36.755500,9.214000
+858,Béja,Béja Sud,Cité El Intilaka,36.757800,9.216300
+859,Béja,Béja Sud,Cité El Izdihar,36.760100,9.218600
+860,Béja,Béja Sud,Cité El Khadra,36.762400,9.220900
+861,Béja,Béja Sud,Cité Ettadhamen,36.764700,9.223200
+862,Béja,Medjez El Bab,Medjez El Bab,36.767000,9.225500
+863,Béja,Medjez El Bab,Cité El Amel,36.769300,9.227800
+864,Béja,Medjez El Bab,Cité Ennasr,36.771600,9.230100
+865,Béja,Medjez El Bab,Cité Erriadh,36.773900,9.232400
+866,Béja,Medjez El Bab,Cité El Menzah,36.776200,9.234700
+867,Béja,Medjez El Bab,Cité El Khadhra,36.778500,9.237000
+868,Béja,Testour,Testour,36.780800,9.239300
+869,Béja,Testour,Cité El Amel,36.783100,9.241600
+870,Béja,Testour,Cité Ennasr,36.785400,9.243900
+871,Béja,Testour,Cité Erriadh,36.787700,9.246200
+872,Béja,Testour,Cité Ennacim,36.790000,9.248500
+873,Béja,Testour,Cité Ezzouhour,36.792300,9.250800
+874,Béja,Goubellat,Goubellat,36.794600,9.253100
+875,Béja,Goubellat,Cité Ennasr,36.796900,9.255400
+876,Béja,Goubellat,Cité Erriadh,36.799200,9.257700
+877,Béja,Goubellat,Cité Ezzouhour,36.801500,9.260000
+878,Béja,Goubellat,Cité El Amal,36.803800,9.262300
+879,Béja,Goubellat,Cité El Hana,36.806100,9.264600
+880,Béja,Nefza,Nefza,36.808400,9.266900
+881,Béja,Nefza,Cité El Amel,36.810700,9.269200
+882,Béja,Nefza,Cité Ennasr,36.813000,9.271500
+883,Béja,Nefza,Cité Erriadh,36.815300,9.273800
+884,Béja,Nefza,Cité Ennacim,36.817600,9.276100
+885,Béja,Nefza,Cité Ezzouhour,36.819900,9.278400
+886,Béja,Teboursouk,Teboursouk,36.822200,9.280700
+887,Béja,Teboursouk,Cité El Amel,36.824500,9.283000
+888,Béja,Teboursouk,Cité Ennasr,36.826800,9.285300
+889,Béja,Teboursouk,Cité Erriadh,36.829100,9.287600
+890,Béja,Teboursouk,Cité Ezzouhour,36.831400,9.289900
+891,Béja,Teboursouk,Cité Ennacim,36.833700,9.292200
+892,Béja,Amdoun,Amdoun,36.836000,9.294500
+893,Béja,Amdoun,Cité El Amel,36.838300,9.296800
+894,Béja,Amdoun,Cité Ennasr,36.840600,9.299100
+895,Béja,Amdoun,Cité Erriadh,36.842900,9.301400
+896,Béja,Amdoun,Cité Ennacim,36.845200,9.303700
+897,Béja,Amdoun,Cité Ezzouhour,36.847500,9.306000
+898,Béja,Amdoun,Cité Essoualmia,36.849800,9.308300
+899,Béja,Amdoun,Cité Romana,36.852100,9.310600
+900,Béja,Thibar,Thibar,36.854400,9.312900
+901,Béja,Thibar,Cité El Amel,36.856700,9.315200
+902,Béja,Thibar,Cité Ennasr,36.859000,9.317500
+903,Béja,Thibar,Cité Erriadh,36.861300,9.319800
+904,Béja,Thibar,Cité Ezzouhour,36.863600,9.322100
+905,Béja,Thibar,Cité Ennacim,36.865900,9.324400
+906,Sfax,Sfax Ville,Sfax Centre,34.739300,10.760000
+907,Sfax,Sfax Ville,Cité El Bahri 1,34.741600,10.762300
+908,Sfax,Sfax Ville,Cité El Bahri 2,34.743900,10.764600
+909,Sfax,Sfax Ville,Cité El Bahri 3,34.746200,10.766900
+910,Sfax,Sfax Ville,Cité El Bahri 4,34.748500,10.769200
+911,Sfax,Sfax Ville,Route El Ain,34.750800,10.771500
+912,Sfax,Sfax Ville,Cité Sakiet Ezzit,34.753100,10.773800
+913,Sfax,Sfax Ville,Cité Sakiet Eddaier,34.755400,10.776100
+914,Sfax,Sfax Ville,Route Menzel Chaker,34.757700,10.778400
+915,Sfax,Sfax Ville,Route Mahdia,34.760000,10.780700
+916,Sfax,Sfax Ville,Route Gremda,34.762300,10.783000
+917,Sfax,Sfax Ville,Route Teniour,34.764600,10.785300
+918,Sfax,Sfax Ville,Cité El Bousten,34.766900,10.787600
+919,Sfax,Sfax Ville,Cité El Haffara,34.769200,10.789900
+920,Sfax,Sfax Ville,Route Manzel Lahbib,34.771500,10.792200
+921,Sfax,Sfax Ville,Route Gabes,34.773800,10.794500
+922,Sfax,Sfax Ville,Route Kerkennah,34.776100,10.796800
+923,Sfax,Sfax Ville,Cité Ennour,34.778400,10.799100
+924,Sfax,Sfax Ville,Cité El Ghraba,34.780700,10.801400
+925,Sfax,Sfax Ville,Cité El Ons,34.783000,10.803700
+926,Sfax,Sfax Ville,Cité El Bassatine,34.785300,10.806000
+927,Sfax,Sakiet Ezzit,Sakiet Ezzit,34.787600,10.808300
+928,Sfax,Sakiet Ezzit,Cité Sidi Salem,34.789900,10.810600
+929,Sfax,Sakiet Ezzit,Cité Sidi Mansour,34.792200,10.812900
+930,Sfax,Sakiet Ezzit,Cité Riadh,34.794500,10.815200
+931,Sfax,Sakiet Ezzit,Cité El Menzah,34.796800,10.817500
+932,Sfax,Sakiet Ezzit,Cité El Hana,34.799100,10.819800
+933,Sfax,Sakiet Ezzit,Cité El Amen,34.801400,10.822100
+934,Sfax,Sakiet Eddaier,Sakiet Eddaier,34.803700,10.824400
+935,Sfax,Sakiet Eddaier,Cité El Boustene,34.806000,10.826700
+936,Sfax,Sakiet Eddaier,Cité Ben Fathallah,34.808300,10.829000
+937,Sfax,Sakiet Eddaier,Cité Ennacim,34.810600,10.831300
+938,Sfax,Sakiet Eddaier,Cité El Wafa,34.812900,10.833600
+939,Sfax,Sakiet Eddaier,Cité El Khalij,34.815200,10.835900
+940,Sfax,Agareb,Agareb,34.817500,10.838200
+941,Sfax,Agareb,Cité Ezzitouna,34.819800,10.840500
+942,Sfax,Agareb,Cité El Bassatine,34.822100,10.842800
+943,Sfax,Agareb,Cité Ennasr,34.824400,10.845100
+944,Sfax,Agareb,Cité El Hana,34.826700,10.847400
+945,Sfax,Jebeniana,Jebeniana,34.829000,10.849700
+946,Sfax,Jebeniana,Cité Erriadh,34.831300,10.852000
+947,Sfax,Jebeniana,Cité El Fath,34.833600,10.854300
+948,Sfax,Jebeniana,Cité El Amal,34.835900,10.856600
+949,Sfax,Menzel Chaker,Menzel Chaker,34.838200,10.858900
+950,Sfax,Menzel Chaker,Cité El Fajr,34.840500,10.861200
+951,Sfax,Menzel Chaker,Cité El Farhat,34.842800,10.863500
+952,Sfax,Menzel Chaker,Cité Ennour,34.845100,10.865800
+953,Sfax,Menzel Chaker,Cité El Bassatine,34.847400,10.868100
+954,Sfax,El Amra,El Amra,34.849700,10.870400
+955,Sfax,El Amra,Cité El Khadhra,34.852000,10.872700
+956,Sfax,El Amra,Cité El Amal,34.854300,10.875000
+957,Sfax,El Amra,Cité Ennacim,34.856600,10.877300
+958,Sfax,El Hencha,El Hencha,34.858900,10.879600
+959,Sfax,El Hencha,Cité El Manar,34.861200,10.881900
+960,Sfax,El Hencha,Cité El Amen,34.863500,10.884200
+961,Sfax,El Hencha,Cité El Fateh,34.865800,10.886500
+962,Sfax,Mahres,Mahres,34.868100,10.888800
+963,Sfax,Mahres,Cité Ennour,34.870400,10.891100
+964,Sfax,Mahres,Cité El Khadhra,34.872700,10.893400
+965,Sfax,Mahres,Cité Erriadh,34.875000,10.895700
+966,Sfax,Skhira,Skhira,34.877300,10.898000
+967,Sfax,Skhira,Cité El Amal,34.879600,10.900300
+968,Sfax,Skhira,Cité Ennacim,34.881900,10.902600
+969,Sfax,Kerkennah,Kerkennah,34.884200,10.904900
+970,Sfax,Kerkennah,Cité El Menzel,34.886500,10.907200
+971,Sfax,Kerkennah,Cité Ennour,34.888800,10.909500
+972,Sfax,Kerkennah,Cité Erriadh,34.891100,10.911800
+973,Sfax,Kerkennah,Cité El Waha,34.893400,10.914100
+974,Sfax,Kerkennah,Cité El Hana,34.895700,10.916400
+975,Sfax,Hajeb,Hajeb,34.898000,10.918700
+976,Sfax,Hajeb,Cité El Hana,34.900300,10.921000
+977,Sfax,Hajeb,Cité Ennacim,34.902600,10.923300
+978,Sfax,Hajeb,Cité El Bassatine,34.904900,10.925600
+979,Sousse,Akouda,Akouda,35.870400,10.570100
+980,Sousse,Akouda,Chott Meriem,35.872700,10.572400
+981,Sousse,Bouficha,Bouficha,35.875000,10.574700
+982,Sousse,Bouficha,El Ghedir,35.877300,10.577000
+983,Sousse,Enfidha,Enfidha,35.879600,10.579300
+984,Sousse,Enfidha,Hergla,35.881900,10.581600
+985,Sousse,Hammam Sousse,Hammam Sousse,35.884200,10.583900
+986,Sousse,Hammam Sousse,Khezama Est,35.886500,10.586200
+987,Sousse,Hammam Sousse,Khezama Ouest,35.888800,10.588500
+988,Sousse,Kalaa Kebira,Kalaa Kebira,35.891100,10.590800
+989,Sousse,Kalaa Seghira,Kalaa Seghira,35.893400,10.593100
+990,Sousse,Msaken,Msaken,35.895700,10.595400
+991,Sousse,Sidi Bou Ali,Sidi Bou Ali,35.898000,10.597700
+992,Sousse,Sidi El Hani,Sidi El Hani,35.900300,10.600000
+993,Sousse,Sousse Jaouhara,Cité Jaouhara,35.902600,10.602300
+994,Sousse,Sousse Jaouhara,Cité Ezzouhour,35.904900,10.604600
+995,Sousse,Sousse Medina,Sousse Medina,35.907200,10.606900
+996,Sousse,Sousse Riadh,Cité Riadh,35.909500,10.609200
+997,Sousse,Sousse Riadh,Cité Sahloul,35.911800,10.611500
+998,Sousse,Sousse Riadh,Cité Erriadh,35.914100,10.613800
+999,Sousse,Sousse Ville,Sousse Ville,35.916400,10.616100
+1000,Sousse,Sousse Ville,Cité Taffala,35.918700,10.618400
+1001,Sousse,Sousse Ville,Cité Olympique,35.921000,10.620700
+1002,Sousse,Sousse Ville,Sahloul 1,35.923300,10.623000
+1003,Sousse,Sousse Ville,Sahloul 2,35.925600,10.625300
+1004,Sousse,Sousse Ville,Sahloul 3,35.927900,10.627600
+1005,Sousse,Sousse Ville,Cité Ezzouhour,35.930200,10.629900
+1006,Sousse,Sousse Ville,Cité El Kantaoui,35.932500,10.632200
+1007,Nabeul,Nabeul,Nabeul Ville,36.451500,10.737400
+1008,Nabeul,Nabeul,Beni Khiar,36.469200,10.782100
+1009,Nabeul,Nabeul,Bou Argoub,36.527900,10.563500
+1010,Nabeul,Nabeul,Dar Chaabane El Fehri,36.468300,10.792500
+1011,Nabeul,Nabeul,El Mida,36.735400,11.019800
+1012,Nabeul,Nabeul,Hammamet,36.407200,10.618500
+1013,Nabeul,Nabeul,Korba,36.578500,10.858600
+1014,Nabeul,Nabeul,Menzel Bouzelfa,36.652900,10.594100
+1015,Nabeul,Nabeul,Menzel Temime,36.785800,10.912300
+1016,Nabeul,Nabeul,Soliman,36.668200,10.489500
+1017,Nabeul,Nabeul,Takelsa,36.767800,10.660700
+1018,Nabeul,Nabeul,Grombalia,36.616800,10.508300
+1019,Nabeul,Nabeul,Hammamet Nord,36.404500,10.617100
+1020,Nabeul,Nabeul,Korbous,36.814400,10.573100
+1021,Nabeul,Nabeul,Beni Khalled,36.652600,10.505300
+1022,Nabeul,Nabeul,Tazarka,36.583500,10.852400
+1023,Nabeul,Nabeul,El Haouaria,37.042500,11.014000
+1024,Nabeul,Nabeul,Teboulba,35.648100,10.938100
+1025,Nabeul,Nabeul,Kélibia,36.847700,11.093800
+1026,Nabeul,Nabeul,Zaouit Djedidi,36.543300,10.637000
+1027,Nabeul,Nabeul,Somâa,36.519800,10.572300
+1028,Nabeul,Nabeul,Takilsa,36.789600,10.706100
+1029,Nabeul,Nabeul,Menzel Horr,36.734800,10.814400
+1030,Nabeul,Nabeul,Ras Jebel,37.204800,10.186500
+1031,Nabeul,Nabeul,El Alia,37.170100,10.025600
+1032,Nabeul,Nabeul,Dar Allouch,37.070100,11.097600
+1033,Nabeul,Nabeul,Soliman Sud,36.684100,10.461200
+1034,Nabeul,Nabeul,Hammamet Sud,36.384500,10.558500
+1035,Kairouan,Kairouan Nord,Kairouan Ville,35.674600,10.096300
+1036,Kairouan,Kairouan Nord,Bir El Haffey,34.929000,9.470600
+1037,Kairouan,Kairouan Nord,Bou Hajla,35.294700,10.068900
+1038,Kairouan,Kairouan Nord,Chebika,35.945000,9.138300
+1039,Kairouan,Kairouan Nord,El Alâa,35.569700,9.885400
+1040,Kairouan,Kairouan Nord,Haffouz,35.633000,9.707400
+1041,Kairouan,Kairouan Nord,Hajeb El Ayoun,35.529100,9.494100
+1042,Kairouan,Kairouan Nord,Nasrallah,35.411600,9.732500
+1043,Kairouan,Kairouan Nord,Oueslatia,35.846600,9.555400
+1044,Kairouan,Kairouan Nord,Sbikha,35.932800,10.021500
+1045,Kairouan,Kairouan Nord,Chrarda,35.144300,10.013800
+1046,Kairouan,Kairouan Nord,Kairouan Nord,35.688800,10.104200
+1047,Kairouan,Kairouan Sud,Kairouan Sud,35.634600,10.073300
+1048,Kairouan,Kairouan Sud,Chebika Sud,35.925000,9.118300
+1049,Kairouan,Kairouan Sud,Bou Hajla Sud,35.284700,10.058900
+1050,Kairouan,Kairouan Sud,El Alâa Sud,35.549700,9.865400
+1051,Kairouan,Kairouan Sud,Haffouz Sud,35.613000,9.687400
+1052,Kairouan,Kairouan Sud,Hajeb El Ayoun Sud,35.509100,9.474100
+1053,Kairouan,Kairouan Sud,Nasrallah Sud,35.391600,9.712500
+1054,Kairouan,Kairouan Sud,Oueslatia Sud,35.826600,9.535400
+1055,Kairouan,Kairouan Sud,Sbikha Sud,35.912800,10.001500
+1056,Kairouan,Kairouan Sud,Chrarda Sud,35.124300,9.993800
+1057,Gabès,Gabès Ville,Gabès Centre,33.881500,10.098200
+1058,Gabès,Gabès Ville,Gabès Médina,33.884100,10.095500
+1059,Gabès,Gabès Ville,Gabès Sud,33.886700,10.092800
+1060,Gabès,Gabès Ville,Gabès Ouest,33.889300,10.090100
+1061,Gabès,Gabès Ville,Zrig,33.891900,10.087400
+1062,Gabès,Gabès Ville,Chott Essalem,33.894500,10.084700
+1063,Gabès,Gabès Ville,El Ferjani,33.897100,10.082000
+1064,Gabès,Gabès Ville,Cité Nouvelle,33.899700,10.079300
+1065,Gabès,Gabès Ville,Chenini Gabès,33.902300,10.076600
+1066,Gabès,Gabès Ville,Ghannouch,33.904900,10.073900
+1067,Gabès,Gabès Ville,Matmata,33.907500,10.071200
+1068,Gabès,Gabès Ville,Mareth,33.910100,10.068500
+1069,Gabès,Gabès Ville,Métouia,33.912700,10.065800
+1070,Gabès,Gabès Ville,Nouvelle Matmata,33.915300,10.063100
+1071,Gabès,Gabès Ville,El Hamma,33.917900,10.060400
+1072,Gabès,Gabès Ville,El Alem,33.920500,10.057700
+1073,Gabès,Gabès Ville,El Hamma Ouest,33.923100,10.055000
+1074,Gabès,Gabès Ville,El Hamma Est,33.925700,10.052300
+1075,Gabès,Gabès Ville,Douz,33.928300,10.049600
+1076,Gabès,Gabès Ville,Nouvelle Matmata Nord,33.930900,10.046900
+1077,Gabès,Gabès Ville,Nouvelle Matmata Sud,33.933500,10.044200
+1078,Gabès,Gabès Ville,Nouvelle Matmata Est,33.936100,10.041500
+1079,Gabès,Gabès Ville,Nouvelle Matmata Ouest,33.938700,10.038800
+1080,Gabès,Gabès Ville,Gabès Plage,33.941300,10.036100
+1081,Gabès,Gabès Ville,Gabès El Metouia,33.943900,10.033400
+1082,Gabès,Gabès Ville,Gabès Matmata,33.946500,10.030700
+1083,Gabès,Gabès Ville,Gabès Mareth,33.949100,10.028000
+1084,Gabès,Gabès Ville,Gabès Nouvelle Matmata,33.951700,10.025300
+1085,Gabès,Gabès Ville,Gabès El Hamma,33.954300,10.022600
+1086,Gabès,Gabès Ville,Gabès Douz,33.956900,10.019900
+1087,Gabès,Gabès Ville,Gabès Nouvelle Matmata Nord,33.959500,10.017200
+1088,Gabès,Gabès Ville,Gabès Nouvelle Matmata Sud,33.962100,10.014500
+1089,Gabès,Gabès Ville,Gabès Nouvelle Matmata Est,33.964700,10.011800
+1090,Gabès,Gabès Ville,Gabès Nouvelle Matmata Ouest,33.967300,10.009100
+1091,Medenine,Medenine Nord,Medenine Centre,33.353000,10.504500
+1092,Medenine,Medenine Nord,Beni Khedache,33.348200,10.363800
+1093,Medenine,Medenine Sud,Ben Guerdane,33.137800,11.219200
+1094,Medenine,Medenine Sud,Zarzis,33.500500,11.112000
+1095,Medenine,Djerba - Houmt Souk,Houmt Souk,33.807600,10.853000
+1096,Medenine,Djerba - Houmt Souk,Midoun,33.813500,10.982000
+1097,Medenine,Djerba - Ajim,Ajim,33.723900,10.753200
+1098,Manouba,Borj El Amri,Borj El Amri,36.809000,10.008300
+1099,Manouba,Borj El Amri,Douar Hicher,36.836400,10.047700
+1100,Manouba,Borj El Amri,Ezzahra,36.838700,10.050000
+1101,Manouba,Borj El Amri,Mornaguia,36.841000,10.052300
+1102,Manouba,Borj El Amri,Oued Ellil,36.843300,10.054600
+1103,Manouba,Douar Hicher,Douar Hicher,36.845600,10.056900
+1104,Manouba,Douar Hicher,Cité Ennour,36.847900,10.059200
+1105,Manouba,Douar Hicher,Cité Ettadhamen,36.850200,10.061500
+1106,Manouba,Douar Hicher,Cité Erriadh,36.852500,10.063800
+1107,Manouba,Douar Hicher,Cité El Menzah,36.854800,10.066100
+1108,Manouba,El Battan,El Battan,36.857100,10.068400
+1109,Manouba,El Battan,Cité El Amel,36.859400,10.070700
+1110,Manouba,El Battan,Cité Ennasr,36.864000,10.075300
+1111,Manouba,El Battan,Cité Erriadh,36.866300,10.077600
+1112,Manouba,Jedaida,Jedaida,36.870900,10.082200
+1113,Manouba,Jedaida,Cité Ennour,36.882400,10.093700
+1114,Manouba,Jedaida,Cité Ettaamir,36.884700,10.096000
+1115,Manouba,Jedaida,Cité Ettaamine,36.887000,10.098300
+1116,Manouba,Jedaida,Cité El Khadra,36.889300,10.100600
+1117,Manouba,Jedaida,Cité Erriadh,36.891600,10.102900
+1118,Manouba,Mornaguia,Mornaguia,36.896200,10.107500
+1119,Manouba,Mornaguia,Cité Ennasr,36.907700,10.119000
+1120,Manouba,Mornaguia,Cité Ettaamir,36.910000,10.121300
+1121,Manouba,Mornaguia,Cité Ettaamine,36.912300,10.123600
+1122,Manouba,Mornaguia,Cité El Khadra,36.914600,10.125900
+1123,Manouba,Oued Ellil,Oued Ellil,36.921500,10.132800
+1124,Manouba,Oued Ellil,Cité El Amel,36.923800,10.135100
+1125,Manouba,Oued Ellil,Cité El Bassatine,36.926100,10.137400
+1126,Manouba,Oued Ellil,Cité El Ons,36.928400,10.139700
+1127,Manouba,Oued Ellil,Cité Ezzouhour,36.930700,10.142000
+1128,Manouba,Oued Ellil,Cité Ennasr,36.933000,10.144300
+1129,Manouba,Oued Ellil,Cité Ettaamir,36.935300,10.146600
+1130,Manouba,Oued Ellil,Cité Ettaamine,36.937600,10.148900
+1131,Manouba,Oued Ellil,Cité El Khadra,36.939900,10.151200
+1132,Manouba,Oued Ellil,Cité Erriadh,36.942200,10.153500
+1133,Manouba,Oued Ellil,Cité Essalem,36.944500,10.155800
+1134,Manouba,Tebourba,Tebourba,36.946800,10.158100
+1135,Manouba,Tebourba,Cité El Amel,36.949100,10.160400
+1136,Manouba,Tebourba,Cité El Bassatine,36.951400,10.162700
+1137,Manouba,Tebourba,Cité El Ons,36.953700,10.165000
+1138,Manouba,Tebourba,Cité Ezzouhour,36.956000,10.167300
+1139,Manouba,Tebourba,Cité Ennasr,36.958300,10.169600
+1140,Manouba,Tebourba,Cité Ettaamir,36.960600,10.171900
+1141,Manouba,Tebourba,Cité Ettaamine,36.962900,10.174200
+1142,Manouba,Tebourba,Cité El Khadra,36.965200,10.176500
+1143,Manouba,Tebourba,Cité Erriadh,36.967500,10.178800
+1144,Manouba,Tebourba,Cité Essalem,36.969800,10.181100
+1145,Kef,Kef Est,Cité El Mansoura,36.182000,8.710600
+1146,Kef,Kef Est,El Karma,36.184000,8.712300
+1147,Kef,Kef Est,Oued Souani,36.186300,8.714600
+1148,Kef,Kef Ouest,Kef Ouest,36.188600,8.716900
+1149,Kef,Kef Ouest,Cité El Amel,36.190900,8.719200
+1150,Kef,Kef Ouest,Cité El Bassatine,36.193200,8.721500
+1151,Kef,Kef Ouest,Cité Ennasr,36.195500,8.723800
+1152,Kef,Kef Ouest,Cité Ettaamir,36.197800,8.726100
+1153,Kef,Kef Ouest,Cité Ettaamine,36.200100,8.728400
+1154,Kef,Kef Ouest,Cité El Khadra,36.202400,8.730700
+1155,Kef,Kef Ouest,Cité Erriadh,36.204700,8.733000
+1156,Kef,Kef Ouest,Cité Essalem,36.207000,8.735300
+1157,Kef,Nebeur,Nebeur,36.209300,8.737600
+1158,Kef,Nebeur,Cité El Amel,36.211600,8.739900
+1159,Kef,Nebeur,Cité El Bassatine,36.213900,8.742200
+1160,Kef,Nebeur,Cité El Ons,36.216200,8.744500
+1161,Kef,Nebeur,Cité Ezzouhour,36.218500,8.746800
+1162,Kef,Nebeur,Cité Ennasr,36.220800,8.749100
+1163,Kef,Nebeur,Cité Ettaamir,36.223100,8.751400
+1164,Kef,Nebeur,Cité Ettaamine,36.225400,8.753700
+1165,Kef,Nebeur,Cité El Khadra,36.227700,8.756000
+1166,Kef,Nebeur,Cité Erriadh,36.230000,8.758300
+1167,Kef,Nebeur,Cité Essalem,36.232300,8.760600
+1168,Kef,Sakiet Sidi Youssef,Sakiet Sidi Youssef,36.234600,8.762900
+1169,Kef,Sakiet Sidi Youssef,Cité El Amel,36.236900,8.765200
+1170,Kef,Sakiet Sidi Youssef,Cité El Bassatine,36.239200,8.767500
+1171,Kef,Sakiet Sidi Youssef,Cité El Ons,36.241500,8.769800
+1172,Kef,Sakiet Sidi Youssef,Cité Ezzouhour,36.243800,8.772100
+1173,Kef,Sakiet Sidi Youssef,Cité Ennasr,36.246100,8.774400
+1174,Kef,Sakiet Sidi Youssef,Cité Ettaamir,36.248400,8.776700
+1175,Kef,Sakiet Sidi Youssef,Cité Ettaamine,36.250700,8.779000
+1176,Kef,Sakiet Sidi Youssef,Cité El Khadra,36.253000,8.781300
+1177,Kef,Sakiet Sidi Youssef,Cité Erriadh,36.255300,8.783600
+1178,Kef,Sakiet Sidi Youssef,Cité Essalem,36.257600,8.785900
+1179,Kef,Touiref,Touiref,36.259900,8.788200
+1180,Kef,Touiref,Cité El Amel,36.262200,8.790500
+1181,Kef,Touiref,Cité El Bassatine,36.264500,8.792800
+1182,Kef,Touiref,Cité El Ons,36.266800,8.795100
+1183,Kef,Touiref,Cité Ezzouhour,36.269100,8.797400
+1184,Kef,Touiref,Cité Ennasr,36.271400,8.799700
+1185,Kef,Touiref,Cité Ettaamir,36.273700,8.802000
+1186,Kef,Touiref,Cité Ettaamine,36.276000,8.804300
+1187,Kef,Touiref,Cité El Khadra,36.278300,8.806600
+1188,Kef,Touiref,Cité Erriadh,36.280600,8.808900
+1189,Kef,Touiref,Cité Essalem,36.282900,8.811200
+1190,Kef,Jerissa,Jerissa,36.285200,8.813500
+1191,Kef,Jerissa,Cité El Amel,36.287500,8.815800
+1192,Kef,Jerissa,Cité El Bassatine,36.289800,8.818100
+1193,Kef,Jerissa,Cité El Ons,36.292100,8.820400
+1194,Kef,Jerissa,Cité Ezzouhour,36.294400,8.822700
+1195,Kef,Jerissa,Cité Ennasr,36.296700,8.825000
+1196,Kef,Jerissa,Cité Ettaamir,36.299000,8.827300
+1197,Kef,Jerissa,Cité Ettaamine,36.301300,8.829600
+1198,Kef,Jerissa,Cité El Khadra,36.303600,8.831900
+1199,Kef,Jerissa,Cité Erriadh,36.305900,8.834200
+1200,Kef,Jerissa,Cité Essalem,36.308200,8.836500
+1201,Kef,Tajerouine,Tajerouine,36.310500,8.838800
+1202,Kef,Tajerouine,Cité El Amel,36.312800,8.841100
+1203,Kef,Tajerouine,Cité El Bassatine,36.315100,8.843400
+1204,Kef,Tajerouine,Cité El Ons,36.317400,8.845700
+1205,Kef,Tajerouine,Cité Ezzouhour,36.319700,8.848000
+1206,Kef,Tajerouine,Cité Ennasr,36.322000,8.850300
+1207,Kef,Tajerouine,Cité Ettaamir,36.324300,8.852600
+1208,Kef,Tajerouine,Cité Ettaamine,36.326600,8.854900
+1209,Kef,Tajerouine,Cité El Khadra,36.328900,8.857200
+1210,Kef,Tajerouine,Cité Erriadh,36.331200,8.859500
+1211,Kef,Tajerouine,Cité Essalem,36.333500,8.861800
+1212,Kef,Kalaat Senan,Kalaat Senan,36.335800,8.864100
+1213,Kef,Kalaat Senan,Cité El Amel,36.338100,8.866400
+1214,Kef,Kalaat Senan,Cité El Bassatine,36.340400,8.868700
+1215,Kef,Kalaat Senan,Cité El Ons,36.342700,8.871000
+1216,Kef,Kalaat Senan,Cité Ezzouhour,36.345000,8.873300
+1217,Kef,Kalaat Senan,Cité Ennasr,36.347300,8.875600
+1218,Kef,Kalaat Senan,Cité Ettaamir,36.349600,8.877900
+1219,Kef,Kalaat Senan,Cité Ettaamine,36.351900,8.880200
+1220,Kef,Kalaat Senan,Cité El Khadra,36.354200,8.882500
+1221,Kef,Kalaat Senan,Cité Erriadh,36.356500,8.884800
+1222,Kef,Kalaat Senan,Cité Essalem,36.358800,8.887100
+1223,Kef,Kalaat Khasba,Kalaat Khasba,36.361100,8.889400
+1224,Kef,Kalaat Khasba,Cité El Amel,36.363400,8.891700
+1225,Kef,Kalaat Khasba,Cité El Bassatine,36.365700,8.894000
+1226,Kef,Kalaat Khasba,Cité El Ons,36.368000,8.896300
+1227,Kef,Kalaat Khasba,Cité Ezzouhour,36.370300,8.898600
+1228,Kef,Kalaat Khasba,Cité Ennasr,36.372600,8.900900
+1229,Kef,Kalaat Khasba,Cité Ettaamir,36.374900,8.903200
+1230,Kef,Kalaat Khasba,Cité Ettaamine,36.377200,8.905500
+1231,Kef,Kalaat Khasba,Cité El Khadra,36.379500,8.907800
+1232,Kef,Kalaat Khasba,Cité Erriadh,36.381800,8.910100
+1233,Kef,Kalaat Khasba,Cité Essalem,36.384100,8.912400
+1234,Kef,Sers,Sers,36.386400,8.914700
+1235,Kef,Sers,Cité El Amel,36.388700,8.917000
+1236,Kef,Sers,Cité El Bassatine,36.391000,8.919300
+1237,Kef,Sers,Cité El Ons,36.393300,8.921600
+1238,Kef,Sers,Cité Ezzouhour,36.395600,8.923900
+1239,Kef,Sers,Cité Ennasr,36.397900,8.926200
+1240,Kef,Sers,Cité Ettaamir,36.400200,8.928500
+1241,Kef,Sers,Cité Ettaamine,36.402500,8.930800
+1242,Kef,Sers,Cité El Khadra,36.404800,8.933100
+1243,Kef,Sers,Cité Erriadh,36.407100,8.935400
+1244,Kef,Sers,Cité Essalem,36.409400,8.937700
+1245,Kef,Dahmani,Dahmani,36.411700,8.940000
+1246,Kef,Dahmani,Cité El Amel,36.414000,8.942300
+1247,Kef,Dahmani,Cité El Bassatine,36.416300,8.944600
+1248,Kef,Dahmani,Cité El Ons,36.418600,8.946900
+1249,Kef,Dahmani,Cité Ezzouhour,36.420900,8.949200
+1250,Kef,Dahmani,Cité Ennasr,36.423200,8.951500
+1251,Kef,Dahmani,Cité Ettaamir,36.425500,8.953800
+1252,Kef,Dahmani,Cité Ettaamine,36.427800,8.956100
+1253,Kef,Dahmani,Cité El Khadra,36.430100,8.958400
+1254,Kef,Dahmani,Cité Erriadh,36.432400,8.960700
+1255,Kef,Dahmani,Cité Essalem,36.434700,8.963000
+1256,Siliana,Siliana Nord,Siliana Ville,36.084000,9.366800
+1257,Siliana,Siliana Nord,Cité Ennasr,36.086100,9.369100
+1258,Siliana,Siliana Nord,Cité Erriadh,36.088200,9.371400
+1259,Siliana,Siliana Nord,Cité Ettaamir,36.090300,9.373700
+1260,Siliana,Siliana Nord,Cité El Khadra,36.092400,9.376000
+1261,Siliana,Siliana Nord,Cité Essalem,36.094500,9.378300
+1262,Siliana,Siliana Sud,Cité El Bassatine,36.096600,9.380600
+1263,Siliana,Siliana Sud,Cité Ennasr,36.098700,9.382900
+1264,Siliana,Siliana Sud,Cité Erriadh,36.100800,9.385200
+1265,Siliana,Siliana Sud,Cité Ettaamir,36.102900,9.387500
+1266,Siliana,Siliana Sud,Cité El Khadra,36.105000,9.389800
+1267,Siliana,Siliana Sud,Cité Essalem,36.107100,9.392100
+1268,Siliana,Gaâfour,Gaâfour,36.109200,9.394400
+1269,Siliana,Gaâfour,Cité El Amel,36.111300,9.396700
+1270,Siliana,Gaâfour,Cité El Bassatine,36.113400,9.399000
+1271,Siliana,Gaâfour,Cité Ennacim,36.115500,9.401300
+1272,Siliana,Gaâfour,Cité Ezzouhour,36.117600,9.403600
+1273,Siliana,Gaâfour,Cité Ennasr,36.119700,9.405900
+1274,Siliana,Gaâfour,Cité Erriadh,36.121800,9.408200
+1275,Siliana,Gaâfour,Cité Ettaamir,36.123900,9.410500
+1276,Siliana,Gaâfour,Cité Ettaamine,36.126000,9.412800
+1277,Siliana,El Krib,El Krib,36.128100,9.415100
+1278,Siliana,El Krib,Cité Ennasr,36.130200,9.417400
+1279,Siliana,El Krib,Cité Erriadh,36.132300,9.419700
+1280,Siliana,El Krib,Cité Ettaamir,36.134400,9.422000
+1281,Siliana,El Krib,Cité El Khadra,36.136500,9.424300
+1282,Siliana,El Krib,Cité Essalem,36.138600,9.426600
+1283,Siliana,Bou Arada,Bou Arada,36.140700,9.428900
+1284,Siliana,Bou Arada,Cité El Amel,36.142800,9.431200
+1285,Siliana,Bou Arada,Cité El Bassatine,36.144900,9.433500
+1286,Siliana,Bou Arada,Cité Ennacim,36.147000,9.435800
+1287,Siliana,Bou Arada,Cité Ezzouhour,36.149100,9.438100
+1288,Siliana,Bou Arada,Cité Ennasr,36.151200,9.440400
+1289,Siliana,Bou Arada,Cité Erriadh,36.153300,9.442700
+1290,Siliana,Bou Arada,Cité Ettaamir,36.155400,9.445000
+1291,Siliana,Bou Arada,Cité Ettaamine,36.157500,9.447300
+1292,Siliana,Kesra,Kesra,36.159600,9.449600
+1293,Siliana,Kesra,Cité Ennasr,36.161700,9.451900
+1294,Siliana,Kesra,Cité Erriadh,36.163800,9.454200
+1295,Siliana,Kesra,Cité Ettaamir,36.165900,9.456500
+1296,Siliana,Kesra,Cité El Khadra,36.168000,9.458800
+1297,Siliana,Kesra,Cité Essalem,36.170100,9.461100
+1298,Siliana,Bargou,Bargou,36.172200,9.463400
+1299,Siliana,Bargou,Cité El Amel,36.174300,9.465700
+1300,Siliana,Bargou,Cité El Bassatine,36.176400,9.468000
+1301,Siliana,Bargou,Cité Ennacim,36.178500,9.470300
+1302,Siliana,Bargou,Cité Ezzouhour,36.180600,9.472600
+1303,Siliana,Bargou,Cité Ennasr,36.182700,9.474900
+1304,Siliana,Bargou,Cité Erriadh,36.184800,9.477200
+1305,Siliana,Bargou,Cité Ettaamir,36.186900,9.479500
+1306,Siliana,Bargou,Cité Ettaamine,36.189000,9.481800
+1307,Siliana,Makthar,Makthar,36.191100,9.484100
+1308,Siliana,Makthar,Cité Ennasr,36.193200,9.486400
+1309,Siliana,Makthar,Cité Erriadh,36.195300,9.488700
+1310,Siliana,Makthar,Cité Ettaamir,36.197400,9.491000
+1311,Siliana,Makthar,Cité El Khadra,36.199500,9.493300
+1312,Siliana,Makthar,Cité Essalem,36.201600,9.495600
+1313,Siliana,Rouhia,Rouhia,36.203700,9.497900
+1314,Siliana,Rouhia,Cité El Amel,36.205800,9.500200
+1315,Siliana,Rouhia,Cité El Bassatine,36.207900,9.502500
+1316,Siliana,Rouhia,Cité Ennacim,36.210000,9.504800
+1317,Siliana,Rouhia,Cité Ezzouhour,36.212100,9.507100
+1318,Siliana,Rouhia,Cité Ennasr,36.214200,9.509400
+1319,Siliana,Rouhia,Cité Erriadh,36.216300,9.511700
+1320,Siliana,Rouhia,Cité Ettaamir,36.218400,9.514000
+1321,Siliana,Rouhia,Cité Ettaamine,36.220500,9.516300
+1322,Siliana,El Aroussa,El Aroussa,36.222600,9.518600
+1323,Siliana,El Aroussa,Cité El Amel,36.224700,9.520900
+1324,Siliana,El Aroussa,Cité El Bassatine,36.226800,9.523200
+1325,Siliana,El Aroussa,Cité Ennacim,36.228900,9.525500
+1326,Siliana,El Aroussa,Cité Ezzouhour,36.231000,9.527800
+1327,Siliana,El Aroussa,Cité Ennasr,36.233100,9.530100
+1328,Siliana,El Aroussa,Cité Erriadh,36.235200,9.532400
+1329,Siliana,El Aroussa,Cité Ettaamir,36.237300,9.534700
+1330,Siliana,El Aroussa,Cité Ettaamine,36.239400,9.537000
+1331,Siliana,Bouarada,Bouarada,36.241500,9.539300
+1332,Siliana,Bouarada,Cité El Amel,36.243600,9.541600
+1333,Siliana,Bouarada,Cité El Bassatine,36.245700,9.543900
+1334,Siliana,Bouarada,Cité Ennacim,36.247800,9.546200
+1335,Siliana,Bouarada,Cité Ezzouhour,36.249900,9.548500
+1336,Siliana,Bouarada,Cité Ennasr,36.252000,9.550800
+1337,Siliana,Bouarada,Cité Erriadh,36.254100,9.553100
+1338,Siliana,Bouarada,Cité Ettaamir,36.256200,9.555400
+1339,Siliana,Bouarada,Cité Ettaamine,36.258300,9.557700
+1340,Siliana,Cebbala Ouled Asker,Cebbala Ouled Asker,36.260400,9.560000
+1341,Siliana,Cebbala Ouled Asker,Cité El Amel,36.262500,9.562300
+1342,Siliana,Cebbala Ouled Asker,Cité El Bassatine,36.264600,9.564600
+1343,Siliana,Cebbala Ouled Asker,Cité Ennacim,36.266700,9.566900
+1344,Siliana,Cebbala Ouled Asker,Cité Ezzouhour,36.268800,9.569200
+1345,Siliana,Cebbala Ouled Asker,Cité Ennasr,36.270900,9.571500
+1346,Siliana,Cebbala Ouled Asker,Cité Erriadh,36.273000,9.573800
+1347,Siliana,Cebbala Ouled Asker,Cité Ettaamir,36.275100,9.576100
+1348,Siliana,Cebbala Ouled Asker,Cité Ettaamine,36.277200,9.578400
+1349,Siliana,Béni Mtir,Béni Mtir,36.279300,9.580700
+1350,Siliana,Béni Mtir,Cité El Amel,36.281400,9.583000
+1351,Siliana,Béni Mtir,Cité El Bassatine,36.283500,9.585300
+1352,Siliana,Béni Mtir,Cité Ennacim,36.285600,9.587600
+1353,Siliana,Béni Mtir,Cité Ezzouhour,36.287700,9.589900
+1354,Siliana,Béni Mtir,Cité Ennasr,36.289800,9.592200
+1355,Siliana,Béni Mtir,Cité Erriadh,36.291900,9.594500
+1356,Siliana,Béni Mtir,Cité Ettaamir,36.294000,9.596800
+1357,Siliana,Béni Mtir,Cité Ettaamine,36.296100,9.599100
+1358,Siliana,Echrarda,Echrarda,36.298200,9.601400
+1359,Siliana,Echrarda,Cité El Amel,36.300300,9.603700
+1360,Siliana,Echrarda,Cité El Bassatine,36.302400,9.606000
+1361,Siliana,Echrarda,Cité Ennacim,36.304500,9.608300
+1362,Siliana,Echrarda,Cité Ezzouhour,36.306600,9.610600
+1363,Siliana,Echrarda,Cité Ennasr,36.308700,9.612900
+1364,Siliana,Echrarda,Cité Erriadh,36.310800,9.615200
+1365,Siliana,Echrarda,Cité Ettaamir,36.312900,9.617500
+1366,Siliana,Echrarda,Cité Ettaamine,36.315000,9.619800
+1367,Siliana,Kesra,Cité El Amel,36.319200,9.624400
+1368,Siliana,Kesra,Cité El Bassatine,36.321300,9.626700
+1369,Siliana,Kesra,Cité Ennacim,36.323400,9.629000
+1370,Siliana,Kesra,Cité Ezzouhour,36.325500,9.631300
+1371,Siliana,Kesra,Cité Ettaamine,36.333900,9.640500
+1372,Sidi Bouzid,Sidi Bouzid Est,Cité Ennasr,35.040000,9.486000
+1373,Sidi Bouzid,Sidi Bouzid Est,Cité Erriadh,35.042000,9.488000
+1374,Sidi Bouzid,Sidi Bouzid Est,Cité Ettaamir,35.044000,9.490000
+1375,Sidi Bouzid,Sidi Bouzid Est,Cité El Khadra,35.046000,9.492000
+1376,Sidi Bouzid,Sidi Bouzid Est,Cité Essalem,35.048000,9.494000
+1377,Sidi Bouzid,Sidi Bouzid Ouest,Cité Ennasr,35.050000,9.496000
+1378,Sidi Bouzid,Sidi Bouzid Ouest,Cité Erriadh,35.052000,9.498000
+1379,Sidi Bouzid,Sidi Bouzid Ouest,Cité Ettaamir,35.054000,9.500000
+1380,Sidi Bouzid,Sidi Bouzid Ouest,Cité El Khadra,35.056000,9.502000
+1381,Sidi Bouzid,Sidi Bouzid Ouest,Cité Essalem,35.058000,9.504000
+1382,Sidi Bouzid,Bir El Hafey,Cité El Amel,35.062000,9.508000
+1383,Sidi Bouzid,Bir El Hafey,Cité El Bassatine,35.064000,9.510000
+1384,Sidi Bouzid,Bir El Hafey,Cité Ennacim,35.066000,9.512000
+1385,Sidi Bouzid,Bir El Hafey,Cité Ezzouhour,35.068000,9.514000
+1386,Sidi Bouzid,Bir El Hafey,Cité Ennasr,35.070000,9.516000
+1387,Sidi Bouzid,Bir El Hafey,Cité Erriadh,35.072000,9.518000
+1388,Sidi Bouzid,Bir El Hafey,Cité Ettaamir,35.074000,9.520000
+1389,Sidi Bouzid,Bir El Hafey,Cité Ettaamine,35.076000,9.522000
+1390,Sidi Bouzid,Jilma,Cité Ennasr,35.080000,9.526000
+1391,Sidi Bouzid,Jilma,Cité Erriadh,35.082000,9.528000
+1392,Sidi Bouzid,Jilma,Cité Ettaamir,35.084000,9.530000
+1393,Sidi Bouzid,Jilma,Cité El Khadra,35.086000,9.532000
+1394,Sidi Bouzid,Jilma,Cité Essalem,35.088000,9.534000
+1395,Sidi Bouzid,Cebbala Ouled Asker,Cité El Amel,35.092000,9.538000
+1396,Sidi Bouzid,Cebbala Ouled Asker,Cité El Bassatine,35.094000,9.540000
+1397,Sidi Bouzid,Cebbala Ouled Asker,Cité Ennacim,35.096000,9.542000
+1398,Sidi Bouzid,Cebbala Ouled Asker,Cité Ezzouhour,35.098000,9.544000
+1399,Sidi Bouzid,Cebbala Ouled Asker,Cité Ennasr,35.100000,9.546000
+1400,Sidi Bouzid,Cebbala Ouled Asker,Cité Erriadh,35.102000,9.548000
+1401,Sidi Bouzid,Cebbala Ouled Asker,Cité Ettaamir,35.104000,9.550000
+1402,Sidi Bouzid,Cebbala Ouled Asker,Cité Ettaamine,35.106000,9.552000
+1403,Sidi Bouzid,Meknassy,Cité Ennasr,35.110000,9.556000
+1404,Sidi Bouzid,Meknassy,Cité Erriadh,35.112000,9.558000
+1405,Sidi Bouzid,Meknassy,Cité Ettaamir,35.114000,9.560000
+1406,Sidi Bouzid,Meknassy,Cité El Khadra,35.116000,9.562000
+1407,Sidi Bouzid,Meknassy,Cité Essalem,35.118000,9.564000
+1408,Sidi Bouzid,Menzel Bouzaiane,Menzel Bouzaiane,35.120000,9.566000
+1409,Sidi Bouzid,Menzel Bouzaiane,Cité El Amel,35.122000,9.568000
+1410,Sidi Bouzid,Menzel Bouzaiane,Cité El Bassatine,35.124000,9.570000
+1411,Sidi Bouzid,Menzel Bouzaiane,Cité Ennacim,35.126000,9.572000
+1412,Sidi Bouzid,Menzel Bouzaiane,Cité Ezzouhour,35.128000,9.574000
+1413,Sidi Bouzid,Menzel Bouzaiane,Cité Ennasr,35.130000,9.576000
+1414,Sidi Bouzid,Menzel Bouzaiane,Cité Erriadh,35.132000,9.578000
+1415,Sidi Bouzid,Menzel Bouzaiane,Cité Ettaamir,35.134000,9.580000
+1416,Sidi Bouzid,Menzel Bouzaiane,Cité Ettaamine,35.136000,9.582000
+1417,Sidi Bouzid,Menzel Bouzaiane,Cité El Khadra,35.138000,9.584000
+1418,Sidi Bouzid,Ouled Haffouz,Cité El Amel,35.142000,9.588000
+1419,Sidi Bouzid,Ouled Haffouz,Cité El Bassatine,35.144000,9.590000
+1420,Sidi Bouzid,Ouled Haffouz,Cité Ennacim,35.146000,9.592000
+1421,Sidi Bouzid,Ouled Haffouz,Cité Ezzouhour,35.148000,9.594000
+1422,Sidi Bouzid,Ouled Haffouz,Cité Ennasr,35.150000,9.596000
+1423,Sidi Bouzid,Ouled Haffouz,Cité Erriadh,35.152000,9.598000
+1424,Sidi Bouzid,Ouled Haffouz,Cité Ettaamir,35.154000,9.600000
+1425,Sidi Bouzid,Ouled Haffouz,Cité Ettaamine,35.156000,9.602000
+1426,Sidi Bouzid,Regueb,Cité Ennasr,35.160000,9.606000
+1427,Sidi Bouzid,Regueb,Cité Erriadh,35.162000,9.608000
+1428,Sidi Bouzid,Regueb,Cité Ettaamir,35.164000,9.610000
+1429,Sidi Bouzid,Regueb,Cité El Khadra,35.166000,9.612000
+1430,Sidi Bouzid,Regueb,Cité Essalem,35.168000,9.614000
+1431,Sidi Bouzid,Sidi Ali Ben Aoun,Cité Ennasr,35.172000,9.618000
+1432,Sidi Bouzid,Sidi Ali Ben Aoun,Cité Erriadh,35.174000,9.620000
+1433,Sidi Bouzid,Sidi Ali Ben Aoun,Cité Ettaamir,35.176000,9.622000
+1434,Sidi Bouzid,Sidi Ali Ben Aoun,Cité El Khadra,35.178000,9.624000
+1435,Sidi Bouzid,Sidi Ali Ben Aoun,Cité Essalem,35.180000,9.626000
+1436,Sidi Bouzid,Souk Jedid,Cité Ennasr,35.184000,9.630000
+1437,Sidi Bouzid,Souk Jedid,Cité Erriadh,35.186000,9.632000
+1438,Sidi Bouzid,Souk Jedid,Cité Ettaamir,35.188000,9.634000
+1439,Sidi Bouzid,Souk Jedid,Cité El Khadra,35.190000,9.636000
+1440,Sidi Bouzid,Souk Jedid,Cité Essalem,35.192000,9.638000
+1441,Sidi Bouzid,Jelma,Jelma,35.194000,9.640000
+1442,Sidi Bouzid,Jelma,Cité Ennasr,35.196000,9.642000
+1443,Sidi Bouzid,Jelma,Cité Erriadh,35.198000,9.644000
+1444,Sidi Bouzid,Jelma,Cité Ettaamir,35.200000,9.646000
+1445,Sidi Bouzid,Jelma,Cité El Khadra,35.202000,9.648000
+1446,Sidi Bouzid,Jelma,Cité Essalem,35.204000,9.650000
+1447,Sidi Bouzid,Mazzouna,Mazzouna,35.206000,9.652000
+1448,Sidi Bouzid,Mazzouna,Cité Ennasr,35.208000,9.654000
+1449,Sidi Bouzid,Mazzouna,Cité Erriadh,35.210000,9.656000
+1450,Sidi Bouzid,Mazzouna,Cité Ettaamir,35.212000,9.658000
+1451,Sidi Bouzid,Mazzouna,Cité El Khadra,35.214000,9.660000
+1452,Sidi Bouzid,Mazzouna,Cité Essalem,35.216000,9.662000
+1453,Sidi Bouzid,Nasrallah,Nasrallah,35.218000,9.664000
+1454,Sidi Bouzid,Nasrallah,Cité Ennasr,35.220000,9.666000
+1455,Sidi Bouzid,Nasrallah,Cité Erriadh,35.222000,9.668000
+1456,Sidi Bouzid,Nasrallah,Cité Ettaamir,35.224000,9.670000
+1457,Sidi Bouzid,Nasrallah,Cité El Khadra,35.226000,9.672000
+1458,Sidi Bouzid,Nasrallah,Cité Essalem,35.228000,9.674000
+1459,Sidi Bouzid,Oueslatia,Oueslatia,35.230000,9.676000
+1460,Sidi Bouzid,Oueslatia,Cité Ennasr,35.232000,9.678000
+1461,Sidi Bouzid,Oueslatia,Cité Erriadh,35.234000,9.680000
+1462,Sidi Bouzid,Oueslatia,Cité Ettaamir,35.236000,9.682000
+1463,Sidi Bouzid,Oueslatia,Cité El Khadra,35.238000,9.684000
+1464,Sidi Bouzid,Oueslatia,Cité Essalem,35.240000,9.686000
+1465,Zaghouan,Zaghouan,Zaghouan Ville,36.407000,10.142000
+1466,Zaghouan,Zaghouan,Cité Ennasr,36.409000,10.144000
+1467,Zaghouan,Zaghouan,Cité Erriadh,36.411000,10.146000
+1468,Zaghouan,Zaghouan,Cité Ettaamir,36.413000,10.148000
+1469,Zaghouan,Zaghouan,Cité El Khadra,36.415000,10.150000
+1470,Zaghouan,Zaghouan,Cité Essalem,36.417000,10.152000
+1471,Zaghouan,Fahs,Fahs,36.419000,10.154000
+1472,Zaghouan,Fahs,Cité El Amel,36.421000,10.156000
+1473,Zaghouan,Fahs,Cité El Bassatine,36.423000,10.158000
+1474,Zaghouan,Fahs,Cité Ennacim,36.425000,10.160000
+1475,Zaghouan,Fahs,Cité Ezzouhour,36.427000,10.162000
+1476,Zaghouan,Fahs,Cité Ennasr,36.429000,10.164000
+1477,Zaghouan,Fahs,Cité Erriadh,36.431000,10.166000
+1478,Zaghouan,Fahs,Cité Ettaamir,36.433000,10.168000
+1479,Zaghouan,Fahs,Cité Ettaamine,36.435000,10.170000
+1480,Zaghouan,Nadhour,Nadhour,36.437000,10.172000
+1481,Zaghouan,Nadhour,Cité Ennasr,36.439000,10.174000
+1482,Zaghouan,Nadhour,Cité Erriadh,36.441000,10.176000
+1483,Zaghouan,Nadhour,Cité Ettaamir,36.443000,10.178000
+1484,Zaghouan,Nadhour,Cité El Khadra,36.445000,10.180000
+1485,Zaghouan,Nadhour,Cité Essalem,36.447000,10.182000
+1486,Zaghouan,Zriba,Zriba,36.449000,10.184000
+1487,Zaghouan,Zriba,Cité El Amel,36.451000,10.186000
+1488,Zaghouan,Zriba,Cité El Bassatine,36.453000,10.188000
+1489,Zaghouan,Zriba,Cité Ennacim,36.455000,10.190000
+1490,Zaghouan,Zriba,Cité Ezzouhour,36.457000,10.192000
+1491,Zaghouan,Zriba,Cité Ennasr,36.459000,10.194000
+1492,Zaghouan,Zriba,Cité Erriadh,36.461000,10.196000
+1493,Zaghouan,Zriba,Cité Ettaamir,36.463000,10.198000
+1494,Zaghouan,Zriba,Cité Ettaamine,36.465000,10.200000
+1495,Zaghouan,Bir Mcherga,Bir Mcherga,36.467000,10.202000
+1496,Zaghouan,Bir Mcherga,Cité Ennasr,36.469000,10.204000
+1497,Zaghouan,Bir Mcherga,Cité Erriadh,36.471000,10.206000
+1498,Zaghouan,Bir Mcherga,Cité Ettaamir,36.473000,10.208000
+1499,Zaghouan,Bir Mcherga,Cité El Khadra,36.475000,10.210000
+1500,Zaghouan,Bir Mcherga,Cité Essalem,36.477000,10.212000
+1501,Zaghouan,Saouaf,Saouaf,36.479000,10.214000
+1502,Zaghouan,Saouaf,Cité El Amel,36.481000,10.216000
+1503,Zaghouan,Saouaf,Cité El Bassatine,36.483000,10.218000
+1504,Zaghouan,Saouaf,Cité Ennacim,36.485000,10.220000
+1505,Zaghouan,Saouaf,Cité Ezzouhour,36.487000,10.222000
+1506,Zaghouan,Saouaf,Cité Ennasr,36.489000,10.224000
+1507,Zaghouan,Saouaf,Cité Erriadh,36.491000,10.226000
+1508,Zaghouan,Saouaf,Cité Ettaamir,36.493000,10.228000
+1509,Zaghouan,Saouaf,Cité Ettaamine,36.495000,10.230000
+1510,Zaghouan,Djebel Oust,Djebel Oust,36.497000,10.232000
+1511,Zaghouan,Djebel Oust,Cité El Amel,36.499000,10.234000
+1512,Zaghouan,Djebel Oust,Cité El Bassatine,36.501000,10.236000
+1513,Zaghouan,Djebel Oust,Cité Ennacim,36.503000,10.238000
+1514,Zaghouan,Djebel Oust,Cité Ezzouhour,36.505000,10.240000
+1515,Zaghouan,Djebel Oust,Cité Ennasr,36.507000,10.242000
+1516,Zaghouan,Djebel Oust,Cité Erriadh,36.509000,10.244000
+1517,Zaghouan,Djebel Oust,Cité Ettaamir,36.511000,10.246000
+1518,Zaghouan,Djebel Oust,Cité Ettaamine,36.513000,10.248000
+1519,Zaghouan,El Fahs,El Fahs,36.515000,10.250000
+1520,Zaghouan,El Fahs,Cité El Amel,36.517000,10.252000
+1521,Zaghouan,El Fahs,Cité El Bassatine,36.519000,10.254000
+1522,Zaghouan,El Fahs,Cité Ennacim,36.521000,10.256000
+1523,Zaghouan,El Fahs,Cité Ezzouhour,36.523000,10.258000
+1524,Zaghouan,El Fahs,Cité Ennasr,36.525000,10.260000
+1525,Zaghouan,El Fahs,Cité Erriadh,36.527000,10.262000
+1526,Zaghouan,El Fahs,Cité Ettaamir,36.529000,10.264000
+1527,Zaghouan,El Fahs,Cité Ettaamine,36.531000,10.266000
+1528,Zaghouan,Bir El Hfey,Bir El Hfey,36.533000,10.268000
+1529,Zaghouan,Bir El Hfey,Cité El Amel,36.535000,10.270000
+1530,Zaghouan,Bir El Hfey,Cité El Bassatine,36.537000,10.272000
+1531,Zaghouan,Bir El Hfey,Cité Ennacim,36.539000,10.274000
+1532,Zaghouan,Bir El Hfey,Cité Ezzouhour,36.541000,10.276000
+1533,Zaghouan,Bir El Hfey,Cité Ennasr,36.543000,10.278000
+1534,Zaghouan,Bir El Hfey,Cité Erriadh,36.545000,10.280000
+1535,Zaghouan,Bir El Hfey,Cité Ettaamir,36.547000,10.282000
+1536,Zaghouan,Bir El Hfey,Cité Ettaamine,36.549000,10.284000
+1537,Tozeur,Tozeur,Tozeur Ville,33.919700,8.133500
+1538,Tozeur,Tozeur,Cité Ennasr,33.921000,8.135800
+1539,Tozeur,Tozeur,Cité Erriadh,33.923100,8.138100
+1540,Tozeur,Tozeur,Cité Ettaamir,33.925200,8.140400
+1541,Tozeur,Tozeur,Cité El Khadra,33.927300,8.142700
+1542,Tozeur,Tozeur,Cité Essalem,33.929400,8.145000
+1543,Tozeur,Nefta,Nefta,33.931500,8.147300
+1544,Tozeur,Nefta,Cité El Amel,33.933600,8.149600
+1545,Tozeur,Nefta,Cité El Bassatine,33.935700,8.151900
+1546,Tozeur,Nefta,Cité Ennacim,33.937800,8.154200
+1547,Tozeur,Nefta,Cité Ezzouhour,33.939900,8.156500
+1548,Tozeur,Nefta,Cité Ennasr,33.942000,8.158800
+1549,Tozeur,Nefta,Cité Erriadh,33.944100,8.161100
+1550,Tozeur,Nefta,Cité Ettaamir,33.946200,8.163400
+1551,Tozeur,Nefta,Cité Ettaamine,33.948300,8.165700
+1552,Tozeur,Degache,Degache,33.950400,8.168000
+1553,Tozeur,Degache,Cité Ennasr,33.952500,8.170300
+1554,Tozeur,Degache,Cité Erriadh,33.954600,8.172600
+1555,Tozeur,Degache,Cité Ettaamir,33.956700,8.174900
+1556,Tozeur,Degache,Cité El Khadra,33.958800,8.177200
+1557,Tozeur,Degache,Cité Essalem,33.960900,8.179500
+1558,Tozeur,Tameghza,Tameghza,33.963000,8.181800
+1559,Tozeur,Tameghza,Cité El Amel,33.965100,8.184100
+1560,Tozeur,Tameghza,Cité El Bassatine,33.967200,8.186400
+1561,Tozeur,Tameghza,Cité Ennacim,33.969300,8.188700
+1562,Tozeur,Tameghza,Cité Ezzouhour,33.971400,8.191000
+1563,Tozeur,Tameghza,Cité Ennasr,33.973500,8.193300
+1564,Tozeur,Tameghza,Cité Erriadh,33.975600,8.195600
+1565,Tozeur,Tameghza,Cité Ettaamir,33.977700,8.197900
+1566,Tozeur,Tameghza,Cité Ettaamine,33.979800,8.200200
+1567,Tozeur,Hazoua,Hazoua,33.981900,8.202500
+1568,Tozeur,Hazoua,Cité Ennasr,33.984000,8.204800
+1569,Tozeur,Hazoua,Cité Erriadh,33.986100,8.207100
+1570,Tozeur,Hazoua,Cité Ettaamir,33.988200,8.209400
+1571,Tozeur,Hazoua,Cité El Khadra,33.990300,8.211700
+1572,Tozeur,Hazoua,Cité Essalem,33.992400,8.214000
+1573,Tataouine,Tataouine Nord,Tataouine Ville,32.929400,10.451800
+1574,Tataouine,Tataouine Nord,Cité Ennasr,32.931500,10.454100
+1575,Tataouine,Tataouine Nord,Cité Erriadh,32.933600,10.456400
+1576,Tataouine,Tataouine Nord,Cité Ettaamir,32.935700,10.458700
+1577,Tataouine,Tataouine Nord,Cité El Khadra,32.937800,10.461000
+1578,Tataouine,Tataouine Nord,Cité Essalem,32.939900,10.463300
+1579,Tataouine,Tataouine Sud,Cité Ennasr,32.942000,10.465600
+1580,Tataouine,Tataouine Sud,Cité Erriadh,32.944100,10.467900
+1581,Tataouine,Tataouine Sud,Cité Ettaamir,32.946200,10.470200
+1582,Tataouine,Tataouine Sud,Cité El Khadra,32.948300,10.472500
+1583,Tataouine,Tataouine Sud,Cité Essalem,32.950400,10.474800
+1584,Tataouine,Ghomrassen,Ghomrassen,32.952500,10.477100
+1585,Tataouine,Ghomrassen,Cité El Amel,32.954600,10.479400
+1586,Tataouine,Ghomrassen,Cité El Bassatine,32.956700,10.481700
+1587,Tataouine,Ghomrassen,Cité Ennacim,32.958800,10.484000
+1588,Tataouine,Ghomrassen,Cité Ezzouhour,32.960900,10.486300
+1589,Tataouine,Ghomrassen,Cité Ennasr,32.963000,10.488600
+1590,Tataouine,Ghomrassen,Cité Erriadh,32.965100,10.490900
+1591,Tataouine,Ghomrassen,Cité Ettaamir,32.967200,10.493200
+1592,Tataouine,Ghomrassen,Cité Ettaamine,32.969300,10.495500
+1593,Tataouine,Dehiba,Dehiba,32.971400,10.497800
+1594,Tataouine,Dehiba,Cité Ennasr,32.973500,10.500100
+1595,Tataouine,Dehiba,Cité Erriadh,32.975600,10.502400
+1596,Tataouine,Dehiba,Cité Ettaamir,32.977700,10.504700
+1597,Tataouine,Dehiba,Cité El Khadra,32.979800,10.507000
+1598,Tataouine,Dehiba,Cité Essalem,32.981900,10.509300
+1599,Tataouine,Bir Lahmar,Bir Lahmar,32.984000,10.511600
+1600,Tataouine,Bir Lahmar,Cité Ennasr,32.986100,10.513900
+1601,Tataouine,Bir Lahmar,Cité Erriadh,32.988200,10.516200
+1602,Tataouine,Bir Lahmar,Cité Ettaamir,32.990300,10.518500
+1603,Tataouine,Bir Lahmar,Cité El Khadra,32.992400,10.520800
+1604,Tataouine,Bir Lahmar,Cité Essalem,32.994500,10.523100
+1605,Tataouine,Smâr,Smâr,32.996600,10.525400
+1606,Tataouine,Smâr,Cité Ennasr,32.998700,10.527700
+1607,Tataouine,Smâr,Cité Erriadh,33.000800,10.530000
+1608,Tataouine,Smâr,Cité Ettaamir,33.002900,10.532300
+1609,Tataouine,Smâr,Cité El Khadra,33.005000,10.534600
+1610,Tataouine,Smâr,Cité Essalem,33.007100,10.536900
+1611,Gafsa,Gafsa Nord,Gafsa Ville,34.425000,8.784000
+1612,Gafsa,Gafsa Nord,Cité Ennasr,34.427000,8.786000
+1613,Gafsa,Gafsa Nord,Cité Erriadh,34.429000,8.788000
+1614,Gafsa,Gafsa Nord,Cité Ettaamir,34.431000,8.790000
+1615,Gafsa,Gafsa Nord,Cité El Khadra,34.433000,8.792000
+1616,Gafsa,Gafsa Nord,Cité Essalem,34.435000,8.794000
+1617,Gafsa,Gafsa Sud,Cité Ennasr,34.437000,8.796000
+1618,Gafsa,Gafsa Sud,Cité Erriadh,34.439000,8.798000
+1619,Gafsa,Gafsa Sud,Cité Ettaamir,34.441000,8.800000
+1620,Gafsa,Gafsa Sud,Cité El Khadra,34.443000,8.802000
+1621,Gafsa,Gafsa Sud,Cité Essalem,34.445000,8.804000
+1622,Gafsa,Métlaoui,Métlaoui,34.447000,8.806000
+1623,Gafsa,Métlaoui,Cité El Amel,34.449000,8.808000
+1624,Gafsa,Métlaoui,Cité El Bassatine,34.451000,8.810000
+1625,Gafsa,Métlaoui,Cité Ennacim,34.453000,8.812000
+1626,Gafsa,Métlaoui,Cité Ezzouhour,34.455000,8.814000
+1627,Gafsa,Métlaoui,Cité Ennasr,34.457000,8.816000
+1628,Gafsa,Métlaoui,Cité Erriadh,34.459000,8.818000
+1629,Gafsa,Métlaoui,Cité Ettaamir,34.461000,8.820000
+1630,Gafsa,Métlaoui,Cité Ettaamine,34.463000,8.822000
+1631,Gafsa,Moularès,Moularès,34.465000,8.824000
+1632,Gafsa,Moularès,Cité Ennasr,34.467000,8.826000
+1633,Gafsa,Moularès,Cité Erriadh,34.469000,8.828000
+1634,Gafsa,Moularès,Cité Ettaamir,34.471000,8.830000
+1635,Gafsa,Moularès,Cité El Khadra,34.473000,8.832000
+1636,Gafsa,Moularès,Cité Essalem,34.475000,8.834000
+1637,Gafsa,Redeyef,Redeyef,34.477000,8.836000
+1638,Gafsa,Redeyef,Cité Ennasr,34.479000,8.838000
+1639,Gafsa,Redeyef,Cité Erriadh,34.481000,8.840000
+1640,Gafsa,Redeyef,Cité Ettaamir,34.483000,8.842000
+1641,Gafsa,Redeyef,Cité El Khadra,34.485000,8.844000
+1642,Gafsa,Redeyef,Cité Essalem,34.487000,8.846000
+1643,Gafsa,Sened,Sened,34.489000,8.848000
+1644,Gafsa,Sened,Cité Ennasr,34.491000,8.850000
+1645,Gafsa,Sened,Cité Erriadh,34.493000,8.852000
+1646,Gafsa,Sened,Cité Ettaamir,34.495000,8.854000
+1647,Gafsa,Sened,Cité El Khadra,34.497000,8.856000
+1648,Gafsa,Sened,Cité Essalem,34.499000,8.858000
+1649,Gafsa,El Guettar,El Guettar,34.501000,8.860000
+1650,Gafsa,El Guettar,Cité Ennasr,34.503000,8.862000
+1651,Gafsa,El Guettar,Cité Erriadh,34.505000,8.864000
+1652,Gafsa,El Guettar,Cité Ettaamir,34.507000,8.866000
+1653,Gafsa,El Guettar,Cité El Khadra,34.509000,8.868000
+1654,Gafsa,El Guettar,Cité Essalem,34.511000,8.870000
+1655,Gafsa,El Ksar,El Ksar,34.513000,8.872000
+1656,Gafsa,El Ksar,Cité Ennasr,34.515000,8.874000
+1657,Gafsa,El Ksar,Cité Erriadh,34.517000,8.876000
+1658,Gafsa,El Ksar,Cité Ettaamir,34.519000,8.878000
+1659,Gafsa,El Ksar,Cité El Khadra,34.521000,8.880000
+1660,Gafsa,El Ksar,Cité Essalem,34.523000,8.882000
+1661,Kasserine,Kasserine Nord,Kasserine Ville,35.172000,8.830000
+1662,Kasserine,Kasserine Nord,Cité Ennasr,35.174000,8.832000
+1663,Kasserine,Kasserine Nord,Cité Erriadh,35.176000,8.834000
+1664,Kasserine,Kasserine Nord,Cité Ettaamir,35.178000,8.836000
+1665,Kasserine,Kasserine Nord,Cité El Khadra,35.180000,8.838000
+1666,Kasserine,Kasserine Nord,Cité Essalem,35.182000,8.840000
+1667,Kasserine,Kasserine Sud,Cité Ennasr,35.184000,8.842000
+1668,Kasserine,Kasserine Sud,Cité Erriadh,35.186000,8.844000
+1669,Kasserine,Kasserine Sud,Cité Ettaamir,35.188000,8.846000
+1670,Kasserine,Kasserine Sud,Cité El Khadra,35.190000,8.848000
+1671,Kasserine,Kasserine Sud,Cité Essalem,35.192000,8.850000
+1672,Kasserine,Sbiba,Sbiba,35.194000,8.852000
+1673,Kasserine,Sbiba,Cité El Amel,35.196000,8.854000
+1674,Kasserine,Sbiba,Cité El Bassatine,35.198000,8.856000
+1675,Kasserine,Sbiba,Cité Ennacim,35.200000,8.858000
+1676,Kasserine,Sbiba,Cité Ezzouhour,35.202000,8.860000
+1677,Kasserine,Sbiba,Cité Ennasr,35.204000,8.862000
+1678,Kasserine,Sbiba,Cité Erriadh,35.206000,8.864000
+1679,Kasserine,Sbiba,Cité Ettaamir,35.208000,8.866000
+1680,Kasserine,Sbiba,Cité Ettaamine,35.210000,8.868000
+1681,Kasserine,Sbeitla,Sbeitla,35.212000,8.870000
+1682,Kasserine,Sbeitla,Cité Ennasr,35.214000,8.872000
+1683,Kasserine,Sbeitla,Cité Erriadh,35.216000,8.874000
+1684,Kasserine,Sbeitla,Cité Ettaamir,35.218000,8.876000
+1685,Kasserine,Sbeitla,Cité El Khadra,35.220000,8.878000
+1686,Kasserine,Sbeitla,Cité Essalem,35.222000,8.880000
+1687,Kasserine,Foussana,Foussana,35.224000,8.882000
+1688,Kasserine,Foussana,Cité Ennasr,35.226000,8.884000
+1689,Kasserine,Foussana,Cité Erriadh,35.228000,8.886000
+1690,Kasserine,Foussana,Cité Ettaamir,35.230000,8.888000
+1691,Kasserine,Foussana,Cité El Khadra,35.232000,8.890000
+1692,Kasserine,Foussana,Cité Essalem,35.234000,8.892000
+1693,Kasserine,Feriana,Feriana,35.236000,8.894000
+1694,Kasserine,Feriana,Cité Ennasr,35.238000,8.896000
+1695,Kasserine,Feriana,Cité Erriadh,35.240000,8.898000
+1696,Kasserine,Feriana,Cité Ettaamir,35.242000,8.900000
+1697,Kasserine,Feriana,Cité El Khadra,35.244000,8.902000
+1698,Kasserine,Feriana,Cité Essalem,35.246000,8.904000
+1699,Kasserine,Thala,Thala,35.248000,8.906000
+1700,Kasserine,Thala,Cité Ennasr,35.250000,8.908000
+1701,Kasserine,Thala,Cité Erriadh,35.252000,8.910000
+1702,Kasserine,Thala,Cité Ettaamir,35.254000,8.912000
+1703,Kasserine,Thala,Cité El Khadra,35.256000,8.914000
+1704,Kasserine,Thala,Cité Essalem,35.258000,8.916000
+1705,Kasserine,Jedelienne,Jedelienne,35.260000,8.918000
+1706,Kasserine,Jedelienne,Cité Ennasr,35.262000,8.920000
+1707,Kasserine,Jedelienne,Cité Erriadh,35.264000,8.922000
+1708,Kasserine,Jedelienne,Cité Ettaamir,35.266000,8.924000
+1709,Kasserine,Jedelienne,Cité El Khadra,35.268000,8.926000
+1710,Kasserine,Jedelienne,Cité Essalem,35.270000,8.928000
+1711,Kasserine,Saidane,Saidane,35.272000,8.930000
+1712,Kasserine,Saidane,Cité Ennasr,35.274000,8.932000
+1713,Kasserine,Saidane,Cité Erriadh,35.276000,8.934000
+1714,Kasserine,Saidane,Cité Ettaamir,35.278000,8.936000
+1715,Kasserine,Saidane,Cité El Khadra,35.280000,8.938000
+1716,Kasserine,Saidane,Cité Essalem,35.282000,8.940000
+1717,Kasserine,Hassi El Ferid,Hassi El Ferid,35.284000,8.942000
+1718,Kasserine,Hassi El Ferid,Cité Erriadh,35.288000,8.946000
+1719,Kasserine,Hassi El Ferid,Cité Ettaamir,35.290000,8.948000
+1720,Kasserine,Hassi El Ferid,Cité El Khadra,35.292000,8.950000
+1721,Kasserine,Hassi El Ferid,Cité Essalem,35.294000,8.952000
+1722,Kasserine,Hassi El Ferid,Cité Ennasr,35.296000,8.954000
+1723,Kasserine,Majel Bel Abbès,Majel Bel Abbès,35.298000,8.956000
+1724,Kasserine,Majel Bel Abbès,Cité Ennasr,35.300000,8.958000
+1725,Kasserine,Majel Bel Abbès,Cité Erriadh,35.302000,8.960000
+1726,Kasserine,Majel Bel Abbès,Cité Ettaamir,35.304000,8.962000
+1727,Kasserine,Majel Bel Abbès,Cité El Khadra,35.306000,8.964000
+1728,Kasserine,Majel Bel Abbès,Cité Essalem,35.308000,8.966000

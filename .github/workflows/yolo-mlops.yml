@@ -1,0 +1,221 @@
+name: YOLO MLOps Pipeline
+
+# Separate from your main app CI/CD pipeline on purpose:
+# only triggers on changes under yolo/, or manually.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "yolo/**"
+      - ".github/workflows/yolo-mlops.yml"
+  workflow_dispatch:
+    inputs:
+      epochs:
+        description: "Training epochs"
+        required: false
+        default: "50"
+      dataset_version:
+        description: "Dataset tag/version to train on"
+        required: false
+        default: "latest"
+      min_map50:
+        description: "Minimum acceptable mAP50 to pass the quality gate"
+        required: false
+        default: "0.5"
+
+env:
+  PYTHON_VERSION: "3.11"
+  MODEL_NAME: "smart-forest-yolo"
+
+jobs:
+  # ────────────────────────────────────────────────────────────
+  train:
+    name: Train
+    runs-on: ubuntu-latest   # swap to a self-hosted GPU runner if you have one
+    outputs:
+      run_id: ${{ steps.stamp.outputs.run_id }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies
+        run: pip install -r yolo/requirements.txt
+
+      - name: Stamp run id
+        id: stamp
+        run: echo "run_id=$(date +%Y%m%d-%H%M%S)-${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+
+      - name: Train model
+        run: |
+          python yolo/scripts/train.py \
+            --epochs "${{ github.event.inputs.epochs || '50' }}" \
+            --dataset-version "${{ github.event.inputs.dataset_version || 'latest' }}" \
+            --output-dir runs/train
+
+      - name: Upload training artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: trained-model-${{ steps.stamp.outputs.run_id }}
+          path: runs/train/**
+          retention-days: 14
+
+      - name: Upload MLflow store
+        uses: actions/upload-artifact@v4
+        with:
+          name: mlflow-store-${{ steps.stamp.outputs.run_id }}
+          path: mlruns/**
+          retention-days: 90
+
+  # ────────────────────────────────────────────────────────────
+  eval:
+    name: Evaluate
+    needs: train
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies
+        run: pip install -r yolo/requirements.txt
+
+      - name: Download training artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: trained-model-${{ needs.train.outputs.run_id }}
+          path: runs/train
+
+      - name: Download MLflow store
+        uses: actions/download-artifact@v4
+        with:
+          name: mlflow-store-${{ needs.train.outputs.run_id }}
+          path: mlruns
+
+      - name: Run evaluation + quality gate
+        run: |
+          python yolo/scripts/evaluate.py \
+            --weights runs/train/weights/best.pt \
+            --min-map50 "${{ github.event.inputs.min_map50 || '0.5' }}" \
+            --metrics-out runs/eval/metrics.json
+
+      - name: Upload eval metrics
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-metrics-${{ needs.train.outputs.run_id }}
+          path: runs/eval/metrics.json
+
+      - name: Re-upload MLflow store with eval metrics
+        uses: actions/upload-artifact@v4
+        with:
+          name: mlflow-store-${{ needs.train.outputs.run_id }}
+          path: mlruns/**
+          retention-days: 90
+          overwrite: true
+
+  # ────────────────────────────────────────────────────────────
+  package:
+    name: Package
+    needs: [train, eval]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies
+        run: pip install -r yolo/requirements.txt
+
+      - name: Download training artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: trained-model-${{ needs.train.outputs.run_id }}
+          path: runs/train
+
+      - name: Download eval metrics
+        uses: actions/download-artifact@v4
+        with:
+          name: eval-metrics-${{ needs.train.outputs.run_id }}
+          path: runs/eval
+
+      - name: Download MLflow store
+        uses: actions/download-artifact@v4
+        with:
+          name: mlflow-store-${{ needs.train.outputs.run_id }}
+          path: mlruns
+
+      - name: Export model (ONNX) and bundle
+        run: |
+          python yolo/scripts/package.py \
+            --weights runs/train/weights/best.pt \
+            --metrics runs/eval/metrics.json \
+            --run-id "${{ needs.train.outputs.run_id }}" \
+            --mlflow-run-id-file runs/train/mlflow_run_id.txt \
+            --output-dir dist
+
+      - name: Upload packaged bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: model-bundle-${{ needs.train.outputs.run_id }}
+          path: dist/**
+
+      - name: Upload final MLflow store (downloadable for local `mlflow ui`)
+        uses: actions/upload-artifact@v4
+        with:
+          name: mlflow-store-${{ needs.train.outputs.run_id }}
+          path: mlruns/**
+          retention-days: 90
+          overwrite: true
+
+      - name: Create GitHub Release with model artifacts
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: yolo-${{ needs.train.outputs.run_id }}
+          name: "YOLO model ${{ needs.train.outputs.run_id }}"
+          body_path: dist/RELEASE_NOTES.md
+          files: |
+            dist/*.onnx
+            dist/*.pt
+            dist/metrics.json
+
+  # ────────────────────────────────────────────────────────────
+  deploy:
+    name: Deploy (Docker → GHCR)
+    needs: [train, package]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download packaged bundle
+        uses: actions/download-artifact@v4
+        with:
+          name: model-bundle-${{ needs.train.outputs.run_id }}
+          path: dist
+
+      - name: Copy model into docker build context
+        run: cp dist/*.onnx yolo/docker/model.onnx
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push inference image
+        uses: docker/build-push-action@v6
+        with:
+          context: yolo/docker
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/${{ env.MODEL_NAME }}:${{ needs.train.outputs.run_id }}
+            ghcr.io/${{ github.repository_owner }}/${{ env.MODEL_NAME }}:latest

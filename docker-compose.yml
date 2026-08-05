@@ -39,6 +39,7 @@ services:
       sh -c "
       python manage.py migrate --noinput &&
       python manage.py collectstatic --noinput &&
+      python manage.py load_locations &&
       daphne -b 0.0.0.0 -p 8000 project.asgi:application
       "
 

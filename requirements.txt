@@ -15,7 +15,7 @@ click-plugins==1.1.1.2
 click-repl==0.3.0
 colorama==0.4.6
 constantly==23.10.4
-cryptography==48.0.1
+cryptography==50.0.0
 daphne==4.2.2
 Django==5.2.16
 django-location-field==2.7.3
@@ -36,7 +36,7 @@ pillow==12.3.0
 pluggy==1.6.0
 prompt_toolkit==3.0.51
 psycopg2-binary==2.9.9
-pyasn1==0.6.3
+pyasn1==0.6.4
 pyasn1_modules==0.4.0
 Pygments==2.20.0
 pytest==9.0.3
