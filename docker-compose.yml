@@ -145,6 +145,81 @@ services:
 
 
 
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: fire_prometheus
+
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+
+    ports:
+      - "9090:9090"
+
+    networks:
+      - fire-network
+
+    restart: unless-stopped
+
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: fire_grafana
+
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
+
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+
+    ports:
+      - "3000:3000"
+
+    depends_on:
+      - prometheus
+
+    networks:
+      - fire-network
+
+    restart: unless-stopped
+
+
+  postgres-exporter:
+    image: quay.io/prometheuscommunity/postgres-exporter:latest
+    container_name: fire_postgres_exporter
+
+    environment:
+      DATA_SOURCE_NAME: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}?sslmode=disable"
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    networks:
+      - fire-network
+
+    restart: unless-stopped
+
+
+  redis-exporter:
+    image: oliver006/redis_exporter:latest
+    container_name: fire_redis_exporter
+
+    environment:
+      REDIS_ADDR: "redis://redis:6379"
+
+    depends_on:
+      redis:
+        condition: service_healthy
+
+    networks:
+      - fire-network
+
+    restart: unless-stopped
+
+
 networks:
   fire-network:
     driver: bridge
@@ -155,3 +230,5 @@ volumes:
   redis_data:
   staticfiles:
   logs:
+  prometheus_data:
+  grafana_data:
