@@ -35,6 +35,15 @@ urlpatterns = [
     path('get_cameras_for_project/', cam_views.list_cameras_for_project, name='get_cameras_for_project'),
     path('delete_camera/<int:camera_id>/', cam_views.delete_camera, name='delete_camera'),
     path('update_parcels_nodes/', views.update_parcels_nodes, name='update_parcels_nodes'),
+
+        #######* Detection History  ##########
+    path('detection_history/', cam_views.detection_history, name='detection_history'),
+    path('detection_history/delete/<int:detection_id>/', cam_views.delete_detection_supervisor, name='delete_detection_supervisor'),
+    path('detection_history/update_status/<int:detection_id>/', cam_views.update_detection_status, name='update_detection_status'),
+
+        #######* Sensor History  ##########
+    path('sensor_history/', views.sensor_history, name='sensor_history'),
+    path('sensor_history/delete/<int:data_id>/', views.delete_sensor_data_supervisor, name='delete_sensor_data_supervisor'),
 ]
 
 

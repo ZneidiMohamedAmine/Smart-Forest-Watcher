@@ -28,7 +28,7 @@ from .models                      import Camera, Detection
 from .workers.inference_worker import run_server_inference
 
 
-CONFIDENCE_THRESHOLD = 0.50    # ignore detections below this level
+CONFIDENCE_THRESHOLD = 0.25    # ignore detections below this level
 
 
 async def receive_detection(request):

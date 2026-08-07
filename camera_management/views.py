@@ -10,6 +10,7 @@ list_cameras_for_project — AJAX endpoint: returns all cameras for a project_id
 """
 
 import json
+import logging
 from django.contrib.auth.decorators import login_required
 from django.contrib.gis.geos        import Point
 from django.http                    import JsonResponse
@@ -19,6 +20,8 @@ from supervisor.models.parcelle     import Parcelle
 from supervisor.models.project      import Project
 from .models  import Camera
 from .forms   import CameraForm
+
+log = logging.getLogger(__name__)
 
 
 @login_required(login_url='supervisor_login')
@@ -152,17 +155,31 @@ def camera_detail(request, project_id, camera_id):
 @login_required(login_url='client_login')
 @client_required
 def delete_detection(request, detection_id):
-    if request.method == 'POST':
-        from .models import Detection
-        detection = get_object_or_404(Detection, id=detection_id)
-        
-        # Ensure client owns the project
-        if detection.camera.project.client != request.user.client:
-            return JsonResponse({'error': 'Unauthorized'}, status=403)
-            
-        detection.delete()
-        return JsonResponse({'success': True, 'message': 'Image deleted successfully'})
-    return JsonResponse({'error': 'Invalid request'}, status=400)
+    if request.method != 'POST':
+        return JsonResponse({'error': 'Invalid request'}, status=400)
+
+    from .models import Detection
+    detection = Detection.objects.filter(id=detection_id).first()
+    if detection is None:
+        return JsonResponse({'error': f'Detection {detection_id} not found (already deleted?)'}, status=404)
+
+    # Ensure client owns the project
+    try:
+        project_client = detection.camera.project.client
+    except Exception as exc:
+        log.error("delete_detection: could not resolve project.client for detection %d: %s", detection_id, exc)
+        return JsonResponse({'error': 'Server error resolving ownership'}, status=500)
+
+    if project_client is None or project_client != request.user.client:
+        log.warning(
+            "delete_detection: ownership mismatch — project.client=%s, request.user.client=%s",
+            project_client, getattr(request.user, 'client', None)
+        )
+        return JsonResponse({'error': 'Unauthorized'}, status=403)
+
+    detection.delete()
+    log.info("delete_detection: detection %d deleted by user %s", detection_id, request.user.username)
+    return JsonResponse({'success': True, 'message': 'Image deleted successfully'})
 
 
 @login_required(login_url='supervisor_login')
@@ -173,3 +190,119 @@ def delete_camera(request, camera_id):
         camera.delete()
         return JsonResponse({'success': True, 'message': 'Camera deleted successfully.'})
     return JsonResponse({'error': 'Invalid request method.'}, status=400)
+
+
+# ── Detection History (Supervisor) ───────────────────────────────────────────
+
+@login_required(login_url='supervisor_login')
+@supervisor_required
+def detection_history(request):
+    """
+    Supervisor-only view: lists ALL detections across every camera/project.
+    Supports filtering by project, confirmation status, and date range.
+    Paginated — 20 records per page.
+    """
+    from .models import Detection
+    from supervisor.models.project import Project
+    from django.core.paginator import Paginator
+
+    qs = Detection.objects.select_related(
+        'camera', 'camera__project', 'camera__project__client'
+    ).order_by('-detected_at')
+
+    # ── Filters ───────────────────────────────────────────────────────────────
+    project_id = request.GET.get('project')
+    status     = request.GET.get('status')        # confirmed / rejected / pending
+    date_from  = request.GET.get('date_from')
+    date_to    = request.GET.get('date_to')
+
+    if project_id:
+        qs = qs.filter(camera__project__polygon_id=project_id)
+
+    if status == 'confirmed':
+        qs = qs.filter(is_confirmed=True)
+    elif status == 'rejected':
+        qs = qs.filter(is_confirmed=False)
+    elif status == 'pending':
+        qs = qs.filter(is_confirmed__isnull=True)
+
+    if date_from:
+        qs = qs.filter(detected_at__date__gte=date_from)
+    if date_to:
+        qs = qs.filter(detected_at__date__lte=date_to)
+
+    # ── Pagination ────────────────────────────────────────────────────────────
+    paginator = Paginator(qs, 20)
+    page_number = request.GET.get('page', 1)
+    page_obj    = paginator.get_page(page_number)
+
+    # ── Stats ─────────────────────────────────────────────────────────────────
+    total     = qs.count()
+    confirmed = qs.filter(is_confirmed=True).count()
+    rejected  = qs.filter(is_confirmed=False).count()
+    pending   = qs.filter(is_confirmed__isnull=True).count()
+
+    projects  = Project.objects.all().order_by('name')
+
+    context = {
+        'page_obj':   page_obj,
+        'projects':   projects,
+        'total':      total,
+        'confirmed':  confirmed,
+        'rejected':   rejected,
+        'pending':    pending,
+        # preserve filter values for the form
+        'f_project':   project_id or '',
+        'f_status':    status or '',
+        'f_date_from': date_from or '',
+        'f_date_to':   date_to or '',
+    }
+    return render(request, 'supervisor/detection_history.html', context)
+
+
+@login_required(login_url='supervisor_login')
+@supervisor_required
+def delete_detection_supervisor(request, detection_id):
+    """Supervisor can delete any detection (no ownership check needed)."""
+    if request.method != 'POST':
+        return JsonResponse({'error': 'POST only'}, status=405)
+
+    from .models import Detection
+    detection = Detection.objects.filter(id=detection_id).first()
+    if detection is None:
+        return JsonResponse({'error': f'Detection {detection_id} not found'}, status=404)
+
+    detection.delete()
+    log.info("Supervisor deleted detection %d", detection_id)
+    return JsonResponse({'success': True})
+
+@login_required(login_url='supervisor_login')
+@supervisor_required
+def update_detection_status(request, detection_id):
+    """Supervisor can manually confirm or reject a detection."""
+    if request.method != 'POST':
+        return JsonResponse({'error': 'POST only'}, status=405)
+
+    from .models import Detection
+    detection = Detection.objects.filter(id=detection_id).first()
+    if detection is None:
+        return JsonResponse({'error': f'Detection {detection_id} not found'}, status=404)
+
+    try:
+        data = json.loads(request.body)
+        new_status = data.get('status') # 'confirmed', 'rejected', or 'pending'
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'Invalid JSON'}, status=400)
+
+    if new_status == 'confirmed':
+        detection.is_confirmed = True
+    elif new_status == 'rejected':
+        detection.is_confirmed = False
+    elif new_status == 'pending':
+        detection.is_confirmed = None
+    else:
+        return JsonResponse({'error': 'Invalid status value'}, status=400)
+
+    detection.save(update_fields=['is_confirmed'])
+    log.info("Supervisor updated detection %d to %s", detection_id, new_status)
+    return JsonResponse({'success': True, 'new_status': new_status})

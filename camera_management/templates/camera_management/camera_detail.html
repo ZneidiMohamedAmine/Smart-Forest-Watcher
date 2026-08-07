@@ -7,8 +7,7 @@
 <!-- Add missing FontAwesome for icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <!-- Add missing SweetAlert2 for deletion confirm -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" crossorigin="anonymous"
-    integrity="sha384-oqVuAfXRKap7fdgcCY5uykM6+R9GqQ8K/uxy9rx7HNQlGYl1kPzQho1wx4JwY8wC"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <style>
     .camera-info-card {
@@ -354,7 +353,7 @@
                 const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
                 const urlTemplate = "{% url 'delete_detection' 0 %}";
-                const fetchUrl = urlTemplate.replace('0', detectionId);
+                const fetchUrl = urlTemplate.replace(/\/0\//, '/' + detectionId + '/');
 
                 fetch(fetchUrl, {
                     method: 'POST',
@@ -363,24 +362,33 @@
                         'Content-Type': 'application/json'
                     }
                 })
-                    .then(response => response.json())
+                    .then(response => {
+                        if (!response.ok) {
+                            return response.text().then(text => {
+                                throw new Error(`HTTP ${response.status}: ${text.substring(0, 200)}`);
+                            });
+                        }
+                        return response.json();
+                    })
                     .then(data => {
                         if (data.success) {
+                            // Brief toast — no click needed, page reloads automatically
                             Swal.fire({
                                 title: '{% trans "Deleted!" %}',
-                                text: data.message,
                                 icon: 'success',
-                                customClass: { popup: 'premium-swal-alert' }
-                            }).then(() => {
-                                location.reload();
-                            });
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 1200,
+                                timerProgressBar: true,
+                            }).then(() => location.reload());
                         } else {
                             Swal.fire('Error', data.error || 'Failed to delete', 'error');
                         }
                     })
                     .catch(error => {
-                        console.error('Error:', error);
-                        Swal.fire('Error', 'An unexpected error occurred', 'error');
+                        console.error('Delete error:', error);
+                        Swal.fire('Error', error.message || 'An unexpected error occurred', 'error');
                     });
             }
         })
