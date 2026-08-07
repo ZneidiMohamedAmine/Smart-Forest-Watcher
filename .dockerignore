@@ -19,3 +19,4 @@ GDAL-*.whl
 *.log
 img/uploads
 img/img
+img/detections

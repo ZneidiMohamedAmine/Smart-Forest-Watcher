@@ -30,7 +30,8 @@ RUN python -m pip install --upgrade pip "setuptools>=78.1.1" wheel \
     && grep -Ev "^(GDAL @|twisted-iocpsupport==|psycopg2==)" requirements.txt > requirements-linux.txt \
     && python -m pip install --prefix=/install "GDAL==$(gdal-config --version)" \
     && python -m pip install --prefix=/install --index-url https://download.pytorch.org/whl/cpu torch torchvision \
-    && PYTHONPATH=/install/lib/python3.11/site-packages python -m pip install --prefer-binary --prefix=/install -r requirements-linux.txt \
+    && PYTHONPATH=/install/lib/python3.11/site-packages python -m pip install --prefer-binary --prefix=/install \
+        --extra-index-url https://download.pytorch.org/whl/cpu -r requirements-linux.txt \
     && python -m pip install --prefix=/install --force-reinstall --no-deps "msgpack==1.2.1"
 
 
