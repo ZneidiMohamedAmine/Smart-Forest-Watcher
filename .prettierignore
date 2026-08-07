@@ -1,0 +1,4 @@
+# Django HTML templates contain template tags ({% %}, {{ }})
+# that Prettier will break if it reformats them.
+# Ignore all Django template HTML files.
+**/*.html
