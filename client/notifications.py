@@ -6,14 +6,23 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 
-from .models import MobileNotification, Client
+from .models import MobileNotification, Client, ClientAuthToken
 
 
 def _cors(response):
     response['Access-Control-Allow-Origin'] = '*'
     response['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
-    response['Access-Control-Allow-Headers'] = 'Content-Type'
+    response['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
     return response
+
+
+def _authenticate(request):
+    auth_header = request.headers.get('Authorization', '')
+    if not auth_header.startswith('Bearer '):
+        return None
+    key = auth_header[len('Bearer '):].strip()
+    token = ClientAuthToken.objects.select_related('client').filter(key=key).first()
+    return token.client if token else None
 
 
 def _parse_json(request):
@@ -146,13 +155,13 @@ def list_notifications(request):
     if request.method == 'OPTIONS':
         return _cors(JsonResponse({}))
 
-    user_id = (request.GET.get('user_id') or '').strip()
-    if not user_id:
-        return _cors(JsonResponse({'error': 'user_id query param required'}, status=400))
+    client = _authenticate(request)
+    if not client:
+        return _cors(JsonResponse({'error': 'Invalid or missing token'}, status=401))
 
     rows = (
         MobileNotification.objects
-        .filter(user_id=user_id)
+        .filter(user_id=client.email)
         .select_related('camera', 'detection')
         .order_by('-id')
     )
@@ -167,14 +176,9 @@ def client_summary(request):
     if request.method == 'OPTIONS':
         return _cors(JsonResponse({}))
 
-    user_id = (request.GET.get('user_id') or '').strip()
-    if not user_id:
-        return _cors(JsonResponse({'error': 'user_id query param required'}, status=400))
-
-    try:
-        client = Client.objects.get(email=user_id)
-    except Client.DoesNotExist:
-        return _cors(JsonResponse({'projects': [], 'cameras': []}))
+    client = _authenticate(request)
+    if not client:
+        return _cors(JsonResponse({'error': 'Invalid or missing token'}, status=401))
 
     from camera_management.models import Camera
 

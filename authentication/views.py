@@ -5,7 +5,7 @@ from django.contrib.auth            import login, logout
 from django.http                    import JsonResponse
 from django.views.decorators.csrf   import csrf_exempt
 from django.views.decorators.http   import require_http_methods
-from client.models                  import Client
+from client.models                  import Client, ClientAuthToken
 from .forms                         import ClientLoginForm, SupervisorLoginForm
 from supervisor.models.supervisor   import Supervisor
 from django.contrib.auth.hashers    import check_password
@@ -74,11 +74,25 @@ def api_client_login(request):
     login(request, client.user)
     request.session['client_authenticated'] = True
     request.session['supervisor_authenticated'] = False
+    token = ClientAuthToken.issue(client)
     return _cors(JsonResponse({
         'id': client.id,
         'email': client.email,
         'username': client.user.get_username() or client.email,
+        'token': token.key,
     }))
+
+
+@csrf_exempt
+@require_http_methods(['POST', 'OPTIONS'])
+def api_client_logout(request):
+    if request.method == 'OPTIONS':
+        return _cors(JsonResponse({}))
+
+    auth_header = request.headers.get('Authorization', '')
+    if auth_header.startswith('Bearer '):
+        ClientAuthToken.objects.filter(key=auth_header[len('Bearer '):].strip()).delete()
+    return _cors(JsonResponse({}))
 
 
 def sign_out_client(request):

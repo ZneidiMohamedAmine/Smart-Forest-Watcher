@@ -72,6 +72,21 @@ class Client(models.Model):
 #validation     
 
 
+class ClientAuthToken(models.Model):
+    client = models.OneToOneField(Client, on_delete=models.CASCADE, related_name='auth_token')
+    key = models.CharField(max_length=64, unique=True, db_index=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    @classmethod
+    def issue(cls, client):
+        key = get_random_string(64)
+        token, _ = cls.objects.update_or_create(client=client, defaults={'key': key})
+        return token
+
+    def __str__(self):
+        return f'token for {self.client.email}'
+
+
 class MobileNotification(models.Model):
     user_id = models.EmailField(db_index=True)
     title = models.CharField(max_length=255)
