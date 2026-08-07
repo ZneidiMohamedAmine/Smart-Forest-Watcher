@@ -57,6 +57,12 @@ RUN apt-get -o Acquire::Retries=10 -o Acquire::http::Timeout=300 -o Acquire::htt
         libgomp1 \
         libpq5 \
         netcat-openbsd \
+        libgl1 \
+        libglib2.0-0 \
+        libxcb1 \
+        libxext6 \
+        libsm6 \
+        libxrender1 \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /install /usr/local
