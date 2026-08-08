@@ -10,6 +10,7 @@ from django.core.files.base import ContentFile
 log = logging.getLogger(__name__)
 
 SERVER_CONFIDENCE_THRESHOLD = float(os.environ.get('YOLO_SERVER_CONFIDENCE', 0.45))
+ALERTABLE_CLASSES = {'fire', 'smoke'}
 
 
 @shared_task(name="run_server_inference")
@@ -27,17 +28,25 @@ def run_server_inference(detection_id: int):
     image_path = detection.image.path   # absolute path on disk
 
     try:
-        best_conf, bboxes, annotated_bytes = run_inference(image_path)
+        _, bboxes, annotated_bytes = run_inference(image_path)
     except Exception as exc:
         log.exception("yolo26m inference failed for detection %d: %s", detection_id, exc)
         # Fall back — trigger alert with Pi's original confidence
         send_camera_alert.delay(detection_id)
         return
 
-    if best_conf < SERVER_CONFIDENCE_THRESHOLD:
+    # Only 'fire'/'smoke' detections should trigger a client alert — a
+    # high-confidence 'other' match (minor/ambiguous indicator) must not
+    # be reported to the client as a confirmed fire.
+    alert_conf = max(
+        (b['confidence'] for b in bboxes if b['label'] in ALERTABLE_CLASSES),
+        default=0.0,
+    )
+
+    if alert_conf < SERVER_CONFIDENCE_THRESHOLD:
         log.info(
             "Detection %d: server-side yolo26m conf=%.3f < threshold=%.3f — alert suppressed.",
-            detection_id, best_conf, SERVER_CONFIDENCE_THRESHOLD,
+            detection_id, alert_conf, SERVER_CONFIDENCE_THRESHOLD,
         )
         # Optional: mark detection as a false positive
         detection.is_confirmed = False
@@ -45,7 +54,7 @@ def run_server_inference(detection_id: int):
         return
 
     # Update record with server-verified data
-    detection.server_confidence = best_conf
+    detection.server_confidence = alert_conf
     detection.bounding_boxes    = bboxes
     detection.is_confirmed      = True
 
@@ -56,5 +65,5 @@ def run_server_inference(detection_id: int):
     detection.save(update_fields=['server_confidence', 'bounding_boxes',
                                   'is_confirmed', 'annotated_image'])
 
-    log.info("Detection %d confirmed by yolo26m (conf=%.3f). Firing alert.", detection_id, best_conf)
+    log.info("Detection %d confirmed by yolo26m (conf=%.3f). Firing alert.", detection_id, alert_conf)
     send_camera_alert.delay(detection_id)
