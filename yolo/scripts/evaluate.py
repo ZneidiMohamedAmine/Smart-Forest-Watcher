@@ -26,7 +26,14 @@ def main():
     parser.add_argument("--min-map50", type=float, default=0.5)
     parser.add_argument("--metrics-out", type=str, default="runs/eval/metrics.json")
     parser.add_argument("--run-id-file", type=str, default="runs/train/mlflow_run_id.txt")
+    parser.add_argument("--baseline-metrics", type=str, default="yolo/current_metrics.json",
+                         help="Metrics of the currently deployed model — new model must beat this mAP50 to be promoted")
     args = parser.parse_args()
+
+    baseline_path = Path(args.baseline_metrics)
+    baseline_map50 = 0.0
+    if baseline_path.exists():
+        baseline_map50 = json.loads(baseline_path.read_text()).get("map50", 0.0)
 
     mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
     run_id = Path(args.run_id_file).read_text().strip()
@@ -50,6 +57,7 @@ def main():
         mlflow.log_artifact(str(out_path), artifact_path="eval")
 
     print(f"Metrics: {metrics}")
+    print(f"Current deployed model baseline mAP50: {baseline_map50:.4f}")
 
     if metrics["map50"] < args.min_map50:
         print(
@@ -58,7 +66,17 @@ def main():
         )
         sys.exit(1)
 
-    print(f"Passed quality gate: mAP50 {metrics['map50']:.4f} >= {args.min_map50:.4f}")
+    if metrics["map50"] <= baseline_map50:
+        print(
+            f"FAILED quality gate: new mAP50 {metrics['map50']:.4f} "
+            f"does not beat currently deployed model's mAP50 {baseline_map50:.4f} — not promoting."
+        )
+        sys.exit(1)
+
+    print(
+        f"Passed quality gate: mAP50 {metrics['map50']:.4f} >= {args.min_map50:.4f} "
+        f"and beats current model's {baseline_map50:.4f}"
+    )
 
 
 if __name__ == "__main__":

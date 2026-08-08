@@ -31,6 +31,9 @@ jobs:
   # ────────────────────────────────────────────────────────────
   train:
     name: Train
+    # The deploy job below commits yolo/best.pt back to main, which would
+    # otherwise re-trigger this same workflow (paths: yolo/**) forever.
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest   # swap to a self-hosted GPU runner if you have one
     outputs:
       run_id: ${{ steps.stamp.outputs.run_id }}
@@ -190,7 +193,7 @@ jobs:
     needs: [train, package]
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       packages: write
     steps:
       - uses: actions/checkout@v4
@@ -203,6 +206,16 @@ jobs:
 
       - name: Copy model into docker build context
         run: cp dist/*.onnx yolo/docker/model.onnx
+
+      - name: Promote new model to production
+        run: |
+          cp dist/model.pt yolo/best.pt
+          cp dist/metrics.json yolo/current_metrics.json
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add yolo/best.pt yolo/current_metrics.json
+          git commit -m "Promote model ${{ needs.train.outputs.run_id }} to production (passed quality gate)"
+          git push
 
       - name: Log in to GHCR
         uses: docker/login-action@v3
