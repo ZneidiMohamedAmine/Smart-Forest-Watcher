@@ -45,6 +45,7 @@ jobs:
             channels-redis==4.3.0 \
             django-location-field==2.7.3 \
             django-prometheus==2.3.1 \
+            firebase-admin==6.9.0 \
             django-redis==5.4.0 \
             joblib==1.5.1 \
             paho-mqtt==2.1.0 \

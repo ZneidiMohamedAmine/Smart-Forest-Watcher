@@ -11,6 +11,7 @@ urlpatterns = [
     path('dashboard_super/',    include('supervisor.urls')),
     path('dashboard_client/',   include('client.urls')),
     path('camera_management/',  include('camera_management.urls')),
+    path('push/',                include('push.urls')),
     path('i18n/',               include('django.conf.urls.i18n')),
     path('health/',             health_check, name='health_check'),
     path('ready/',              readiness_check, name='readiness_check'),

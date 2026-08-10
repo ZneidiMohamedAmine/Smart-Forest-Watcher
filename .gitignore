@@ -37,3 +37,6 @@ logs/
 .vscode/
 
 camera_management/models_weights/*.pt
+
+# Firebase service account key — never commit, contains a private key
+firebase-service-account.json

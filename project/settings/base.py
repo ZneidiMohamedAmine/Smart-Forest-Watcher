@@ -86,6 +86,7 @@ INSTALLED_APPS = [
     'supervisor',
     'client',
     'camera_management',
+    'push',
 ]
 
 MIDDLEWARE = [

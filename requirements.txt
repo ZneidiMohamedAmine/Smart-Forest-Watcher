@@ -17,6 +17,7 @@ colorama==0.4.6
 constantly==23.10.4
 cryptography==50.0.0
 daphne==4.2.2
+firebase-admin==6.9.0
 Django==5.2.16
 django-location-field==2.7.3
 django-mqtt==0.4.3

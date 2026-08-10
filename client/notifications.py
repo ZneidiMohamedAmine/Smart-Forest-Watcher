@@ -86,6 +86,19 @@ def send_mobile_notification(user_id, title, body='', data=None, camera=None, de
         camera=camera,
         detection=detection,
     )
+
+    # Real push (FCM) alongside the in-app/polling notification above — reaches
+    # the device even if the app is fully closed. Must never break this
+    # function even if firebase-admin isn't installed/configured yet.
+    try:
+        client = Client.objects.filter(email=user_id).first()
+        if client:
+            from push.fcm import send_push_to_client
+            send_push_to_client(client, title or '', body or '', data=data)
+    except Exception:
+        import logging
+        logging.getLogger(__name__).exception("FCM push failed for %s", user_id)
+
     return {'notification_id': notification.id}
 
 
