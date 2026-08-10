@@ -509,3 +509,50 @@ msgstr "en attente"
 
 msgid "total"
 msgstr "total"
+
+msgid "Add"
+msgstr "Ajouter"
+
+msgid "Add TTN app"
+msgstr "Ajouter une application TTN"
+
+msgid ""
+"Add a TTN application's MQTT credentials so its sensors' data gets received."
+msgstr ""
+"Ajoutez les identifiants MQTT d'une application TTN pour recevoir les "
+"données de ses capteurs."
+
+msgid "Added by"
+msgstr "Ajouté par"
+
+msgid "Its sensors will stop sending data until re-added."
+msgstr ""
+"Ses capteurs cesseront d'envoyer des données jusqu'à ce qu'elle soit "
+"rajoutée."
+
+msgid "Label"
+msgstr "Libellé"
+
+msgid "No TTN apps registered yet."
+msgstr "Aucune application TTN enregistrée pour le moment."
+
+msgid "Registered apps"
+msgstr "Applications enregistrées"
+
+msgid "Remove this TTN app?"
+msgstr "Supprimer cette application TTN ?"
+
+msgid "TTN API key"
+msgstr "Clé API TTN"
+
+msgid "TTN MQTT username"
+msgstr "Nom d'utilisateur MQTT TTN"
+
+msgid "TTN Sensor Apps"
+msgstr "Applications de capteurs TTN"
+
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+msgid "Yes, remove it"
+msgstr "Oui, supprimer"

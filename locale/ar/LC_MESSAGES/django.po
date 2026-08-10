@@ -496,3 +496,46 @@ msgstr "قيد الانتظار"
 
 msgid "total"
 msgstr "الإجمالي"
+
+msgid "Add"
+msgstr "إضافة"
+
+msgid "Add TTN app"
+msgstr "إضافة تطبيق TTN"
+
+msgid ""
+"Add a TTN application's MQTT credentials so its sensors' data gets received."
+msgstr "أضف بيانات اعتماد MQTT الخاصة بتطبيق TTN لتلقي بيانات مستشعراته."
+
+msgid "Added by"
+msgstr "أضيف بواسطة"
+
+msgid "Its sensors will stop sending data until re-added."
+msgstr "ستتوقف مستشعراته عن إرسال البيانات حتى تتم إعادة إضافته."
+
+msgid "Label"
+msgstr "التسمية"
+
+msgid "No TTN apps registered yet."
+msgstr "لم يتم تسجيل أي تطبيق TTN بعد."
+
+msgid "Registered apps"
+msgstr "التطبيقات المسجلة"
+
+msgid "Remove this TTN app?"
+msgstr "إزالة تطبيق TTN هذا؟"
+
+msgid "TTN API key"
+msgstr "مفتاح API الخاص بـ TTN"
+
+msgid "TTN MQTT username"
+msgstr "اسم مستخدم MQTT لـ TTN"
+
+msgid "TTN Sensor Apps"
+msgstr "تطبيقات مستشعرات TTN"
+
+msgid "Username"
+msgstr "اسم المستخدم"
+
+msgid "Yes, remove it"
+msgstr "نعم، احذفه"
