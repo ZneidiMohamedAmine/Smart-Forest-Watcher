@@ -1,0 +1,321 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<style>
+    .editor-wrap {
+        background: white;
+        border-radius: 1.25rem;
+        padding: 1.5rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .canvas-stage {
+        position: relative;
+        display: inline-block;
+        max-width: 100%;
+        line-height: 0;
+        background: #111827;
+        border-radius: 0.75rem;
+        overflow: hidden;
+    }
+
+    .canvas-stage img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        user-select: none;
+        -webkit-user-drag: none;
+    }
+
+    .canvas-stage canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor: crosshair;
+    }
+
+    .legend-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-right: 0.75rem;
+    }
+
+    .legend-swatch {
+        width: 12px;
+        height: 12px;
+        border-radius: 3px;
+        display: inline-block;
+    }
+
+    .box-row {
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.6rem;
+        cursor: pointer;
+        font-size: 0.85rem;
+        margin-bottom: 4px;
+        border: 1.5px solid transparent;
+    }
+
+    .box-row:hover {
+        background: #f3f4f6;
+    }
+
+    .box-row.selected {
+        border-color: #10b981;
+        background: #ecfdf5;
+    }
+
+    .side-panel {
+        background: white;
+        border-radius: 1.25rem;
+        padding: 1.5rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-0">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="fw-bold mb-0">
+            <i class="fas fa-crosshairs text-primary me-2"></i>{% trans "Correct Detection Boxes" %}
+        </h4>
+        <a href="{% url 'supervisor:review_queue' %}" class="btn btn-sm btn-outline-secondary">
+            <i class="fas fa-arrow-left me-1"></i>{% trans "Back to queue" %}
+        </a>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="editor-wrap">
+                <div class="mb-3">
+                    <span class="legend-chip"><span class="legend-swatch" style="background:#ef4444;"></span>fire</span>
+                    <span class="legend-chip"><span class="legend-swatch" style="background:#6b7280;"></span>smoke</span>
+                    <span class="legend-chip"><span class="legend-swatch" style="background:#f59e0b;"></span>other</span>
+                    <span class="text-muted small">— {% trans "drag on the image to draw a new box; click a box to select it" %}</span>
+                </div>
+                <div class="canvas-stage">
+                    <img id="detImage" src="{{ detection.image.url }}" alt="Detection {{ detection.id }}">
+                    <canvas id="boxCanvas"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="side-panel">
+                <div class="mb-3">
+                    <label class="form-label fw-bold small">{% trans "New box class" %}</label>
+                    <select id="newLabelSelect" class="form-select form-select-sm">
+                        {% for label in valid_labels %}
+                        <option value="{{ label }}">{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div id="selectedControls" class="mb-3" style="display:none;">
+                    <label class="form-label fw-bold small">{% trans "Selected box class" %}</label>
+                    <div class="d-flex gap-2">
+                        <select id="relabelSelect" class="form-select form-select-sm">
+                            {% for label in valid_labels %}
+                            <option value="{{ label }}">{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                        <button id="deleteBoxBtn" class="btn btn-sm btn-outline-danger" title="{% trans 'Delete selected box' %}">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="fw-bold small text-uppercase text-muted">{% trans "Boxes" %}</span>
+                    <span class="badge bg-secondary" id="boxCount">0</span>
+                </div>
+                <div id="boxList" style="max-height: 260px; overflow-y: auto;"></div>
+
+                <hr>
+
+                <button id="submitBtn" class="btn btn-success w-100 fw-bold">
+                    <i class="fas fa-check me-1"></i>{% trans "Approve & send to staging" %}
+                </button>
+                <p class="text-muted small mt-2 mb-0">
+                    {% trans "An empty box list means this image has no fire/smoke — it'll be staged as a confirmed negative example." %}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% csrf_token %}
+<script id="existingBoxesData" type="application/json">{{ existing_boxes_json|safe }}</script>
+
+<script>
+(function () {
+    const COLORS = { fire: '#ef4444', smoke: '#6b7280', other: '#f59e0b' };
+    const img = document.getElementById('detImage');
+    const canvas = document.getElementById('boxCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let boxes = JSON.parse(document.getElementById('existingBoxesData').textContent || '[]')
+        .filter(b => typeof b.x1 === 'number')
+        .map(b => ({ x1: b.x1, y1: b.y1, x2: b.x2, y2: b.y2, label: b.label || 'fire', confidence: b.confidence }));
+    let selectedIndex = -1;
+    let drawing = false;
+    let startX = 0, startY = 0;
+    let scale = 1;
+
+    function resizeCanvas() {
+        canvas.width = img.clientWidth;
+        canvas.height = img.clientHeight;
+        scale = img.naturalWidth ? img.clientWidth / img.naturalWidth : 1;
+        redraw();
+    }
+
+    function redraw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        boxes.forEach((b, i) => {
+            const color = COLORS[b.label] || '#3b82f6';
+            ctx.strokeStyle = color;
+            ctx.lineWidth = i === selectedIndex ? 4 : 2;
+            ctx.strokeRect(b.x1 * scale, b.y1 * scale, (b.x2 - b.x1) * scale, (b.y2 - b.y1) * scale);
+            ctx.fillStyle = color;
+            ctx.font = 'bold 12px sans-serif';
+            const tagText = b.label + (b.confidence ? ' ' + Math.round(b.confidence * 100) + '%' : '');
+            const textWidth = ctx.measureText(tagText).width + 8;
+            ctx.fillRect(b.x1 * scale, Math.max(0, b.y1 * scale - 16), textWidth, 16);
+            ctx.fillStyle = '#fff';
+            ctx.fillText(tagText, b.x1 * scale + 4, Math.max(12, b.y1 * scale - 4));
+        });
+    }
+
+    function getMousePos(e) {
+        const rect = canvas.getBoundingClientRect();
+        return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    }
+
+    function hitTest(x, y) {
+        for (let i = boxes.length - 1; i >= 0; i--) {
+            const b = boxes[i];
+            const dx1 = b.x1 * scale, dy1 = b.y1 * scale, dx2 = b.x2 * scale, dy2 = b.y2 * scale;
+            if (x >= dx1 && x <= dx2 && y >= dy1 && y <= dy2) return i;
+        }
+        return -1;
+    }
+
+    function select(index) {
+        selectedIndex = index;
+        const controls = document.getElementById('selectedControls');
+        if (index === -1) {
+            controls.style.display = 'none';
+        } else {
+            controls.style.display = 'block';
+            document.getElementById('relabelSelect').value = boxes[index].label;
+        }
+        redraw();
+        updateSidebar();
+    }
+
+    canvas.addEventListener('mousedown', (e) => {
+        const pos = getMousePos(e);
+        const hit = hitTest(pos.x, pos.y);
+        if (hit !== -1) {
+            select(hit);
+            drawing = false;
+            return;
+        }
+        select(-1);
+        drawing = true;
+        startX = pos.x;
+        startY = pos.y;
+    });
+
+    canvas.addEventListener('mousemove', (e) => {
+        if (!drawing) return;
+        const pos = getMousePos(e);
+        redraw();
+        ctx.strokeStyle = '#10b981';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([6, 4]);
+        ctx.strokeRect(Math.min(startX, pos.x), Math.min(startY, pos.y), Math.abs(pos.x - startX), Math.abs(pos.y - startY));
+        ctx.setLineDash([]);
+    });
+
+    canvas.addEventListener('mouseup', (e) => {
+        if (!drawing) return;
+        drawing = false;
+        const pos = getMousePos(e);
+        const w = Math.abs(pos.x - startX), h = Math.abs(pos.y - startY);
+        if (w < 8 || h < 8) { redraw(); return; }
+        const x1 = Math.min(startX, pos.x) / scale, y1 = Math.min(startY, pos.y) / scale;
+        const x2 = Math.max(startX, pos.x) / scale, y2 = Math.max(startY, pos.y) / scale;
+        boxes.push({ x1, y1, x2, y2, label: document.getElementById('newLabelSelect').value });
+        select(boxes.length - 1);
+    });
+
+    document.getElementById('deleteBoxBtn').onclick = () => {
+        if (selectedIndex === -1) return;
+        boxes.splice(selectedIndex, 1);
+        select(-1);
+    };
+
+    document.getElementById('relabelSelect').onchange = (e) => {
+        if (selectedIndex === -1) return;
+        boxes[selectedIndex].label = e.target.value;
+        redraw();
+        updateSidebar();
+    };
+
+    function updateSidebar() {
+        const list = document.getElementById('boxList');
+        list.innerHTML = '';
+        boxes.forEach((b, i) => {
+            const row = document.createElement('div');
+            row.className = 'box-row' + (i === selectedIndex ? ' selected' : '');
+            const confText = b.confidence ? ' (' + Math.round(b.confidence * 100) + '%)' : '';
+            row.innerHTML = '<i class="fas fa-square me-1" style="color:' + (COLORS[b.label] || '#3b82f6') + ';"></i> #' + (i + 1) + ' ' + b.label + confText;
+            row.onclick = () => select(i);
+            list.appendChild(row);
+        });
+        document.getElementById('boxCount').textContent = boxes.length;
+    }
+
+    document.getElementById('submitBtn').onclick = () => {
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        const payload = boxes.map(b => ({
+            x1: Math.round(b.x1), y1: Math.round(b.y1),
+            x2: Math.round(b.x2), y2: Math.round(b.y2),
+            label: b.label,
+        }));
+        fetch(window.location.href, {
+            method: 'POST',
+            headers: { 'X-CSRFToken': csrftoken, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ boxes: payload }),
+        })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({ title: '{% trans "Sent to staging!" %}', icon: 'success', toast: true, position: 'top-end', showConfirmButton: false, timer: 1200 })
+                        .then(() => { window.location.href = "{% url 'supervisor:review_queue' %}"; });
+                } else {
+                    Swal.fire('Error', data.error || 'Failed to save', 'error');
+                }
+            })
+            .catch(err => Swal.fire('Error', err.message || 'Unexpected error', 'error'));
+    };
+
+    window.addEventListener('resize', resizeCanvas);
+    if (img.complete) { resizeCanvas(); } else { img.onload = resizeCanvas; }
+    updateSidebar();
+})();
+</script>
+{% endblock %}
