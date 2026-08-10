@@ -33,25 +33,39 @@ if ON_WINDOWS:
         os.environ["PROJ_LIB"] = os.path.join(OSGEO_PATH, "data", "proj")
         GDAL_LIBRARY_PATH = os.path.join(OSGEO_PATH, "gdal.dll")
     else:
-        # Fallback to system GDAL installation
-        SYSTEM_GDAL_PATH = r"C:\Program Files\GDAL"
-        if os.path.exists(SYSTEM_GDAL_PATH):
+        # Fallback to a system GDAL installation — either a manual
+        # "C:\Program Files\GDAL" drop-in, or an OSGeo4W install (whose
+        # root varies: machine-wide installs default to C:\OSGeo4W64,
+        # unprivileged installs land under the user's AppData instead).
+        import glob
+
+        candidate_roots = [
+            r"C:\Program Files\GDAL",
+            r"C:\OSGeo4W64",
+            r"C:\OSGeo4W",
+            os.path.join(os.environ.get("LOCALAPPDATA", ""), "Programs", "OSGeo4W"),
+        ]
+
+        GDAL_LIBRARY_PATH = None
+        for root in candidate_roots:
+            if not root or not os.path.exists(root):
+                continue
+            bin_dir = os.path.join(root, "bin") if os.path.exists(os.path.join(root, "bin")) else root
+            dlls = glob.glob(os.path.join(bin_dir, "gdal*.dll"))
+            if not dlls:
+                continue
+
             if hasattr(os, "add_dll_directory"):
-                os.add_dll_directory(SYSTEM_GDAL_PATH)
-            os.environ["PATH"] = SYSTEM_GDAL_PATH + ";" + os.environ["PATH"]
-            
-            proj_lib_path = os.path.join(SYSTEM_GDAL_PATH, "projlib")
-            if os.path.exists(proj_lib_path):
-                os.environ["PROJ_LIB"] = proj_lib_path
-                
-            import glob
-            dlls = glob.glob(os.path.join(SYSTEM_GDAL_PATH, "gdal*.dll"))
-            if dlls:
-                GDAL_LIBRARY_PATH = dlls[0]
-            else:
-                GDAL_LIBRARY_PATH = None
-        else:
-            GDAL_LIBRARY_PATH = None
+                os.add_dll_directory(bin_dir)
+            os.environ["PATH"] = bin_dir + ";" + os.environ["PATH"]
+
+            for proj_candidate in (os.path.join(root, "projlib"), os.path.join(root, "share", "proj")):
+                if os.path.exists(proj_candidate):
+                    os.environ["PROJ_LIB"] = proj_candidate
+                    break
+
+            GDAL_LIBRARY_PATH = dlls[0]
+            break
 else:
     GDAL_LIBRARY_PATH = os.environ.get("GDAL_LIBRARY_PATH", "/usr/lib/x86_64-linux-gnu/libgdal.so.36")
 

@@ -36,7 +36,9 @@ msgstr "Gestion des Agents"
 
 #: .\supervisor\templates\website\clients\list_client.html:10
 msgid "Manage all registered clients and their forest monitoring projects."
-msgstr "Gérer tous les clients enregistrés et leurs projets de surveillance forestière."
+msgstr ""
+"Gérer tous les clients enregistrés et leurs projets de surveillance "
+"forestière."
 
 #: .\supervisor\templates\website\clients\list_client.html:14
 #: .\supervisor\templates\website\clients\list_client.html:143
@@ -77,7 +79,8 @@ msgstr "Centre de Commande"
 
 #: .\supervisor\templates\website\index.html:10
 msgid "Real-time forest monitoring and fire detection analytics."
-msgstr "Surveillance forestière en temps réel et analyses de détection d'incendie."
+msgstr ""
+"Surveillance forestière en temps réel et analyses de détection d'incendie."
 
 #: .\supervisor\templates\website\index.html:14
 msgid "System Live"
@@ -232,7 +235,9 @@ msgstr "Clé API (Optionnelle)"
 
 #: .\supervisor\templates\website\project.html:371
 msgid "Use the map tool to place a marker inside a parcel."
-msgstr "Utilisez l'outil de carte pour placer un marqueur à l'intérieur d'une parcelle."
+msgstr ""
+"Utilisez l'outil de carte pour placer un marqueur à l'intérieur d'une "
+"parcelle."
 
 #: .\supervisor\templates\website\project.html:377
 msgid "Finish & Review"
@@ -247,8 +252,12 @@ msgstr "Liste des nœuds"
 msgid "Welcome Client!"
 msgstr "Bienvenue Client !"
 
-msgid "This dashboard allows the customer to monitor their farm for any potential fire threats."
-msgstr "Ce tableau de bord permet au client de surveiller son exploitation pour toute menace d'incendie potentielle."
+msgid ""
+"This dashboard allows the customer to monitor their farm for any potential "
+"fire threats."
+msgstr ""
+"Ce tableau de bord permet au client de surveiller son exploitation pour "
+"toute menace d'incendie potentielle."
 
 msgid "Temperature"
 msgstr "Température"
@@ -354,3 +363,149 @@ msgstr "Sûr"
 
 msgid "Check detection logs for images."
 msgstr "Vérifiez les journaux de détection pour les images."
+
+msgid "All detections across all cameras"
+msgstr "Toutes les détections de toutes les caméras"
+
+msgid "All"
+msgstr "Tous"
+
+msgid "All projects"
+msgstr "Tous les projets"
+
+msgid ""
+"An empty box list means this image has no fire/smoke — it'll be staged as a "
+"confirmed negative example."
+msgstr ""
+"Une liste de zones vide signifie que cette image ne contient ni feu ni fumée"
+" — elle sera mise en attente comme exemple négatif confirmé."
+
+msgid "Approve & send to staging"
+msgstr "Approuver et envoyer en attente"
+
+msgid "Back to queue"
+msgstr "Retour à la liste"
+
+msgid "Boxes"
+msgstr "Zones"
+
+msgid "Camera:"
+msgstr "Caméra :"
+
+msgid "Clear filters"
+msgstr "Effacer les filtres"
+
+msgid "Confirmed"
+msgstr "Confirmé"
+
+msgid "Confirmed Fires"
+msgstr "Incendies confirmés"
+
+msgid "Correct Detection Boxes"
+msgstr "Corriger les zones de détection"
+
+msgid "Correct YOLO's boxes before they become training data"
+msgstr ""
+"Corrigez les zones de YOLO avant qu'elles ne deviennent des données "
+"d'entraînement"
+
+msgid "Delete Detection?"
+msgstr "Supprimer la détection ?"
+
+msgid "Deleted!"
+msgstr "Supprimé !"
+
+msgid "Detection History"
+msgstr "Historique des détections"
+
+msgid "Every detection has been reviewed for the training dataset."
+msgstr ""
+"Toutes les détections ont été examinées pour le jeu de données "
+"d'entraînement."
+
+msgid "False Positives"
+msgstr "Faux positifs"
+
+msgid "Filter"
+msgstr "Filtrer"
+
+msgid "From"
+msgstr "Du"
+
+msgid "New box class"
+msgstr "Nouvelle classe de zone"
+
+msgid "No detections found"
+msgstr "Aucune détection trouvée"
+
+msgid ""
+"No fire detections match your current filters. Try broadening your search "
+"criteria."
+msgstr ""
+"Aucune détection d'incendie ne correspond à vos filtres actuels. Essayez "
+"d'élargir vos critères de recherche."
+
+msgid "Nothing to review"
+msgstr "Rien à examiner"
+
+msgid "Pending"
+msgstr "En attente"
+
+msgid "Pending Review"
+msgstr "En attente d'examen"
+
+msgid "Position:"
+msgstr "Position :"
+
+msgid "Project:"
+msgstr "Projet :"
+
+msgid "Rejected"
+msgstr "Rejeté"
+
+msgid "Reset"
+msgstr "Réinitialiser"
+
+msgid "Review for Training"
+msgstr "Examen pour l'entraînement"
+
+msgid "Selected box class"
+msgstr "Classe de la zone sélectionnée"
+
+msgid "Sensor History"
+msgstr "Historique des capteurs"
+
+msgid "Sent to staging!"
+msgstr "Envoyé en attente !"
+
+msgid "Supervisor Dashboard"
+msgstr "Tableau de bord superviseur"
+
+msgid "This action cannot be undone."
+msgstr "Cette action est irréversible."
+
+msgid "To"
+msgstr "Au"
+
+msgid "Total Detections"
+msgstr "Total des détections"
+
+msgid "Updated!"
+msgstr "Mis à jour !"
+
+msgid "Yes, delete it!"
+msgstr "Oui, supprimer !"
+
+msgid "box(es) from YOLO"
+msgstr "zone(s) de YOLO"
+
+msgid "drag on the image to draw a new box; click a box to select it"
+msgstr ""
+"faites glisser sur l'image pour dessiner une nouvelle zone ; cliquez sur une"
+" zone pour la sélectionner"
+
+msgid "pending"
+msgstr "en attente"
+
+msgid "total"
+msgstr "total"

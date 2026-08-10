@@ -513,11 +513,11 @@
             <div class="det-img-wrap">
                 {% if det.annotated_image %}
                 <a href="{{ det.annotated_image.url }}" data-fslightbox="supervisor-gallery">
-                    <img src="{{ det.annotated_image.url }}" alt="Detection {{ det.id }}">
+                    <img src="{{ det.annotated_image.url }}" alt="Detection {{ det.id }}" loading="lazy">
                 </a>
                 {% elif det.image %}
                 <a href="{{ det.image.url }}" data-fslightbox="supervisor-gallery">
-                    <img src="{{ det.image.url }}" alt="Detection {{ det.id }}">
+                    <img src="{{ det.image.url }}" alt="Detection {{ det.id }}" loading="lazy">
                 </a>
                 {% else %}
                 <div class="d-flex align-items-center justify-content-center h-100">

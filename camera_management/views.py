@@ -205,6 +205,7 @@ def detection_history(request):
     from .models import Detection
     from supervisor.models.project import Project
     from django.core.paginator import Paginator
+    from django.db.models import Count, Case, When, IntegerField
 
     qs = Detection.objects.select_related(
         'camera', 'camera__project', 'camera__project__client'
@@ -236,11 +237,14 @@ def detection_history(request):
     page_number = request.GET.get('page', 1)
     page_obj    = paginator.get_page(page_number)
 
-    # ── Stats ─────────────────────────────────────────────────────────────────
-    total     = qs.count()
-    confirmed = qs.filter(is_confirmed=True).count()
-    rejected  = qs.filter(is_confirmed=False).count()
-    pending   = qs.filter(is_confirmed__isnull=True).count()
+    # ── Stats — one aggregate query instead of four separate COUNT(*) calls ────
+    stats = qs.aggregate(
+        total=Count('id'),
+        confirmed=Count(Case(When(is_confirmed=True, then=1), output_field=IntegerField())),
+        rejected=Count(Case(When(is_confirmed=False, then=1), output_field=IntegerField())),
+        pending=Count(Case(When(is_confirmed__isnull=True, then=1), output_field=IntegerField())),
+    )
+    total, confirmed, rejected, pending = stats['total'], stats['confirmed'], stats['rejected'], stats['pending']
 
     projects  = Project.objects.all().order_by('name')
 

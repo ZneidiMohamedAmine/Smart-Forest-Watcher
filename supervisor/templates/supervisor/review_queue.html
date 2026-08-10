@@ -113,7 +113,7 @@
         <a href="{% url 'supervisor:review_detection' det.id %}" class="review-card">
             <div class="review-img-wrap">
                 {% if det.image %}
-                <img src="{{ det.image.url }}" alt="Detection {{ det.id }}">
+                <img src="{{ det.image.url }}" alt="Detection {{ det.id }}" loading="lazy">
                 {% endif %}
             </div>
             <div class="review-body">

@@ -247,8 +247,12 @@ msgstr "قائمة العقد"
 msgid "Welcome Client!"
 msgstr "أهلاً بك أيها العميل!"
 
-msgid "This dashboard allows the customer to monitor their farm for any potential fire threats."
-msgstr "تتيح لوحة القيادة هذه للعميل مراقبة مزرعته بحثاً عن أي تهديدات محتملة للحريق."
+msgid ""
+"This dashboard allows the customer to monitor their farm for any potential "
+"fire threats."
+msgstr ""
+"تتيح لوحة القيادة هذه للعميل مراقبة مزرعته بحثاً عن أي تهديدات محتملة "
+"للحريق."
 
 msgid "Temperature"
 msgstr "درجة الحرارة"
@@ -354,3 +358,141 @@ msgstr "آمن"
 
 msgid "Check detection logs for images."
 msgstr "تحقق من سجلات الكشف عن الصور."
+
+msgid "All detections across all cameras"
+msgstr "جميع الاكتشافات من جميع الكاميرات"
+
+msgid "All"
+msgstr "الكل"
+
+msgid "All projects"
+msgstr "جميع المشاريع"
+
+msgid ""
+"An empty box list means this image has no fire/smoke — it'll be staged as a "
+"confirmed negative example."
+msgstr ""
+"قائمة مربعات فارغة تعني أن هذه الصورة لا تحتوي على حريق أو دخان — سيتم "
+"إدراجها كمثال سلبي مؤكد للتدريب."
+
+msgid "Approve & send to staging"
+msgstr "الموافقة والإرسال إلى قائمة الانتظار"
+
+msgid "Back to queue"
+msgstr "العودة إلى القائمة"
+
+msgid "Boxes"
+msgstr "المربعات"
+
+msgid "Camera:"
+msgstr "الكاميرا:"
+
+msgid "Clear filters"
+msgstr "مسح الفلاتر"
+
+msgid "Confirmed"
+msgstr "مؤكد"
+
+msgid "Confirmed Fires"
+msgstr "حرائق مؤكدة"
+
+msgid "Correct Detection Boxes"
+msgstr "تصحيح مربعات الاكتشاف"
+
+msgid "Correct YOLO's boxes before they become training data"
+msgstr "صحّح مربعات YOLO قبل أن تصبح بيانات تدريب"
+
+msgid "Delete Detection?"
+msgstr "حذف الاكتشاف؟"
+
+msgid "Deleted!"
+msgstr "تم الحذف!"
+
+msgid "Detection History"
+msgstr "سجل الاكتشافات"
+
+msgid "Every detection has been reviewed for the training dataset."
+msgstr "تمت مراجعة جميع الاكتشافات لمجموعة بيانات التدريب."
+
+msgid "False Positives"
+msgstr "إنذارات كاذبة"
+
+msgid "Filter"
+msgstr "تصفية"
+
+msgid "From"
+msgstr "من"
+
+msgid "New box class"
+msgstr "فئة المربع الجديد"
+
+msgid "No detections found"
+msgstr "لم يتم العثور على اكتشافات"
+
+msgid ""
+"No fire detections match your current filters. Try broadening your search "
+"criteria."
+msgstr "لا توجد اكتشافات حريق تطابق الفلاتر الحالية. حاول توسيع معايير البحث."
+
+msgid "Nothing to review"
+msgstr "لا يوجد شيء للمراجعة"
+
+msgid "Pending"
+msgstr "قيد الانتظار"
+
+msgid "Pending Review"
+msgstr "بانتظار المراجعة"
+
+msgid "Position:"
+msgstr "الموقع:"
+
+msgid "Project:"
+msgstr "المشروع:"
+
+msgid "Rejected"
+msgstr "مرفوض"
+
+msgid "Reset"
+msgstr "إعادة تعيين"
+
+msgid "Review for Training"
+msgstr "مراجعة للتدريب"
+
+msgid "Selected box class"
+msgstr "فئة المربع المحدد"
+
+msgid "Sensor History"
+msgstr "سجل المستشعرات"
+
+msgid "Sent to staging!"
+msgstr "تم الإرسال إلى قائمة الانتظار!"
+
+msgid "Supervisor Dashboard"
+msgstr "لوحة تحكم المشرف"
+
+msgid "This action cannot be undone."
+msgstr "لا يمكن التراجع عن هذا الإجراء."
+
+msgid "To"
+msgstr "إلى"
+
+msgid "Total Detections"
+msgstr "إجمالي الاكتشافات"
+
+msgid "Updated!"
+msgstr "تم التحديث!"
+
+msgid "Yes, delete it!"
+msgstr "نعم، احذفه!"
+
+msgid "box(es) from YOLO"
+msgstr "مربع (مربعات) من YOLO"
+
+msgid "drag on the image to draw a new box; click a box to select it"
+msgstr "اسحب على الصورة لرسم مربع جديد؛ انقر على مربع لتحديده"
+
+msgid "pending"
+msgstr "قيد الانتظار"
+
+msgid "total"
+msgstr "الإجمالي"
