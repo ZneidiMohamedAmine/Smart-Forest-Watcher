@@ -593,6 +593,9 @@
                     <button class="btn btn-sm btn-outline-warning flex-fill" onclick="updateDetectionStatus({{ det.id }}, 'pending')" {% if det.is_confirmed == None %}disabled{% endif %} title="{% trans 'Reset to Pending' %}">
                         <i class="fas fa-undo"></i>
                     </button>
+                    <a href="{% url 'supervisor:review_detection' det.id %}" class="btn btn-sm btn-outline-primary flex-fill" title="{% trans 'Review boxes for training' %}">
+                        <i class="fas fa-crosshairs"></i>
+                    </a>
                 </div>
             </div>
         </div>
