@@ -90,6 +90,24 @@
         border-radius: 1.25rem;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     }
+
+    .page-link {
+        border-radius: 0.6rem !important;
+        margin: 0 2px;
+        border: 1.5px solid #e5e7eb !important;
+        color: #374151 !important;
+        font-weight: 500;
+    }
+
+    .page-item.active .page-link {
+        background: linear-gradient(135deg, #6b7280, #4b5563) !important;
+        border-color: transparent !important;
+        color: white !important;
+    }
+
+    .page-link:hover {
+        background: #f3f4f6 !important;
+    }
 </style>
 {% endblock %}
 
