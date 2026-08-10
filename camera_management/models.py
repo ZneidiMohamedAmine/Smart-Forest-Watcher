@@ -1,4 +1,5 @@
 from django.contrib.gis.db import models
+from django.contrib.auth.models import User
 from supervisor.models.project   import Project
 from supervisor.models.parcelle  import Parcelle
 
@@ -42,3 +43,48 @@ class Detection(models.Model):
 
     def __str__(self):
         return f"🔥 Fire @ {self.camera.name}  |  conf={self.confidence_score:.2f}  |  {self.detected_at:%Y-%m-%d %H:%M}"
+
+
+class StagedCorrection(models.Model):
+    """
+    A supervisor-reviewed, corrected set of bounding boxes for a Detection's
+    image — the human-in-the-loop step of the MLOps dataset pipeline.
+    Sits in "staging" until run_merge_staging() folds it into
+    yolo/data/dataset_finale/ once enough approved corrections pile up.
+    """
+    STATUS_CHOICES = [
+        ('approved', 'Approved'),
+        ('merged', 'Merged'),
+        ('rejected', 'Rejected'),
+    ]
+
+    detection   = models.ForeignKey(Detection, on_delete=models.CASCADE, related_name='staged_corrections')
+    boxes       = models.JSONField(default=list)   # [{x1,y1,x2,y2,label}, ...] absolute pixel coords
+    reviewed_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    status      = models.CharField(max_length=10, choices=STATUS_CHOICES, default='approved')
+    reject_reason = models.CharField(max_length=255, blank=True)
+    created_at  = models.DateTimeField(auto_now_add=True)
+    merged_at   = models.DateTimeField(null=True, blank=True)
+
+    def __str__(self):
+        return f'Correction for detection {self.detection_id} ({self.status})'
+
+
+class DatasetVersion(models.Model):
+    """
+    One row per successful run_merge_staging() batch — the "PROFILE" step's
+    version history (yolo/data/profiles/versions.json mirrors this table).
+    """
+    version      = models.CharField(max_length=32, unique=True)
+    created_at   = models.DateTimeField(auto_now_add=True)
+    image_count  = models.PositiveIntegerField(default=0)
+    train_count  = models.PositiveIntegerField(default=0)
+    val_count    = models.PositiveIntegerField(default=0)
+    test_count   = models.PositiveIntegerField(default=0)
+    class_counts = models.JSONField(default=dict)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f'Dataset version {self.version} ({self.image_count} images)'

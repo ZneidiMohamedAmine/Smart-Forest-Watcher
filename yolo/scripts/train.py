@@ -10,6 +10,7 @@ repo's train/test folders onto disk -- no reformatting required.
 so re-running with a pinned ref gives reproducible training data.
 """
 import argparse
+import os
 import subprocess
 from pathlib import Path
 
@@ -18,12 +19,11 @@ from ultralytics import YOLO
 
 DFIRE_REPO = "https://github.com/gaia-solutions-on-demand/DFireDataset.git"
 
-# File-based tracking store, kept in the workspace and passed between
-# GitHub Actions jobs as an artifact (see the workflow). For real
-# cross-run history (comparing this run against last month's), point
-# this at a persistent server instead -- e.g. a small hosted MLflow
-# instance or DagsHub's free hosted MLflow -- by setting MLFLOW_TRACKING_URI.
-MLFLOW_TRACKING_URI = "file:./mlruns"
+# Defaults to a local file-based store (e.g. in GitHub Actions, where the
+# mlruns/ folder travels between jobs as an artifact). Set MLFLOW_TRACKING_URI
+# to point at a real server instead -- e.g. the one in docker-compose.mlops.yml --
+# for live cross-run history you can browse in the MLflow UI.
+MLFLOW_TRACKING_URI = os.environ.get("MLFLOW_TRACKING_URI", "file:./mlruns")
 MLFLOW_EXPERIMENT = "yolo26-dfire"
 
 

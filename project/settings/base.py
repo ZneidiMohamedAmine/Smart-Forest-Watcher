@@ -178,6 +178,10 @@ CELERY_BEAT_SCHEDULE = {
         'task': 'supervisor.tasks.predict_fwi_for_data',
         'schedule': crontab(minute='*/5'),
     },
+    'merge_staging_hourly': {
+        'task': 'merge_staging_task',
+        'schedule': crontab(minute=0),
+    },
 }
 
 LOGS_DIR = os.path.join(BASE_DIR, 'logs')

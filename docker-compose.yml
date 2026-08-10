@@ -22,6 +22,8 @@ x-app: &app
   volumes:
     - staticfiles:/app/staticfiles
     - logs:/app/logs
+    - detection_images:/app/img
+    - dataset_finale:/app/yolo/data
 
   networks:
     - fire-network
@@ -232,3 +234,5 @@ volumes:
   logs:
   prometheus_data:
   grafana_data:
+  detection_images:
+  dataset_finale:

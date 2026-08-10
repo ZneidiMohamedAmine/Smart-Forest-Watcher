@@ -11,13 +11,14 @@ metrics land on the same run as training params/metrics.
 """
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
 import mlflow
 from ultralytics import YOLO
 
-MLFLOW_TRACKING_URI = "file:./mlruns"
+MLFLOW_TRACKING_URI = os.environ.get("MLFLOW_TRACKING_URI", "file:./mlruns")
 
 
 def main():

@@ -306,3 +306,76 @@ def update_detection_status(request, detection_id):
     detection.save(update_fields=['is_confirmed'])
     log.info("Supervisor updated detection %d to %s", detection_id, new_status)
     return JsonResponse({'success': True, 'new_status': new_status})
+
+
+VALID_TRAINING_LABELS = ['fire', 'smoke', 'other']
+
+
+@login_required(login_url='supervisor_login')
+@supervisor_required
+def review_queue(request):
+    """
+    Supervisor-only: lists detections that haven't been reviewed/corrected
+    yet for the training dataset pipeline (MLOps human-in-the-loop step).
+    """
+    from django.core.paginator import Paginator
+    from .models import Detection
+
+    qs = (
+        Detection.objects
+        .filter(staged_corrections__isnull=True)
+        .select_related('camera', 'camera__project')
+        .order_by('-detected_at')
+    )
+
+    paginator = Paginator(qs, 12)
+    page_obj = paginator.get_page(request.GET.get('page'))
+
+    return render(request, 'supervisor/review_queue.html', {
+        'page_obj': page_obj,
+        'total_pending': paginator.count,
+    })
+
+
+@login_required(login_url='supervisor_login')
+@supervisor_required
+def review_detection(request, detection_id):
+    """
+    GET  — renders the canvas box-correction editor for one detection.
+    POST — saves the supervisor's corrected boxes as a StagedCorrection,
+           ready to be picked up by run_merge_staging().
+    """
+    from .models import Detection, StagedCorrection
+
+    detection = get_object_or_404(Detection, pk=detection_id)
+
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            boxes = data.get('boxes', [])
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON'}, status=400)
+
+        for box in boxes:
+            if box.get('label') not in VALID_TRAINING_LABELS:
+                return JsonResponse({'error': f"Invalid label: {box.get('label')}"}, status=400)
+            for key in ('x1', 'y1', 'x2', 'y2'):
+                if not isinstance(box.get(key), (int, float)):
+                    return JsonResponse({'error': f"Box missing numeric '{key}'"}, status=400)
+            if box['x2'] <= box['x1'] or box['y2'] <= box['y1']:
+                return JsonResponse({'error': 'Box coordinates must have x2>x1 and y2>y1'}, status=400)
+
+        StagedCorrection.objects.create(
+            detection=detection,
+            boxes=boxes,
+            reviewed_by=request.user,
+            status='approved',
+        )
+        log.info("Supervisor staged %d corrected box(es) for detection %d", len(boxes), detection_id)
+        return JsonResponse({'success': True})
+
+    return render(request, 'supervisor/review_detection.html', {
+        'detection': detection,
+        'existing_boxes_json': json.dumps(detection.bounding_boxes or []),
+        'valid_labels': VALID_TRAINING_LABELS,
+    })

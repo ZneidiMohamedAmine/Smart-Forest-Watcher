@@ -41,6 +41,10 @@ urlpatterns = [
     path('detection_history/delete/<int:detection_id>/', cam_views.delete_detection_supervisor, name='delete_detection_supervisor'),
     path('detection_history/update_status/<int:detection_id>/', cam_views.update_detection_status, name='update_detection_status'),
 
+        #######* Training Dataset Review (MLOps human-in-the-loop)  ##########
+    path('review_queue/', cam_views.review_queue, name='review_queue'),
+    path('review_queue/<int:detection_id>/', cam_views.review_detection, name='review_detection'),
+
         #######* Sensor History  ##########
     path('sensor_history/', views.sensor_history, name='sensor_history'),
     path('sensor_history/delete/<int:data_id>/', views.delete_sensor_data_supervisor, name='delete_sensor_data_supervisor'),

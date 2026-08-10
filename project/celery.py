@@ -14,6 +14,10 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 # Auto-discover les tâches dans les apps Django
 app.autodiscover_tasks(['supervisor.tasks.calcul_fwi', 'supervisor.tasks.Pediction_ml', 'client'])
 
+# camera_management keeps its Celery tasks under workers/ instead of the
+# tasks.py convention autodiscover_tasks looks for, so register explicitly.
+import camera_management.workers.dataset_pipeline  # noqa: E402,F401
+
 # Beat Schedule : exécute une tâche toutes les 5 minutes
 '''app.conf.beat_schedule = {
     'predict_fwi_every_5min': {

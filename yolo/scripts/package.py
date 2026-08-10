@@ -8,13 +8,14 @@ bundle, so the MLflow record links straight to what got shipped.
 """
 import argparse
 import json
+import os
 import shutil
 from pathlib import Path
 
 import mlflow
 from ultralytics import YOLO
 
-MLFLOW_TRACKING_URI = "file:./mlruns"
+MLFLOW_TRACKING_URI = os.environ.get("MLFLOW_TRACKING_URI", "file:./mlruns")
 
 
 def main():
