@@ -297,7 +297,11 @@ def update_detection_status(request, detection_id):
     if new_status == 'confirmed':
         detection.is_confirmed = True
     elif new_status == 'rejected':
+        was_already_rejected = detection.is_confirmed is False
         detection.is_confirmed = False
+        if not was_already_rejected:
+            from client.notifications import notify_client_of_false_alarm
+            notify_client_of_false_alarm(detection)
     elif new_status == 'pending':
         detection.is_confirmed = None
     else:

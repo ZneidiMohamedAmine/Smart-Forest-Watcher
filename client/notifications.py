@@ -122,6 +122,32 @@ def notify_client_for_detection(detection):
     )
 
 
+def notify_client_of_false_alarm(detection):
+    """A supervisor reviewed a prior fire alert and marked it a false positive."""
+    camera = detection.camera
+    project = camera.project or (camera.parcelle.project if camera.parcelle else None)
+    client = project.client if project else None
+    if not client or not client.email:
+        return None
+
+    title = f"False Alarm — {camera.name} ({project.name})"
+    body = f"The fire alert from camera '{camera.name}' on {detection.detected_at:%Y-%m-%d %H:%M UTC} was reviewed and confirmed to be a false alarm."
+    data = {
+        'source': 'camera',
+        'camera_id': camera.camera_id,
+        'camera_name': camera.name,
+        'project': project.name,
+    }
+    return send_mobile_notification(
+        user_id=client.email,
+        title=title,
+        body=body,
+        data=data,
+        camera=camera,
+        detection=detection,
+    )
+
+
 @csrf_exempt
 @require_http_methods(['POST', 'OPTIONS'])
 def send_notification(request):
