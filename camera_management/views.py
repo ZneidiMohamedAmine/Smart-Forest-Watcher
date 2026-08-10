@@ -106,7 +106,11 @@ def list_cameras_for_project(request):
     for c in cameras:
         try:
             det         = c.detections.latest('detected_at')
-            has_alert   = True
+            # A rejected (false alarm) detection clears the map marker back to
+            # normal. A confirmed or still-pending one keeps it flagged — there's
+            # no "resolved" step in this app, so a real fire stays shown until
+            # a human explicitly marks it a false alarm.
+            has_alert   = det.is_confirmed is not False
             detected_at = det.detected_at.isoformat()
             image_url   = det.image.url
             confidence  = det.confidence_score
