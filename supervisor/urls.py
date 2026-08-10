@@ -48,6 +48,11 @@ urlpatterns = [
         #######* Sensor History  ##########
     path('sensor_history/', views.sensor_history, name='sensor_history'),
     path('sensor_history/delete/<int:data_id>/', views.delete_sensor_data_supervisor, name='delete_sensor_data_supervisor'),
+
+        #######* TTN Credentials  ##########
+    path('ttn_credentials/', views.list_ttn_credentials, name='list_ttn_credentials'),
+    path('ttn_credentials/add/', views.add_ttn_credential, name='add_ttn_credential'),
+    path('ttn_credentials/delete/<int:pk>/', views.delete_ttn_credential, name='delete_ttn_credential'),
 ]
 
 

@@ -1,23 +1,12 @@
-import os
 import json
 import paho.mqtt.client as mqtt
+from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
 from supervisor.tasks.calcul_fwi import calculate_fwi_task
 
-# Configuration pour TOUTES les applications TTN
 TTN_HOST = "eu1.cloud.thethings.network"
 TTN_PORT = 8883
 
-TTN_APPS = [
-    {
-        "user": os.environ.get("TTN_USER_1", "lorae5app2@ttn"),
-        "pass": os.environ.get("TTN_PASS_1", "NNSXS.7SPGHIMTGOGDQCROYRSD67YPZL4P5PZQ3MQJRCY.QBM3MPQHNDZWHOBTDDEUVQT2EBHP6ECICHBEWRZWWCGPMUY2FAKA"),
-    },
-    {
-        "user": os.environ.get("TTN_USER_2", "chottmariem@ttn"),
-        "pass": os.environ.get("TTN_PASS_2", "NNSXS.3YVGCH7JORI7ISWVUHRFVEM3DXZRKGR6YOUR6GQ.5TNHG2HAPHXQGVE4WT7KBPVJKOGRNLBS23M5X42VH233GLFW2CBA"),
-    },
-]
 
 class MQTTConsumer(AsyncWebsocketConsumer):
     #accepte connexion WebSocket (frontend)
@@ -25,7 +14,8 @@ class MQTTConsumer(AsyncWebsocketConsumer):
         await self.accept()
         self.clients = []
 
-        for i, app in enumerate(TTN_APPS):
+        apps = await self._get_ttn_apps()
+        for i, app in enumerate(apps):
             client = mqtt.Client(client_id=f"django_mqtt_{i}")
             client.username_pw_set(app["user"], app["pass"])
             client.tls_set()
@@ -38,6 +28,16 @@ class MQTTConsumer(AsyncWebsocketConsumer):
                 print(f"MQTT connected to TTN app: {app['user']}")
             except Exception as e:
                 print(f"MQTT connection failed for {app['user']}: {e}")
+
+    @database_sync_to_async
+    def _get_ttn_apps(self):
+        # Registered via the "TTN Sensor Apps" page (supervisor:list_ttn_credentials)
+        # instead of being hardcoded here, so any supervisor can add their own.
+        from supervisor.models.ttn_credential import TTNCredential
+        return [
+            {"user": c.username, "pass": c.api_key}
+            for c in TTNCredential.objects.all()
+        ]
 
     async def disconnect(self, close_code):
         for client in getattr(self, "clients", []):

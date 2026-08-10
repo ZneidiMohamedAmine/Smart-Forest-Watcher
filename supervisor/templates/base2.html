@@ -318,6 +318,14 @@
                     <span>{% trans "Sensor History" %}</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{% url 'supervisor:list_ttn_credentials' %}"
+                    class="nav-link {% if request.resolver_match.url_name == 'list_ttn_credentials' %}active{% endif %}"
+                    style="{% if request.resolver_match.url_name != 'list_ttn_credentials' %}color: #0ea5e9;{% endif %}">
+                    <i class="fas fa-broadcast-tower"></i>
+                    <span>{% trans "TTN Sensor Apps" %}</span>
+                </a>
+            </li>
             <li class="mt-4 border-top border-secondary pt-3">
                 <a href="{% url 'logout_supervisor' %}" class="nav-link text-danger">
                     <i class="fas fa-sign-out-alt"></i>
