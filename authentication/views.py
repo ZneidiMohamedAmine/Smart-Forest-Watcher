@@ -32,8 +32,8 @@ def client_login(request):
             email = form_client.cleaned_data['email']
             password = form_client.cleaned_data['password']
             try:
-                client = Client.objects.get(email=email)
-                if check_password(password, client.password):
+                client = Client.objects.select_related('user').get(email=email)
+                if client.user and check_password(password, client.user.password):
                     login(request, client.user)
                     request.session['client_authenticated'] = True
                     request.session['supervisor_authenticated'] = False
@@ -68,7 +68,7 @@ def api_client_login(request):
     except Client.DoesNotExist:
         return _cors(JsonResponse({'error': 'Invalid email or password!!!'}, status=401))
 
-    if not check_password(password, client.password):
+    if not client.user or not check_password(password, client.user.password):
         return _cors(JsonResponse({'error': 'Invalid email or password!!!'}, status=401))
 
     login(request, client.user)

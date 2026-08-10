@@ -38,7 +38,7 @@ class SupervisorLoginForm(forms.Form):
             except Supervisor.DoesNotExist:
                 raise forms.ValidationError("Invalid email or password!!!")
 
-            if not check_password(password, supervisor.password):
+            if not supervisor.user or not check_password(password, supervisor.user.password):
                 raise forms.ValidationError("Invalid email or password!!!")
         
         return cleaned_data
@@ -79,7 +79,7 @@ class ClientLoginForm(forms.Form):
             except Client.DoesNotExist:
                 raise forms.ValidationError("Invalid email or password!!!")
 
-            if not check_password(password, client.password):
+            if not client.user or not check_password(password, client.user.password):
                 raise forms.ValidationError("Invalid email or password!!!")
         
         return cleaned_data
