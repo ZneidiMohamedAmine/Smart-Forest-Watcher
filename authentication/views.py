@@ -92,6 +92,17 @@ def api_client_logout(request):
     auth_header = request.headers.get('Authorization', '')
     if auth_header.startswith('Bearer '):
         ClientAuthToken.objects.filter(key=auth_header[len('Bearer '):].strip()).delete()
+
+    # Also unregister this device's push token, so it stops receiving this
+    # client's alerts now that they've logged out — otherwise the device
+    # keeps getting pushed to indefinitely until a different account logs
+    # in on the same device and overwrites the registration.
+    payload = _parse_json(request) or {}
+    fcm_token = (payload.get('fcm_token') or '').strip()
+    if fcm_token:
+        from push.models import DeviceToken
+        DeviceToken.objects.filter(token=fcm_token).delete()
+
     return _cors(JsonResponse({}))
 
 
