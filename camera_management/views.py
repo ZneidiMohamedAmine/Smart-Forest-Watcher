@@ -16,6 +16,7 @@ from django.contrib.gis.geos        import Point
 from django.http                    import JsonResponse
 from django.shortcuts               import get_object_or_404, render
 from authentication.decorators      import supervisor_required, client_required
+from authentication.access          import accessible_projects, can_access_project
 from supervisor.models.parcelle     import Parcelle
 from supervisor.models.project      import Project
 from .models  import Camera
@@ -42,6 +43,9 @@ def add_camera(request):
                 point     = Point(latitude, longitude)
 
                 parcelle = get_object_or_404(Parcelle, id=parcelle_id)
+
+                if not can_access_project(request.user, parcelle.project):
+                    return JsonResponse({'error': 'Not authorized for this project.'}, status=403)
 
                 if not parcelle.polygon.contains(point):
                     return JsonResponse(
@@ -97,6 +101,10 @@ def list_cameras_for_project(request):
     project_id = request.GET.get('project_id')
     if not project_id:
         return JsonResponse({'error': 'No project_id provided'}, status=400)
+
+    project = get_object_or_404(Project, pk=project_id)
+    if not can_access_project(request.user, project):
+        return JsonResponse({'error': 'Not authorized for this project.'}, status=403)
 
     cameras = Camera.objects.filter(
         project_id=project_id
@@ -191,6 +199,8 @@ def delete_detection(request, detection_id):
 def delete_camera(request, camera_id):
     if request.method == 'POST':
         camera = get_object_or_404(Camera, pk=camera_id)
+        if not can_access_project(request.user, camera.project):
+            return JsonResponse({'error': 'Not authorized for this project.'}, status=403)
         camera.delete()
         return JsonResponse({'success': True, 'message': 'Camera deleted successfully.'})
     return JsonResponse({'error': 'Invalid request method.'}, status=400)
@@ -207,11 +217,12 @@ def detection_history(request):
     Paginated — 20 records per page.
     """
     from .models import Detection
-    from supervisor.models.project import Project
     from django.core.paginator import Paginator
     from django.db.models import Count, Case, When, IntegerField
 
-    qs = Detection.objects.select_related(
+    my_projects = accessible_projects(request.user)
+
+    qs = Detection.objects.filter(camera__project__in=my_projects).select_related(
         'camera', 'camera__project', 'camera__project__client'
     ).order_by('-detected_at')
 
@@ -250,7 +261,7 @@ def detection_history(request):
     )
     total, confirmed, rejected, pending = stats['total'], stats['confirmed'], stats['rejected'], stats['pending']
 
-    projects  = Project.objects.all().order_by('name')
+    projects  = my_projects.order_by('name')
 
     context = {
         'page_obj':   page_obj,
@@ -271,14 +282,16 @@ def detection_history(request):
 @login_required(login_url='supervisor_login')
 @supervisor_required
 def delete_detection_supervisor(request, detection_id):
-    """Supervisor can delete any detection (no ownership check needed)."""
+    """Supervisor can delete any detection within a project they can access."""
     if request.method != 'POST':
         return JsonResponse({'error': 'POST only'}, status=405)
 
     from .models import Detection
-    detection = Detection.objects.filter(id=detection_id).first()
+    detection = Detection.objects.select_related('camera__project').filter(id=detection_id).first()
     if detection is None:
         return JsonResponse({'error': f'Detection {detection_id} not found'}, status=404)
+    if not can_access_project(request.user, detection.camera.project):
+        return JsonResponse({'error': 'Not authorized for this project.'}, status=403)
 
     detection.delete()
     log.info("Supervisor deleted detection %d", detection_id)
@@ -292,9 +305,11 @@ def update_detection_status(request, detection_id):
         return JsonResponse({'error': 'POST only'}, status=405)
 
     from .models import Detection
-    detection = Detection.objects.filter(id=detection_id).first()
+    detection = Detection.objects.select_related('camera__project').filter(id=detection_id).first()
     if detection is None:
         return JsonResponse({'error': f'Detection {detection_id} not found'}, status=404)
+    if not can_access_project(request.user, detection.camera.project):
+        return JsonResponse({'error': 'Not authorized for this project.'}, status=403)
 
     try:
         data = json.loads(request.body)
@@ -335,7 +350,7 @@ def review_queue(request):
 
     qs = (
         Detection.objects
-        .filter(staged_corrections__isnull=True)
+        .filter(staged_corrections__isnull=True, camera__project__in=accessible_projects(request.user))
         .select_related('camera', 'camera__project')
         .order_by('-detected_at')
     )
@@ -359,7 +374,9 @@ def review_detection(request, detection_id):
     """
     from .models import Detection, StagedCorrection
 
-    detection = get_object_or_404(Detection, pk=detection_id)
+    detection = get_object_or_404(Detection.objects.select_related('camera__project'), pk=detection_id)
+    if not can_access_project(request.user, detection.camera.project):
+        return JsonResponse({'error': 'Not authorized for this project.'}, status=403)
 
     if request.method == 'POST':
         try:
@@ -418,7 +435,9 @@ def bulk_review_no_class(request):
         return JsonResponse({'error': 'detection_ids must be a non-empty list'}, status=400)
 
     detections = Detection.objects.filter(
-        id__in=detection_ids, staged_corrections__isnull=True
+        id__in=detection_ids,
+        staged_corrections__isnull=True,
+        camera__project__in=accessible_projects(request.user),
     )
 
     processed_ids = []

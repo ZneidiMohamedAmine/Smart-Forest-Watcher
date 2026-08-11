@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from authentication.decorators import supervisor_required
+from authentication.access import accessible_projects, can_access_project
 from supervisor.models.data import Data
 from supervisor.models.project import Project
 from django.core.paginator import Paginator
@@ -19,7 +20,9 @@ def sensor_history(request):
     Supports filtering by project, node, and date range.
     Paginated — 20 records per page.
     """
-    qs = Data.objects.select_related(
+    my_projects = accessible_projects(request.user)
+
+    qs = Data.objects.filter(node__parcelle__project__in=my_projects).select_related(
         'node', 'node__parcelle', 'node__parcelle__project'
     ).order_by('-published_date')
 
@@ -58,7 +61,7 @@ def sensor_history(request):
     avg_hum  = round(aggregates['avg_hum'], 1) if aggregates['avg_hum'] is not None else 0
     avg_fwi  = round(aggregates['avg_fwi'], 2) if aggregates['avg_fwi'] is not None else 0
 
-    projects = Project.objects.all().order_by('name')
+    projects = my_projects.order_by('name')
 
     context = {
         'page_obj':    page_obj,
@@ -84,9 +87,11 @@ def delete_sensor_data_supervisor(request, data_id):
     if request.method != 'POST':
         return JsonResponse({'error': 'POST only'}, status=405)
 
-    data_record = Data.objects.filter(idData=data_id).first()
+    data_record = Data.objects.select_related('node__parcelle__project').filter(idData=data_id).first()
     if data_record is None:
         return JsonResponse({'error': f'Data {data_id} not found'}, status=404)
+    if not can_access_project(request.user, data_record.node.parcelle.project):
+        return JsonResponse({'error': 'Not authorized for this project.'}, status=403)
 
     data_record.delete()
     log.info("Supervisor deleted sensor data %d", data_id)

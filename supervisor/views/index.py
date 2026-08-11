@@ -1,6 +1,7 @@
 from django.shortcuts               import render
 from django.contrib.auth.decorators import login_required
 from authentication.decorators      import supervisor_required
+from authentication.access          import accessible_projects
 from django.http                    import JsonResponse
 from django.db.models               import Prefetch
 from supervisor.models.project      import Project
@@ -12,10 +13,11 @@ from camera_management.models       import Camera, Detection
 @login_required(login_url='supervisor_login')
 @supervisor_required
 def index(request):
-    total_nodes = Node.objects.count()
-    total_cameras = Camera.objects.count()
-    total_projects = Project.objects.count()
-    
+    my_projects = accessible_projects(request.user)
+    total_nodes = Node.objects.filter(parcelle__project__in=my_projects).count()
+    total_cameras = Camera.objects.filter(project__in=my_projects).count()
+    total_projects = my_projects.count()
+
     context = {
         'total_nodes': total_nodes,
         'total_cameras': total_cameras,
@@ -26,7 +28,7 @@ def index(request):
 @login_required(login_url='supervisor_login')
 @supervisor_required
 def get_all_assets(request):
-    projects = Project.objects.prefetch_related(
+    projects = accessible_projects(request.user).prefetch_related(
         Prefetch(
             'parcelle',
             queryset=Parcelle.objects.prefetch_related(

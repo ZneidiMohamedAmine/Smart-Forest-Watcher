@@ -12,6 +12,12 @@ class Supervisor(models.Model):
     email       = models.EmailField(max_length=255, unique=True)
     user        = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
 
+    # Global admins see/manage every project (legacy behavior, preserved for
+    # existing accounts via migration). Non-admins are restricted to the
+    # projects explicitly assigned to them below.
+    is_admin    = models.BooleanField(default=False, help_text="Can see and manage every project, not just assigned ones.")
+    projects    = models.ManyToManyField('supervisor.Project', blank=True, related_name='assigned_supervisors')
+
     def save(self, *args, **kwargs):
         if not self.pk:  
             if User.objects.filter(username=self.username).exists():

@@ -3,6 +3,9 @@ from django.core.exceptions import ValidationError
 from .models.supervisor import Supervisor
 
 class SupervisorAdmin(admin.ModelAdmin):
+    list_display = ('firstName', 'lastName', 'email', 'is_admin')
+    filter_horizontal = ('projects',)
+
     def save_model(self, request, obj, form, change):
         try:    
             obj.save()

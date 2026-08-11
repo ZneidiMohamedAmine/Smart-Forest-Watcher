@@ -9,6 +9,7 @@ from django.http                    import JsonResponse
 from django.shortcuts               import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from authentication.decorators      import supervisor_required
+from authentication.access          import accessible_projects, can_access_project
 from django.db.models.functions     import Concat
 from django.contrib.gis.geos        import Point
 from supervisor.models.parcelle     import Parcelle 
@@ -24,13 +25,14 @@ from camera_management.forms         import CameraForm
 @supervisor_required
 def list_project(request):
     client_id = request.GET.get('client_id')
-    projects_by_client = Project.objects.annotate(
+    my_projects = accessible_projects(request.user)
+    projects_by_client = my_projects.annotate(
         full_name=Concat('client__firstName', Value(' '), 'client__lastName')
     ).values('full_name', 'client_id').annotate(count=Count('client')).order_by('full_name')
     if client_id:
-        projects = Project.objects.filter(client_id=client_id)  
+        projects = my_projects.filter(client_id=client_id)
     else:
-        projects = Project.objects.all()
+        projects = my_projects
     form = ProjectForm()
     node_form = NodeForm()
     camera_form = CameraForm()
@@ -63,6 +65,9 @@ def add_project(request):
             existing_project = Project.objects.filter(name=project_name, city=project.city).first()
 
             if existing_project:
+                if not can_access_project(request.user, existing_project):
+                    messages.error(request, 'A project with that name and city already exists and you are not authorized to modify it.')
+                    return redirect('supervisor:list_project')
                 existing_project.descp = form.cleaned_data.get('descp', existing_project.descp)
                 existing_project.date_debut = form.cleaned_data.get('date_debut', existing_project.date_debut)
                 existing_project.date_fin = form.cleaned_data.get('date_fin', existing_project.date_fin)
@@ -73,6 +78,9 @@ def add_project(request):
             else:
                 project.save()
                 form.save_m2m()
+                supervisor = getattr(request.user, 'supervisor', None)
+                if supervisor and not supervisor.is_admin:
+                    supervisor.projects.add(project)
                 messages.success(request, 'Project added successfully.')
             
             latitude = float(project.city.latitude)
@@ -84,10 +92,11 @@ def add_project(request):
             node_form = NodeForm()
             camera_form = CameraForm()
             # Fetch project lists to ensure UI updates without refresh
-            projects_by_client = Project.objects.annotate(
+            my_projects = accessible_projects(request.user)
+            projects_by_client = my_projects.annotate(
                 full_name=Concat('client__firstName', Value(' '), 'client__lastName')
             ).values('full_name', 'client_id').annotate(count=Count('client')).order_by('full_name')
-            projects = Project.objects.all()
+            projects = my_projects
 
             return render(request, 'website/project.html', {
                 'projects_by_client': projects_by_client,
@@ -110,10 +119,11 @@ def add_project(request):
         data = request.session['map_data']
 
     show_map_modal = request.session.get('project_added', False)
-    projects_by_client = Project.objects.annotate(
+    my_projects = accessible_projects(request.user)
+    projects_by_client = my_projects.annotate(
         full_name=Concat('client__firstName', Value(' '), 'client__lastName')
     ).values('full_name', 'client_id').annotate(count=Count('client')).order_by('full_name')
-    projects = Project.objects.all()
+    projects = my_projects
 
     response = render(request, 'website/project.html', {
         'projects_by_client': projects_by_client,
@@ -139,6 +149,8 @@ def add_project(request):
 def get_project_details(request, project_id):
     try:
         project = Project.objects.get(pk=project_id)
+        if not can_access_project(request.user, project):
+            return JsonResponse({'error': 'Not authorized for this project.'}, status=403)
         data = {
             'project_name': project.name,
             'client_name': f"{project.client.firstName} {project.client.lastName}",
@@ -155,7 +167,10 @@ def get_project_details(request, project_id):
 def delete_project(request, pk):
     from django.db import connection
     project = get_object_or_404(Project, pk=pk)
-    
+    if not can_access_project(request.user, project):
+        messages.error(request, 'You are not authorized to delete this project.')
+        return redirect('supervisor:list_project')
+
     # 1. Modern ORM cleanup
     project.cameras.all().delete()
     project.parcelle.all().delete() 
@@ -196,10 +211,16 @@ def parcelle_create(request):
 
                 if parcelle_id:
                     parcelle = get_object_or_404(Parcelle, id=parcelle_id)
+                    if not can_access_project(request.user, parcelle.project):
+                        return JsonResponse({'error': 'Not authorized for this project.'}, status=403)
                     parcelle.polygon = polygon
                     parcelle.save()
                     message = 'Polygon updated successfully.'
                 else:
+                    new_parcelle_project = form.cleaned_data.get('project')
+                    if not can_access_project(request.user, new_parcelle_project):
+                        return JsonResponse({'error': 'Not authorized for this project.'}, status=403)
+
                     existing_parcelles = Parcelle.objects.all()
                     for existing_parcelle in existing_parcelles:
                         if existing_parcelle.polygon and polygon.equals_exact(existing_parcelle.polygon, tolerance=1e-9):
@@ -231,7 +252,7 @@ def parcelle_create(request):
             return JsonResponse({'error': errors}, status=400)
     else:
         form = ParcelleForm()
-        projects = Project.objects.all()
+        projects = accessible_projects(request.user)
         project_data = []
 
         for project in projects:
@@ -243,10 +264,10 @@ def parcelle_create(request):
             } for parcelle in parcelles if parcelle.polygon]
             project_data.append({
                 'project': {
-                    'id': project.id,
+                    'id': project.polygon_id,
                     'name': project.name,
-                    'latitude': project.city.latitude,
-                    'longitude': project.city.longitude
+                    'latitude': project.city.latitude if project.city else None,
+                    'longitude': project.city.longitude if project.city else None
                 },
                 'parcelles': project_parcelles
             })
@@ -266,6 +287,9 @@ def parcelle_create(request):
 def get_parcelles_for_project(request):
     project_id = request.GET.get('project_id')
     if project_id:
+        project = get_object_or_404(Project, pk=project_id)
+        if not can_access_project(request.user, project):
+            return JsonResponse({'error': 'Not authorized for this project.'}, status=403)
         parcelles = Parcelle.objects.filter(project_id=project_id)
         parcelle_data = [{
             'id': parcelle.id,
@@ -294,6 +318,8 @@ def node_create(request):
                 point = Point(latitude, longitude)
                 print(point)
                 parcelle = get_object_or_404(Parcelle, id=parcelle_id)
+                if not can_access_project(request.user, parcelle.project):
+                    return JsonResponse({'error': 'Not authorized for this project.'}, status=403)
 
                 if parcelle.polygon.contains(point):
                     node = node_form.save(commit=False)
@@ -345,6 +371,9 @@ def node_create(request):
 def get_parcelles_with_nodes_for_project(request):
     project_id = request.GET.get('project_id')
     if project_id:
+        project = get_object_or_404(Project, pk=project_id)
+        if not can_access_project(request.user, project):
+            return JsonResponse({'error': 'Not authorized for this project.'}, status=403)
         parcelles = Parcelle.objects.filter(project_id=project_id)
         parcelle_data = []
         for parcelle in parcelles:
@@ -446,6 +475,12 @@ def get_parcelles_with_nodes_for_project(request):
 @supervisor_required
 def update_project(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
+    if not can_access_project(request.user, project):
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            return JsonResponse({'success': False, 'errors': 'Not authorized for this project.'}, status=403)
+        messages.error(request, 'You are not authorized to modify this project.')
+        return redirect('supervisor:list_project')
+
     if request.method == 'POST':
         form = ProjectForm(request.POST, request.FILES, instance=project)
         if form.is_valid():
@@ -498,6 +533,8 @@ def update_parcels_nodes(request):
         deleted_markers = data.get('deleted_markers', [])
 
         project = get_object_or_404(Project, pk=project_id)
+        if not can_access_project(request.user, project):
+            return JsonResponse({'error': 'Not authorized for this project.'}, status=403)
 
         #! Supprimer les parcelles
         for parcelle_id in deleted_polygons:
@@ -506,7 +543,7 @@ def update_parcels_nodes(request):
 
         #! Supprimer les nœuds
         for node_id in deleted_markers:
-            node = get_object_or_404(Node, pk=node_id)
+            node = get_object_or_404(Node, pk=node_id, parcelle__project=project)
             node.delete()
 
         #TODO Mettre à jour les parcelles
@@ -527,7 +564,7 @@ def update_parcels_nodes(request):
             longitude = marker_data.get('longitude')
             modified = marker_data.get('modified', False)
             if node_id and modified:
-                node = get_object_or_404(Node, pk=node_id)
+                node = get_object_or_404(Node, pk=node_id, parcelle__project=project)
                 node.position = Point(latitude, longitude)  # longitude, latitude
                 node.latitude = latitude
                 node.longitude = longitude
@@ -544,7 +581,9 @@ def update_parcels_nodes(request):
 @supervisor_required
 def delete_node(request, node_id):
     if request.method == 'POST':
-        node = get_object_or_404(Node, pk=node_id)
+        node = get_object_or_404(Node.objects.select_related('parcelle__project'), pk=node_id)
+        if not can_access_project(request.user, node.parcelle.project):
+            return JsonResponse({'error': 'Not authorized for this project.'}, status=403)
         node.delete()
         return JsonResponse({'success': True, 'message': 'Node deleted successfully.'})
     return JsonResponse({'error': 'Invalid request method.'}, status=400)
