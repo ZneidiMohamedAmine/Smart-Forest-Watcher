@@ -72,6 +72,10 @@ def _serialize_notification(n, request=None):
         'confidence': (n.data or {}).get('confidence'),
         'detected_at': (n.data or {}).get('detected_at'),
         'created_at': n.created_at.isoformat(),
+        # A supervisor marked the underlying detection a false alarm — the
+        # client app uses this to stop counting it (and its follow-up
+        # "False Alarm" notice) as an alert that still needs attention.
+        'is_resolved_false_alarm': n.detection_id is not None and n.detection.is_confirmed is False,
     }
 
 
