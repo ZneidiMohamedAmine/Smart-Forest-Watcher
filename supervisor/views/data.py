@@ -32,7 +32,7 @@ def sensor_history(request):
     if project_id:
         qs = qs.filter(node__parcelle__project__polygon_id=project_id)
     if node_id:
-        qs = qs.filter(node__id=node_id)
+        qs = qs.filter(node__name__icontains=node_id)
 
     if date_from:
         qs = qs.filter(published_date__date__gte=date_from)
