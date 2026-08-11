@@ -43,6 +43,7 @@ urlpatterns = [
 
         #######* Training Dataset Review (MLOps human-in-the-loop)  ##########
     path('review_queue/', cam_views.review_queue, name='review_queue'),
+    path('review_queue/bulk_no_class/', cam_views.bulk_review_no_class, name='bulk_review_no_class'),
     path('review_queue/<int:detection_id>/', cam_views.review_detection, name='review_detection'),
 
         #######* Sensor History  ##########

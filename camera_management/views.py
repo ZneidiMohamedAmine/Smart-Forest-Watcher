@@ -391,3 +391,45 @@ def review_detection(request, detection_id):
         'existing_boxes_json': json.dumps(detection.bounding_boxes or []),
         'valid_labels': VALID_TRAINING_LABELS,
     })
+
+
+@login_required(login_url='supervisor_login')
+@supervisor_required
+def bulk_review_no_class(request):
+    """
+    Supervisor selects multiple pending-review detections at once and marks
+    them all as "no class" (negative examples — any YOLO boxes they came in
+    with are discarded, nothing to correct one-by-one).
+    Stages an empty-boxes StagedCorrection for each, same as submitting an
+    empty box list through the single-detection editor.
+    """
+    from .models import Detection, StagedCorrection
+
+    if request.method != 'POST':
+        return JsonResponse({'error': 'POST only'}, status=405)
+
+    try:
+        data = json.loads(request.body)
+        detection_ids = data.get('detection_ids', [])
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'Invalid JSON'}, status=400)
+
+    if not isinstance(detection_ids, list) or not detection_ids:
+        return JsonResponse({'error': 'detection_ids must be a non-empty list'}, status=400)
+
+    detections = Detection.objects.filter(
+        id__in=detection_ids, staged_corrections__isnull=True
+    )
+
+    processed_ids = []
+    for detection in detections:
+        StagedCorrection.objects.create(
+            detection=detection,
+            boxes=[],
+            reviewed_by=request.user,
+            status='approved',
+        )
+        processed_ids.append(detection.id)
+
+    log.info("Supervisor bulk-staged %d detection(s) as no-class", len(processed_ids))
+    return JsonResponse({'success': True, 'processed': processed_ids})

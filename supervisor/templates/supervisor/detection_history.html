@@ -425,28 +425,28 @@
         <div class="stat-card">
             <div class="stat-icon total"><i class="fas fa-camera"></i></div>
             <div>
-                <div class="stat-value">{{ total }}</div>
+                <div class="stat-value" id="stat-total">{{ total }}</div>
                 <div class="stat-label">{% trans "Total Detections" %}</div>
             </div>
         </div>
         <div class="stat-card">
             <div class="stat-icon confirmed"><i class="fas fa-check-circle"></i></div>
             <div>
-                <div class="stat-value">{{ confirmed }}</div>
+                <div class="stat-value" id="stat-confirmed">{{ confirmed }}</div>
                 <div class="stat-label">{% trans "Confirmed Fires" %}</div>
             </div>
         </div>
         <div class="stat-card">
             <div class="stat-icon rejected"><i class="fas fa-times-circle"></i></div>
             <div>
-                <div class="stat-value">{{ rejected }}</div>
+                <div class="stat-value" id="stat-rejected">{{ rejected }}</div>
                 <div class="stat-label">{% trans "False Positives" %}</div>
             </div>
         </div>
         <div class="stat-card">
             <div class="stat-icon pending"><i class="fas fa-hourglass-half"></i></div>
             <div>
-                <div class="stat-value">{{ pending }}</div>
+                <div class="stat-value" id="stat-pending">{{ pending }}</div>
                 <div class="stat-label">{% trans "Pending Review" %}</div>
             </div>
         </div>
@@ -508,7 +508,7 @@
     <div class="detections-grid">
         {% for det in page_obj %}
 
-        <div class="det-card {% if det.is_confirmed == True %}confirmed{% elif det.is_confirmed == False %}rejected{% else %}pending{% endif %}" id="det-card-{{ det.id }}">
+        <div class="det-card {% if det.is_confirmed == True %}confirmed{% elif det.is_confirmed == False %}rejected{% else %}pending{% endif %}" id="det-card-{{ det.id }}" data-status="{% if det.is_confirmed == True %}confirmed{% elif det.is_confirmed == False %}rejected{% else %}pending{% endif %}">
             <!-- Image -->
             <div class="det-img-wrap">
                 {% if det.annotated_image %}
@@ -526,7 +526,7 @@
                 {% endif %}
 
                 <!-- Status badge -->
-                <span class="det-status-badge {% if det.is_confirmed == True %}badge-confirmed{% elif det.is_confirmed == False %}badge-rejected{% else %}badge-pending{% endif %}">
+                <span class="det-status-badge js-status-badge {% if det.is_confirmed == True %}badge-confirmed{% elif det.is_confirmed == False %}badge-rejected{% else %}badge-pending{% endif %}">
                     {% if det.is_confirmed == True %}✅ Confirmed{% elif det.is_confirmed == False %}❌ Rejected{% else %}⏳ Pending{% endif %}
                 </span>
 
@@ -584,18 +584,12 @@
 
                 <!-- Action Buttons -->
                 <div class="d-flex gap-2 mt-3 pt-3 border-top" style="border-color: rgba(0,0,0,0.05)!important;">
-                    <button class="btn btn-sm btn-outline-success flex-fill" onclick="updateDetectionStatus({{ det.id }}, 'confirmed')" {% if det.is_confirmed == True %}disabled{% endif %} title="{% trans 'Confirm Fire' %}">
+                    <button class="btn btn-sm btn-outline-success flex-fill js-btn-confirmed" onclick="updateDetectionStatus({{ det.id }}, 'confirmed')" {% if det.is_confirmed == True %}disabled{% endif %} title="{% trans 'Confirm Fire' %}">
                         <i class="fas fa-check"></i>
                     </button>
-                    <button class="btn btn-sm btn-outline-danger flex-fill" onclick="updateDetectionStatus({{ det.id }}, 'rejected')" {% if det.is_confirmed == False %}disabled{% endif %} title="{% trans 'Reject (False Positive)' %}">
+                    <button class="btn btn-sm btn-outline-danger flex-fill js-btn-rejected" onclick="updateDetectionStatus({{ det.id }}, 'rejected')" {% if det.is_confirmed == False %}disabled{% endif %} title="{% trans 'Reject (False Positive)' %}">
                         <i class="fas fa-times"></i>
                     </button>
-                    <button class="btn btn-sm btn-outline-warning flex-fill" onclick="updateDetectionStatus({{ det.id }}, 'pending')" {% if det.is_confirmed == None %}disabled{% endif %} title="{% trans 'Reset to Pending' %}">
-                        <i class="fas fa-undo"></i>
-                    </button>
-                    <a href="{% url 'supervisor:review_detection' det.id %}" class="btn btn-sm btn-outline-primary flex-fill" title="{% trans 'Review boxes for training' %}">
-                        <i class="fas fa-crosshairs"></i>
-                    </a>
                 </div>
             </div>
         </div>
@@ -727,6 +721,7 @@
             })
             .then(data => {
                 if (data.success) {
+                    applyDetectionStatus(detectionId, data.new_status);
                     Swal.fire({
                         title: '{% trans "Updated!" %}',
                         icon: 'success',
@@ -735,7 +730,7 @@
                         showConfirmButton: false,
                         timer: 1000,
                         timerProgressBar: true
-                    }).then(() => location.reload());
+                    });
                 } else {
                     Swal.fire('Error', data.error || 'Failed to update', 'error');
                 }
@@ -743,6 +738,50 @@
             .catch(err => {
                 Swal.fire('Error', err.message || 'Unexpected error', 'error');
             });
+    }
+
+    const STATUS_META = {
+        confirmed: { badgeClass: 'badge-confirmed', badgeText: '✅ Confirmed' },
+        rejected:  { badgeClass: 'badge-rejected',  badgeText: '❌ Rejected' },
+        pending:   { badgeClass: 'badge-pending',   badgeText: '⏳ Pending' },
+    };
+
+    function applyDetectionStatus(detectionId, newStatus) {
+        const card = document.getElementById('det-card-' + detectionId);
+        if (!card) return;
+
+        const oldStatus = card.dataset.status;
+        if (oldStatus === newStatus) return;
+
+        // Card container class
+        card.classList.remove('confirmed', 'rejected', 'pending');
+        card.classList.add(newStatus);
+        card.dataset.status = newStatus;
+
+        // Badge
+        const badge = card.querySelector('.js-status-badge');
+        if (badge) {
+            badge.classList.remove('badge-confirmed', 'badge-rejected', 'badge-pending');
+            badge.classList.add(STATUS_META[newStatus].badgeClass);
+            badge.textContent = STATUS_META[newStatus].badgeText;
+        }
+
+        // Buttons — disable the one matching the new status, enable the rest
+        card.querySelectorAll('.js-btn-confirmed, .js-btn-rejected, .js-btn-pending').forEach(btn => {
+            btn.disabled = false;
+        });
+        const activeBtn = card.querySelector('.js-btn-' + newStatus);
+        if (activeBtn) activeBtn.disabled = true;
+
+        // Stat counters
+        if (oldStatus && document.getElementById('stat-' + oldStatus)) {
+            const el = document.getElementById('stat-' + oldStatus);
+            el.textContent = Math.max(0, parseInt(el.textContent, 10) - 1);
+        }
+        const newEl = document.getElementById('stat-' + newStatus);
+        if (newEl) {
+            newEl.textContent = parseInt(newEl.textContent, 10) + 1;
+        }
     }
 </script>
 {% endblock %}
