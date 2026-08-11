@@ -90,6 +90,20 @@ services:
         condition: service_healthy
 
 
+  mqtt-listener:
+    <<: *app
+    container_name: fire_mqtt_listener
+
+    command:
+      python manage.py listen_ttn
+
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+
   db:
     image: postgis/postgis:15-3.4
     container_name: fire_db
