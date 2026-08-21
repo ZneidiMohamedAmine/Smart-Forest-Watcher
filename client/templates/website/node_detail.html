@@ -5,17 +5,17 @@
 
 {% block head %}
 
-    <style>
-        .node-info-card {
+<style>
+    .node-info-card {
         border: 1px solid #dee2e6;
         border-radius: 8px;
-        background-color: #f0f0f5; 
+        background-color: #f0f0f5;
         padding: 15px;
-        margin: 20px auto; 
+        margin: 20px auto;
         text-align: center;
-        }
+    }
 
-        .node-info-card .card-header {
+    .node-info-card .card-header {
         font-size: 25px;
         font-weight: bold;
         margin-bottom: 10px;
@@ -24,86 +24,44 @@
         justify-content: center;
         color: #333;
         height: 130px;
-        }
+    }
 
-        .node-info-card .card-header i {
-            margin-right: 10px;
-        }
-
-        .node-info-card .card-body {
-        text-align: left;
-        }
-
-        .node-info-card .card-body p {
-            margin: 10px 0;
-            font-size: 16px;
-            color: #333;
-            line-height: 1.5;
-        }
-
-        .node-info-card .card-body p span:first-child {
-            font-weight: bold;
-            margin-right: 10px;
-        }
-
-        .node-info-card .card-body p span:last-child {
-            flex-grow: 1;
-            text-align: right;
-        }
-
-        .weather-info-card {
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            background-color: #f0f0f5;
-            padding: 20px;
-            width: 300px; 
-            margin: 20px auto;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .weather-info-card .card-header {
-        font-size: 20px;
-        font-weight: bold;
-        margin-bottom: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #333;
-        background-color: #e0e0eb; 
-        border-radius: 8px 8px 0 0;
-        padding: 10px;
-        }
-
-        .weather-info-card .card-header i {
+    .node-info-card .card-header i {
         margin-right: 10px;
-        }
+    }
 
-        .weather-info-card .card-body {
+    .node-info-card .card-body {
         text-align: left;
-        }
+    }
 
-        .weather-info-card .card-body p {
+    .node-info-card .card-body p {
         margin: 10px 0;
         font-size: 16px;
         color: #333;
         line-height: 1.5;
-        }
+    }
 
-        .weather-info-card .card-body p strong {
+    .node-info-card .card-body p span:first-child {
         font-weight: bold;
-        }
+        margin-right: 10px;
+    }
 
+    .node-info-card .card-body p span:last-child {
+        flex-grow: 1;
+        text-align: right;
+    }
 
-        .prediction-info-card {
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            background-color: #f0f0f5;
-            width: 300px; 
-            margin: 20px auto;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+    .weather-info-card {
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        background-color: #f0f0f5;
+        padding: 20px;
+        width: 300px;
+        margin: 20px auto;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-        .prediction-info-card .card-header {
+    .weather-info-card .card-header {
         font-size: 20px;
         font-weight: bold;
         margin-bottom: 20px;
@@ -111,83 +69,137 @@
         align-items: center;
         justify-content: center;
         color: #333;
-        background-color: #e0e0eb; 
+        background-color: #e0e0eb;
         border-radius: 8px 8px 0 0;
         padding: 10px;
-        }
+    }
 
-        .prediction-info-card .card-header i {
+    .weather-info-card .card-header i {
         margin-right: 10px;
-        }
+    }
 
-        .prediction-info-card .card-body {
+    .weather-info-card .card-body {
+        text-align: left;
+    }
+
+    .weather-info-card .card-body p {
+        margin: 10px 0;
+        font-size: 16px;
+        color: #333;
+        line-height: 1.5;
+    }
+
+    .weather-info-card .card-body p strong {
+        font-weight: bold;
+    }
+
+
+    .prediction-info-card {
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        background-color: #f0f0f5;
+        width: 300px;
+        margin: 20px auto;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .prediction-info-card .card-header {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #333;
+        background-color: #e0e0eb;
+        border-radius: 8px 8px 0 0;
+        padding: 10px;
+    }
+
+    .prediction-info-card .card-header i {
+        margin-right: 10px;
+    }
+
+    .prediction-info-card .card-body {
         text-align: center;
-        }
+    }
 
-        .prediction-info-card .card-body p {
+    .prediction-info-card .card-body p {
         margin: 10px 0;
         font-size: 16px;
         color: #333;
         line-height: 1.5;
-        }
+    }
 
-        .prediction-info-card .card-body p span {
+    .prediction-info-card .card-body p span {
         font-weight: bold;
-        color: green; 
-        }
+        color: green;
+    }
+</style>
 
-    </style>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 {% endblock %}
 
 {% block content %}
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="position-relative iq-banner">
-            <!-- Nav Start -->
-            <nav class="nav navbar navbar-expand-lg navbar-light iq-navbar">
+<!-- Main Content -->
+<main class="main-content">
+    <div class="position-relative iq-banner">
+        <!-- Nav Start -->
+        <nav class="nav navbar navbar-expand-lg navbar-light iq-navbar">
             <div class="container-fluid navbar-inner">
                 <a href="{% url 'dashboard_client' project.polygon_id %}" class="navbar-brand">
-                <!-- Logo start -->
-                <div class="logo-main">
-                    <div class="logo-normal">
-                    <svg class="text-primary icon-30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2" transform="rotate(-45 -0.757324 19.2427)" fill="currentColor"/>
-                        <rect x="7.72803" y="27.728" width="28" height="4" rx="2" transform="rotate(-45 7.72803 27.728)" fill="currentColor"/>
-                        <rect x="10.5366" y="16.3945" width="16" height="4" rx="2" transform="rotate(45 10.5366 16.3945)" fill="currentColor"/>
-                        <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2" transform="rotate(45 10.5562 -0.556152)" fill="currentColor"/>
-                    </svg>
+                    <!-- Logo start -->
+                    <div class="logo-main">
+                        <div class="logo-normal">
+                            <svg class="text-primary icon-30" viewBox="0 0 30 30" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2"
+                                    transform="rotate(-45 -0.757324 19.2427)" fill="currentColor" />
+                                <rect x="7.72803" y="27.728" width="28" height="4" rx="2"
+                                    transform="rotate(-45 7.72803 27.728)" fill="currentColor" />
+                                <rect x="10.5366" y="16.3945" width="16" height="4" rx="2"
+                                    transform="rotate(45 10.5366 16.3945)" fill="currentColor" />
+                                <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2"
+                                    transform="rotate(45 10.5562 -0.556152)" fill="currentColor" />
+                            </svg>
+                        </div>
+                        <div class="logo-mini">
+                            <svg class="text-primary icon-30" viewBox="0 0 30 30" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2"
+                                    transform="rotate(-45 -0.757324 19.2427)" fill="currentColor" />
+                                <rect x="7.72803" y="27.728" width="28" height="4" rx="2"
+                                    transform="rotate(-45 7.72803 27.728)" fill="currentColor" />
+                                <rect x="10.5366" y="16.3945" width="16" height="4" rx="2"
+                                    transform="rotate(45 10.5366 16.3945)" fill="currentColor" />
+                                <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2"
+                                    transform="rotate(45 10.5562 -0.556152)" fill="currentColor" />
+                            </svg>
+                        </div>
                     </div>
-                    <div class="logo-mini">
-                    <svg class="text-primary icon-30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2" transform="rotate(-45 -0.757324 19.2427)" fill="currentColor"/>
-                        <rect x="7.72803" y="27.728" width="28" height="4" rx="2" transform="rotate(-45 7.72803 27.728)" fill="currentColor"/>
-                        <rect x="10.5366" y="16.3945" width="16" height="4" rx="2" transform="rotate(45 10.5366 16.3945)" fill="currentColor"/>
-                        <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2" transform="rotate(45 10.5562 -0.556152)" fill="currentColor"/>
-                    </svg>
-                    </div>
-                </div>
-                <!-- Logo End -->
-                <h4 class="logo-title">SFG</h4>
+                    <!-- Logo End -->
+                    <h4 class="logo-title">SFG</h4>
                 </a>
                 <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
-                <i class="icon">
-                    <svg width="20px" class="icon-20" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" />
-                    </svg>
-                </i>
+                    <i class="icon">
+                        <svg width="20px" class="icon-20" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" />
+                        </svg>
+                    </i>
                 </div>
                 <!-- Language Dropdown -->
                 <div class="dropdown ms-auto me-3">
-                    <a class="dropdown-toggle d-flex align-items-center text-dark" href="#" id="langDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="dropdown-toggle d-flex align-items-center text-dark" href="#" id="langDropdown"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="me-2">
                             {% if LANGUAGE_CODE == 'en' %}🇺🇸{% elif LANGUAGE_CODE == 'fr' %}🇫🇷{% elif LANGUAGE_CODE == 'ar' %}🇸🇦{% endif %}
                         </span>
                         <span class="d-none d-lg-inline">{{ LANGUAGE_CODE|upper }}</span>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-4 mt-2" aria-labelledby="langDropdown">
+                    <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-4 mt-2"
+                        aria-labelledby="langDropdown">
                         <form action="{% url 'set_language' %}" method="post">
                             {% csrf_token %}
                             <input name="next" type="hidden" value="{{ request.get_full_path }}">
@@ -208,224 +220,284 @@
                         </form>
                     </ul>
                 </div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon">
-                    <span class="mt-2 navbar-toggler-bar bar1"></span>
-                    <span class="navbar-toggler-bar bar2"></span>
-                    <span class="navbar-toggler-bar bar3"></span>
-                </span>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon">
+                        <span class="mt-2 navbar-toggler-bar bar1"></span>
+                        <span class="navbar-toggler-bar bar2"></span>
+                        <span class="navbar-toggler-bar bar3"></span>
+                    </span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="mb-2 navbar-nav ms-auto align-items-center navbar-list mb-lg-0">
-                    <li class="nav-item dropdown">
-                    <a class="py-0 nav-link d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        {% if project.client.image %}
-                        <img src="{{ project.client.image.url }}" alt="User-Profile" style="width: 50px; border-radius: 50%;">
-                        {% else %}
-                            <img src="{% static 'assets/images/default-avatar.jpg' %}" alt="User-Profile" style="width: 50px; border-radius: 50%;">
-                        {% endif %}
-                        <div class="caption ms-3 d-none d-md-block">
-                            <h6 class="mb-0 caption-title">{{ project.client.firstName }} {{ project.client.lastName }}</h6>
-                            <p class="mb-0 caption-sub-title">{{ project.name }}</p>
-                        </div>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <!-- <li><a class="dropdown-item" href="#">Profile</a></li> -->
-                        <li><a class="dropdown-item" data-bs-toggle="offcanvas" href="#offcanvasExample" aria-controls="offcanvasExample">Setting</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="{% url 'logout_client' %}">Logout</a></li>
+                    <ul class="mb-2 navbar-nav ms-auto align-items-center navbar-list mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="py-0 nav-link d-flex align-items-center" href="#" id="navbarDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {% if project.client.image %}
+                                <img src="{{ project.client.image.url }}" alt="User-Profile"
+                                    style="width: 50px; border-radius: 50%;">
+                                {% else %}
+                                <img src="{% static 'assets/images/default-avatar.jpg' %}" alt="User-Profile"
+                                    style="width: 50px; border-radius: 50%;">
+                                {% endif %}
+                                <div class="caption ms-3 d-none d-md-block">
+                                    <h6 class="mb-0 caption-title">{{ project.client.firstName }} {{ project.client.lastName }}</h6>
+                                    <p class="mb-0 caption-sub-title">{{ project.name }}</p>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <!-- <li><a class="dropdown-item" href="#">Profile</a></li> -->
+                                <li><a class="dropdown-item" data-bs-toggle="offcanvas" href="#offcanvasExample"
+                                        aria-controls="offcanvasExample">Setting</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="{% url 'logout_client' %}">Logout</a></li>
+                            </ul>
+                        </li>
                     </ul>
-                    </li>
-                </ul>
                 </div>
             </div>
-            </nav>
-            <!-- Nav Header Component Start -->
-            <div class="iq-navbar-header" style="height: 215px;">
+        </nav>
+        <!-- Nav Header Component Start -->
+        <div class="iq-navbar-header" style="height: 215px;">
             <div class="container-fluid iq-container">
                 <div class="row">
-                <div class="col-md-12">
-                    <div class="flex-wrap d-flex justify-content-between align-items-center">
-                    <div>
-                        <h1>{% trans "Welcome Client!" %}</h1>
-                        <p>{% trans "This dashboard allows the customer to monitor their farm for any potential fire threats." %}</p>
+                    <div class="col-md-12">
+                        <div class="flex-wrap d-flex justify-content-between align-items-center">
+                            <div>
+                                <h1>{% trans "Welcome Client!" %}</h1>
+                                <p>{% trans "This dashboard allows the customer to monitor their farm for any potential fire threats." %}</p>
+                            </div>
+                        </div>
                     </div>
-                    </div>
-                </div>
                 </div>
             </div>
             <div class="iq-header-img">
-                <img src="{% static 'assets/images/dashboard/top-header.png' %}" alt="header" class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX">
-                <img src="{% static 'assets/images/dashboard/top-header1.png' %}" alt="header" class="theme-color-purple-img img-fluid w-100 h-100 animated-scaleX">
-                <img src="{% static 'assets/images/dashboard/top-header2.png' %}" alt="header" class="theme-color-blue-img img-fluid w-100 h-100 animated-scaleX">
-                <img src="{% static 'assets/images/dashboard/top-header3.png' %}" alt="header" class="theme-color-green-img img-fluid w-100 h-100 animated-scaleX">
-                <img src="{% static 'assets/images/dashboard/top-header4.png' %}" alt="header" class="theme-color-yellow-img img-fluid w-100 h-100 animated-scaleX">
-                <img src="{% static 'assets/images/dashboard/top-header5.png' %}" alt="header" class="theme-color-pink-img img-fluid w-100 h-100 animated-scaleX">
+                <img src="{% static 'assets/images/dashboard/top-header.png' %}" alt="header"
+                    class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX">
+                <img src="{% static 'assets/images/dashboard/top-header1.png' %}" alt="header"
+                    class="theme-color-purple-img img-fluid w-100 h-100 animated-scaleX">
+                <img src="{% static 'assets/images/dashboard/top-header2.png' %}" alt="header"
+                    class="theme-color-blue-img img-fluid w-100 h-100 animated-scaleX">
+                <img src="{% static 'assets/images/dashboard/top-header3.png' %}" alt="header"
+                    class="theme-color-green-img img-fluid w-100 h-100 animated-scaleX">
+                <img src="{% static 'assets/images/dashboard/top-header4.png' %}" alt="header"
+                    class="theme-color-yellow-img img-fluid w-100 h-100 animated-scaleX">
+                <img src="{% static 'assets/images/dashboard/top-header5.png' %}" alt="header"
+                    class="theme-color-pink-img img-fluid w-100 h-100 animated-scaleX">
             </div>
-            </div>
-            <!-- Nav Header Component End -->
         </div>
+        <!-- Nav Header Component End -->
+    </div>
 
-        <div class="container-fluid content-inner mt-n5 py-0">
-            <div class="row">
-                <div class="col-md-12 col-lg-8">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card" data-aos="fade-up" data-aos-delay="800">
-                                <div class="flex-wrap card-header d-flex justify-content-between align-items-center" data-project-id="{{ project.polygon_id }}" data-node-id="{{ node.id }}">
-                                    <canvas id="temperatureChart" width="400" height="200"></canvas>
-                                </div>
-                            </div>                                                        
-                        </div>
-                        <div class="col-md-12">
-                            <div class="card" data-aos="fade-up" data-aos-delay="850">
-                                <div class="flex-wrap card-header d-flex justify-content-between align-items-center" data-project-id="{{ project.polygon_id }}" data-node-id="{{ node.id }}">
-                                    <canvas id="humidityChart" width="400" height="200"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="card" data-aos="fade-up" data-aos-delay="900">
-                                <div class="flex-wrap card-header d-flex justify-content-between align-items-center" data-project-id="{{ project.polygon_id }}" data-node-id="{{ node.id }}">
-                                    <canvas id="gasChart" width="400" height="200"></canvas>
-                                </div>
+    <div class="container-fluid content-inner mt-n5 py-0">
+        <div class="row">
+            <div class="col-md-12 col-lg-8">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card" data-aos="fade-up" data-aos-delay="800">
+                            <div class="flex-wrap card-header d-flex justify-content-between align-items-center"
+                                data-project-id="{{ project.polygon_id }}" data-node-id="{{ node.id }}">
+                                <canvas id="temperatureChart" width="400" height="200"></canvas>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-12 col-lg-4">
-                    <div class="row">
-                        <div class="col-md-12 col-lg-12">
-                            <div class="card credit-card-widget" data-aos="fade-up" data-aos-delay="900">
-                                <div class="pb-4 border-0 card-header">
-                                    <div class="node-info-card">
-                                        <div class="card-header">
-                                            <i class="fas fa-info-circle"></i> {% trans "Node Information" %}
-                                        </div>
-                                        <div class="card-body">
-                                            <p><strong>{% trans "Node Name:" %}</strong> <span id="nodeName">{{ node.name }}</span></p>
-                                            <p><strong>{% trans "ID Parcelle:" %}</strong> <span id="nodeReference">{{ node.reference }}</span></p>
-                                            <p><strong>{% trans "Position:" %}</strong> <span id="nodePosition">{{ node.latitude }}, {{ node.longitude }}</span></p>
-                                            <p><strong>{% trans "Sensors:" %}</strong> <span id="nodeSensors">{{ node.sensors }}</span></p>
-                                            <p><strong>{% trans "RSSI:" %}</strong> <span id="nodeRSSI">{{ node.RSSI }}</span></p>
-                                            <p><strong>{% trans "Battery:" %}</strong> <span id="nodeBattery">{% if node.Battery_value is not None %}{{ node.Battery_value }}{% else %}N/A{% endif %}</span>%</p>
-                                        </div>
-                                    </div>
-                                </div> 
+                    <div class="col-md-12">
+                        <div class="card" data-aos="fade-up" data-aos-delay="850">
+                            <div class="flex-wrap card-header d-flex justify-content-between align-items-center"
+                                data-project-id="{{ project.polygon_id }}" data-node-id="{{ node.id }}">
+                                <canvas id="humidityChart" width="400" height="200"></canvas>
                             </div>
                         </div>
-                        <div class="col-md-12 col-lg-12">
-                            <div class="card" data-aos="fade-up" data-aos-delay="900">
-                                <div class="flex-wrap card-header d-flex justify-content-between">
-                                    <div class="weather-info-card">
-                                        <div class="card-header">
-                                            <i class="fas fa-cloud"></i> {% trans "Weather Information" %}
-                                        </div>
-                                        <div class="card-body">
-                                            <p><strong>{% trans "Temperature:" %}</strong> <span id="temperature">N/A</span>°C</p>
-                                            <p><strong>{% trans "Humidity:" %}</strong> <span id="humidity">N/A</span>%</p>
-                                            <p><strong>{% trans "Pressure:" %}</strong> <span id="pressure">N/A</span> hPa</p>
-                                            <p><strong>{% trans "Gas Concentration:" %}</strong> <span id="gas">N/A</span> ppm</p>
-                                            <p><strong>{% trans "Wind Speed:" %}</strong> <span id="wind">N/A</span> km/h</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 col-lg-12">
-                            <div class="card" data-aos="fade-up" data-aos-delay="1000">
-                                <div class="flex-wrap card-header d-flex justify-content-between">
-                                    <div class="prediction-info-card">
-                                        <div class="card-header">
-                                            <i class="fas fa-bell"></i> {% trans "Prediction" %}
-                                        </div>
-                                        <div class="card-body">
-                                            <p><strong>{% trans "FM:" %}</strong> 3.3</p>
-                                            <p>{% trans "Status:" %} <span>OK</span></p>
-                                        </div>
-                                    </div>
-                                </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card" data-aos="fade-up" data-aos-delay="900">
+                            <div class="flex-wrap card-header d-flex justify-content-between align-items-center"
+                                data-project-id="{{ project.polygon_id }}" data-node-id="{{ node.id }}">
+                                <canvas id="gasChart" width="400" height="200"></canvas>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Footer Section Start -->
-        <footer class="footer">
-            <div class="footer-body">
-                <ul class="left-panel list-inline mb-0 p-0">
-                    <li class="list-inline-item"><a href="">Smart For Green</a></li>
-                </ul>
-                <div class="right-panel">
-                    ©<script>document.write(new Date().getFullYear())</script> Designed By 
-                    <a href="">Mohamed Omar Ben Ali</a>.
+            <div class="col-md-12 col-lg-4">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="card credit-card-widget" data-aos="fade-up" data-aos-delay="900">
+                            <div class="pb-4 border-0 card-header">
+                                <div class="node-info-card">
+                                    <div class="card-header">
+                                        <i class="fas fa-info-circle"></i> {% trans "Node Information" %}
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>{% trans "Node Name:" %}</strong> <span id="nodeName">{{ node.name }}</span></p>
+                                        <p><strong>{% trans "ID Parcelle:" %}</strong> <span id="nodeReference">{{ node.reference }}</span></p>
+                                        <p><strong>{% trans "Position:" %}</strong> <span id="nodePosition">{{ node.latitude }}, {{ node.longitude }}</span></p>
+                                        <p><strong>{% trans "Sensors:" %}</strong> <span id="nodeSensors">{{ node.sensors }}</span></p>
+                                        <p><strong>{% trans "RSSI:" %}</strong> <span id="nodeRSSI">{{ node.RSSI }}</span></p>
+                                        <p><strong>{% trans "Battery:" %}</strong> <span id="nodeBattery">{% if node.Battery_value is not None %}{{ node.Battery_value }}{% else %}N/A{% endif %}</span>%</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12">
+                        <div class="card" data-aos="fade-up" data-aos-delay="900">
+                            <div class="flex-wrap card-header d-flex justify-content-between">
+                                <div class="weather-info-card">
+                                    <div class="card-header">
+                                        <i class="fas fa-cloud"></i> {% trans "Weather Information" %}
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>{% trans "Temperature:" %}</strong> <span
+                                                id="temperature">N/A</span>°C</p>
+                                        <p><strong>{% trans "Humidity:" %}</strong> <span id="humidity">N/A</span>%</p>
+                                        <p><strong>{% trans "Pressure:" %}</strong> <span id="pressure">N/A</span> hPa
+                                        </p>
+                                        <p><strong>{% trans "Gas Concentration:" %}</strong> <span id="gas">N/A</span>
+                                            ppm</p>
+                                        <p><strong>{% trans "Wind Speed:" %}</strong> <span id="wind">N/A</span> km/h
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12">
+                        <div class="card" data-aos="fade-up" data-aos-delay="1000">
+                            <div class="flex-wrap card-header d-flex justify-content-between">
+                                <div class="prediction-info-card">
+                                    <div class="card-header">
+                                        <i class="fas fa-bell"></i> {% trans "Prediction" %}
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>{% trans "Predicted FWI:" %}</strong> <span id="fwiPredit">N/A</span>
+                                        </p>
+                                        <p>{% trans "Status:" %} <span id="predictionStatus">N/A</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </footer>
-        <!-- Footer Section End -->
-    </main>
-    <!-- Main Content End -->
+        </div>
+    </div>
+
+    <!-- Footer Section Start -->
+    <footer class="footer">
+        <div class="footer-body">
+            <ul class="left-panel list-inline mb-0 p-0">
+                <li class="list-inline-item"><a href="">Smart For Green</a></li>
+            </ul>
+            <div class="right-panel">
+                ©
+                <script>document.write(new Date().getFullYear())</script> Designed By
+                <a href="">Mohamed Omar Ben Ali</a>.
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+</main>
+<!-- Main Content End -->
 
 {% endblock %}
 
 {% block scripts %}
 
 <script>
-     document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         // We capture the server-rendered node reference to filter incoming WebSocket messages
         const currentNodeRef = "{{ node.reference }}";
 
         const nodeData = loadNodeDataFromLocalStorage(currentNodeRef);
 
+        function getPredictionStatus(fwi) {
+            if (fwi === null || fwi === undefined || fwi === 'N/A') return 'N/A';
+            const v = parseFloat(fwi);
+            if (v < 11.2) return 'Low risk';
+            if (v < 21.3) return 'Moderate risk';
+            if (v < 38.0) return 'High risk';
+            if (v < 50.0) return 'Very high risk';
+            return 'Extreme risk';
+        }
+
+        function getPredictionColor(fwi) {
+            if (fwi === null || fwi === undefined || fwi === 'N/A') return '#333';
+            const v = parseFloat(fwi);
+            if (v < 11.2) return 'green';
+            if (v < 21.3) return 'orange';
+            if (v < 38.0) return 'darkorange';
+            if (v < 50.0) return 'red';
+            return 'darkred';
+        }
+
+        function updatePrediction(fwi, detection) {
+            const fwiEl = document.getElementById('fwiPredit');
+            const statusEl = document.getElementById('predictionStatus');
+            if (!fwiEl || !statusEl) return;
+
+            const fwiVal = (fwi !== null && fwi !== undefined) ? fwi : 'N/A';
+            fwiEl.innerText = fwiVal;
+
+            const statusText = detection || getPredictionStatus(fwi);
+            statusEl.innerText = statusText;
+            statusEl.style.color = getPredictionColor(fwi);
+        }
+
         // Initialiser les éléments avec les données sauvegardées (only if we have data for this specific node)
         if (nodeData.device_id) {
             // document.getElementById('nodeReference').innerText  = nodeData.device_id || 'N/A'; // Do NOT overwrite the real reference
-            document.getElementById('nodeRSSI').innerText       = nodeData.rssi || 'N/A';
-            document.getElementById('nodeBattery').innerText    = nodeData.battery !== undefined ? nodeData.battery : 'N/A';
-            
+            document.getElementById('nodeRSSI').innerText = nodeData.rssi || 'N/A';
+            document.getElementById('nodeBattery').innerText = nodeData.battery !== undefined ? nodeData.battery : 'N/A';
+
             // Ajouter les valeurs de température, humidité, pression et gaz
-            document.getElementById('temperature').innerText    = nodeData.temperature  || 'N/A';
-            document.getElementById('humidity').innerText       = nodeData.humidity  || 'N/A';
-            document.getElementById('pressure').innerText       = nodeData.pressure || 'N/A';
-            document.getElementById('wind').innerText           = nodeData.wind_speed  || 'N/A';
-            document.getElementById('gas').innerText            = nodeData.gaz  || 'N/A';
+            document.getElementById('temperature').innerText = nodeData.temperature || 'N/A';
+            document.getElementById('humidity').innerText = nodeData.humidity || 'N/A';
+            document.getElementById('pressure').innerText = nodeData.pressure || 'N/A';
+            document.getElementById('wind').innerText = nodeData.wind_speed || 'N/A';
+            document.getElementById('gas').innerText = nodeData.gaz || 'N/A';
+            
+            updatePrediction(nodeData.fwi_predit, nodeData.detection);
         }
 
         const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
         const socket = new WebSocket(protocol + window.location.host + "/ws/data/");
 
-        socket.onmessage = function(event) {
+        socket.onmessage = function (event) {
             const data = JSON.parse(event.data);
             const message = data.message;
             const nodeData = data.data;
 
             // Only update the UI if the incoming data matches the current node!
             if (nodeData.device_id && currentNodeRef && nodeData.device_id.toLowerCase() === currentNodeRef.toLowerCase()) {
-                document.getElementById('nodeRSSI').innerText       = nodeData.rssi || 'N/A';
-                document.getElementById('nodeBattery').innerText    = nodeData.battery !== undefined ? nodeData.battery : 'N/A';
-                
+                document.getElementById('nodeRSSI').innerText = nodeData.rssi || 'N/A';
+                document.getElementById('nodeBattery').innerText = nodeData.battery !== undefined ? nodeData.battery : 'N/A';
+
                 // Mettre à jour les valeurs de température, humidité, pression et gaz
-                document.getElementById('temperature').innerText    = nodeData.temperature  || 'N/A';
-                document.getElementById('humidity').innerText       = nodeData.humidity  || 'N/A';
-                document.getElementById('pressure').innerText       = nodeData.pressure  || 'N/A';
-                document.getElementById('gas').innerText            = nodeData.gaz   || 'N/A';
-                document.getElementById('wind').innerText           = nodeData.wind_speed  || 'N/A';
+                document.getElementById('temperature').innerText = nodeData.temperature || 'N/A';
+                document.getElementById('humidity').innerText = nodeData.humidity || 'N/A';
+                document.getElementById('pressure').innerText = nodeData.pressure || 'N/A';
+                document.getElementById('gas').innerText = nodeData.gaz || 'N/A';
+                document.getElementById('wind').innerText = nodeData.wind_speed || 'N/A';
+
+                updatePrediction(nodeData.fwi_predit, nodeData.detection);
 
                 saveNodeDataToLocalStorage(currentNodeRef, nodeData);
             }
         };
 
-        socket.onopen = function(event) {
+        socket.onopen = function (event) {
             console.log("WebSocket connection established");
         };
 
-        socket.onclose = function(event) {
+        socket.onclose = function (event) {
             console.log("WebSocket connection closed");
         };
 
-        socket.onerror = function(error) {
+        socket.onerror = function (error) {
             console.error("WebSocket error: ", error);
         };
 
@@ -440,12 +512,12 @@
     });
 </script>
 
-    <!-- Moment.js and Chart.js adapter for Moment.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^0.1.0"></script>
+<!-- Moment.js and Chart.js adapter for Moment.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^0.1.0"></script>
 
-    <script src="{% static 'assets/js/charts/temperature.js' %}"></script>
-    <script src="{% static 'assets/js/charts/humidity.js' %}"></script>
-    <script src="{% static 'assets/js/charts/gas.js' %}"></script>  
+<script src="{% static 'assets/js/charts/temperature.js' %}"></script>
+<script src="{% static 'assets/js/charts/humidity.js' %}"></script>
+<script src="{% static 'assets/js/charts/gas.js' %}"></script>
 
 {% endblock %}

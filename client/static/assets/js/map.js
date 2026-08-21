@@ -158,18 +158,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // --- ADDED: Creation of Camera markers ---
         if (data.cameras && data.cameras.length > 0) {
-            data.cameras.forEach(camera => {
-                const marker = L.marker([camera.latitude, camera.longitude], {
-                    icon: camera.has_alert ? fireIcon : cameraIcon
-                });
-                const popupContent = generateCameraPopupContent(camera);
-                marker.bindPopup(popupContent).addTo(map);
-                bounds.push([camera.latitude, camera.longitude]);
-
-                // Index camera for locate logic
-                if (!markers[camera.name]) markers[camera.name] = [];
-                markers[camera.name].push(marker);
+          data.cameras.forEach(camera => {
+            const marker = L.marker([camera.latitude, camera.longitude], {
+              icon: camera.has_alert ? fireIcon : cameraIcon
             });
+            const popupContent = generateCameraPopupContent(camera);
+            marker.bindPopup(popupContent).addTo(map);
+            bounds.push([camera.latitude, camera.longitude]);
+
+            // Index camera for locate logic
+            if (!markers[camera.name]) markers[camera.name] = [];
+            markers[camera.name].push(marker);
+          });
         }
 
         map.fitBounds(bounds)
@@ -191,9 +191,9 @@ document.addEventListener('DOMContentLoaded', function () {
           // Try exact match first, then case-insensitive
           let nodeMarkers = markers[nodeData.device_id]
           if (!nodeMarkers && nodeData.device_id) {
-              const lowerId = nodeData.device_id.toLowerCase();
-              const foundKey = Object.keys(markers).find(k => k.toLowerCase() === lowerId);
-              if (foundKey) nodeMarkers = markers[foundKey];
+            const lowerId = nodeData.device_id.toLowerCase();
+            const foundKey = Object.keys(markers).find(k => k.toLowerCase() === lowerId);
+            if (foundKey) nodeMarkers = markers[foundKey];
           }
 
           if (nodeMarkers) {
@@ -260,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <b>${t.status || 'Status'}:</b> <span style="color: ${node.is_online ? 'green' : 'red'}; font-weight: bold;">${node.is_online ? (t.online || 'Online') : (t.offline || 'Offline')}</span><br>
                 <b>${t.parcel_id || 'ID Parcelle'}:</b> ${node.ref}<br>
                 <b>RSSI:</b> ${nodeData.rssi || 'N/A'}<br>
-                <b>FWI:</b> ${nodeData.fwi || 'N/A'}<br>
+                // 
                 <b>${t.fwi_predicted || 'FWI prédit'}:</b> ${nodeData.fwi_predit || 'N/A'}<br>
                 <b>${t.prediction_result || 'Prediction result'}:</b>
                 <span style="color: ${getColorFromPrediction(nodeData.fwi_predit || 0)}; font-weight: bold;">
@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const t = window.MAP_TRANSLATIONS || {};
     let alertContent = '';
     if (camera.has_alert && camera.latest_alert_image) {
-        alertContent = `
+      alertContent = `
             <div style="margin-top: 10px; text-align: center;">
                 <p style="font-weight: bold; color: red; margin-bottom: 5px;">🔥 Latest Alert (${camera.latest_alert_time})</p>
                 <img src="${camera.latest_alert_image}" style="width: 100%; max-width: 200px; border-radius: 5px; border: 2px solid red;" alt="Alert Image" />
@@ -319,21 +319,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (window.customClientMap && !isNaN(lat) && !isNaN(lng)) {
         window.customClientMap.setView([lat, lng], 17, { animate: true });
-        
+
         // Find marker and open popup
         if (window.markers) {
-            let targetMarkers = window.markers[ref];
-            
-            // Robustness: Fallback to case-insensitive search if not found
-            if (!targetMarkers && ref) {
-                const lowerRef = ref.toLowerCase();
-                const foundKey = Object.keys(window.markers).find(k => k.toLowerCase() === lowerRef);
-                if (foundKey) targetMarkers = window.markers[foundKey];
-            }
+          let targetMarkers = window.markers[ref];
 
-            if (targetMarkers) {
-                targetMarkers.forEach(m => m.openPopup());
-            }
+          // Robustness: Fallback to case-insensitive search if not found
+          if (!targetMarkers && ref) {
+            const lowerRef = ref.toLowerCase();
+            const foundKey = Object.keys(window.markers).find(k => k.toLowerCase() === lowerRef);
+            if (foundKey) targetMarkers = window.markers[foundKey];
+          }
+
+          if (targetMarkers) {
+            targetMarkers.forEach(m => m.openPopup());
+          }
         }
       }
     }
