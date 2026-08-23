@@ -225,7 +225,8 @@ def client_summary(request):
 
     from camera_management.models import Camera
 
-    projects = list(client.project_set.values_list('name', flat=True))
+    # An agent has exactly one project (Project.client is a OneToOneField).
+    projects = [client.project.name] if hasattr(client, 'project') else []
     cameras = list(
         Camera.objects
         .filter(project__client=client)

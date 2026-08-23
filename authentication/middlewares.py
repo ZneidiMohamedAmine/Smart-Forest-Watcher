@@ -7,7 +7,7 @@ class MediaCorsMiddleware(MiddlewareMixin):
         if request.path.startswith('/img/') or '/api/' in request.path:
             response['Access-Control-Allow-Origin'] = '*'
             response['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
-            response['Access-Control-Allow-Headers'] = 'Content-Type'
+            response['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
             response['Cross-Origin-Resource-Policy'] = 'cross-origin'
         return response
 

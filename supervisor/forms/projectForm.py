@@ -70,3 +70,18 @@ class ProjectForm(forms.ModelForm):
         #? Handle the datetime-local input format for browser compatibility
         self.fields['date_debut'].input_formats = ('%Y-%m-%dT%H:%M',)
         self.fields['date_fin'].input_formats = ('%Y-%m-%dT%H:%M',)
+
+    def clean_client(self):
+        # An agent manages exactly one project (Project.client is a
+        # OneToOneField) — surface that as a friendly form error instead of
+        # letting the save fail with a raw IntegrityError.
+        client = self.cleaned_data.get('client')
+        if client is None:
+            return client
+        existing = Project.objects.filter(client=client).exclude(pk=self.instance.pk).first()
+        if existing:
+            raise forms.ValidationError(
+                f"{client.firstName} {client.lastName} already manages a project ({existing.name}). "
+                "An agent can only have one project."
+            )
+        return client

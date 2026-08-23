@@ -11,7 +11,9 @@ class Project(models.Model):
     date_fin        = models.DateTimeField()
     city            = models.ForeignKey(Localisation, on_delete=models.SET_NULL, null=True, blank=True, related_name='projects')
     piece_joindre   = models.FileField(upload_to='uploads/%Y/%m/%d/', null=True, blank=True)
-    client          = models.ForeignKey(Client, on_delete=models.CASCADE, null=True)
+    # An agent (Client) manages exactly one project — enforced at the DB
+    # level so this can't drift again the way it did before.
+    client          = models.OneToOneField(Client, on_delete=models.CASCADE, null=True)
     polygon_id      = models.BigAutoField(primary_key=True, default=None)
 
     @property
