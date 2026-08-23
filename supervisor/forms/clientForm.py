@@ -30,12 +30,11 @@ class ClientForm(forms.ModelForm):
         self.fields['phone'].required = True
         self.fields['username'].required = True
         
-        if self.instance and self.instance.pk:
-            self.fields['password'].required = False
-            self.fields['password_confirmation'].required = False
-        else:
-            self.fields['password'].required = True
-            self.fields['password_confirmation'].required = True
+        # Password is optional in both create and edit: leaving it blank on
+        # create generates a random one emailed to the new agent to change
+        # later, and leaving it blank on edit keeps the current password.
+        self.fields['password'].required = False
+        self.fields['password_confirmation'].required = False
 
     def clean(self):
         cleaned_data = super().clean()
@@ -48,13 +47,14 @@ class ClientForm(forms.ModelForm):
             if not phone_str.isdigit() or len(phone_str) != 8:
                 self.add_error('phone', 'Phone number must be exactly 8 digits.')
 
-        if not self.instance or not self.instance.pk:
+        # Password is optional — if left blank, Client.save() generates a
+        # random one and emails it to the new agent. If either field is
+        # filled, both must be present and match.
+        if password or confirm_password:
             if not password or not confirm_password:
-                raise forms.ValidationError("Password and confirmation are required for new agents.")
+                raise forms.ValidationError("Fill in both password fields, or leave both blank to auto-generate one.")
             if password != confirm_password:
                 raise forms.ValidationError("The passwords entered do not match.")
-        elif password and password != confirm_password:
-            raise forms.ValidationError("The passwords entered do not match.")
 
         return cleaned_data
 

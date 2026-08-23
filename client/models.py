@@ -25,11 +25,15 @@ class Client(models.Model):
             if User.objects.filter(username=self.username).exists():
                 raise ValidationError(f"Username {self.username} already exists.")
 
-            #! Générer un mot de passe sécurisé pour l'envoi
-            gen_password = get_random_string(length=12)
-            self.password = make_password(gen_password)
-            self.user = User.objects.create_user(username=self.username, email=self.email, password=gen_password)
-            password_to_send = gen_password
+            # Use the password the supervisor set in the form, if any — only
+            # fall back to a random generated one (emailed for the agent to
+            # change later) when the field was left blank.
+            is_temporary_password = not bool(self.password)
+            plain_password = self.password if self.password else get_random_string(length=12)
+
+            self.password = make_password(plain_password)
+            self.user = User.objects.create_user(username=self.username, email=self.email, password=plain_password)
+            password_to_send = plain_password
         else:
             if self.user:
                 self.user.username = self.username
@@ -44,7 +48,9 @@ class Client(models.Model):
 
         if is_new:
             from client.tasks import send_client_welcome_email
-            send_client_welcome_email.delay(self.email, self.firstName, self.lastName, password_to_send)
+            send_client_welcome_email.delay(
+                self.email, self.firstName, self.lastName, password_to_send, is_temporary_password
+            )
 
     def delete(self, *args, **kwargs):
         if self.user:

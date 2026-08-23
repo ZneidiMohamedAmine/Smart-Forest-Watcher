@@ -68,6 +68,9 @@
             <h3>Hello {{ client.firstName }} {{ client.lastName }}! Attached you will find your credentials for your Fire Shield account</h3>
             <h2>Email: {{ client.email }}</h2>
             <h2>Password: {{ password }}</h2>
+            {% if is_temporary_password %}
+            <p>This is a temporary password — please change it after your first login.</p>
+            {% endif %}
             <a href="http://127.0.0.1:8000/connect_as/client/" class="btn">Login Now</a>
         </div>
     </div>
