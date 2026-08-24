@@ -2,6 +2,7 @@ from django.urls    import path
 from .              import views
 from .              import notifications
 from .              import sensors
+from .              import map_data
 from camera_management import views as cam_views
 
 urlpatterns = [
@@ -9,6 +10,7 @@ urlpatterns = [
     path('api/notifications/send', notifications.send_notification, name='api_send_notification'),
     path('api/summary', notifications.client_summary, name='api_client_summary'),
     path('api/sensors', sensors.list_sensors, name='api_list_sensors'),
+    path('api/map', map_data.project_map, name='api_project_map'),
     path('<int:project_id>/', views.index1, name='dashboard_client'),
     path('node_detail/<int:project_id>/<int:node_id>/', views.node_detail, name='node_detail'),
     path('node_list/<int:project_id>/', views.node_list, name='node_list'),

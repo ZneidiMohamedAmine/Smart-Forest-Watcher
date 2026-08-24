@@ -39,4 +39,7 @@ start "Django" cmd /k "venv\Scripts\python.exe start_daphne.py"
 echo Starting Celery worker...
 start "Celery" cmd /k "venv\Scripts\python.exe -m celery -A project worker --loglevel=info --pool=solo"
 
+echo Starting TTN sensor listener...
+start "TTN Listener" cmd /k "venv\Scripts\python.exe manage.py listen_ttn"
+
 echo All services launching in separate windows. Check http://localhost:8000/health/
