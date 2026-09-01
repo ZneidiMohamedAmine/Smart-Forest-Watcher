@@ -165,7 +165,7 @@
                                                 </svg>
                                             </div>
                                              <div class="progress-detail">
-                                                <h3 id="temperature">-- °C</h3>
+                                                <h3 id="temperature">{% if latest_data %}{{ latest_data.temperature }}{% else %}--{% endif %} °C</h3>
                                                 <p>{% trans "Temperature" %}</p>
                                             </div>
                                         </div>
@@ -180,7 +180,7 @@
                                                 </svg>
                                             </div>
                                             <div class="progress-detail">
-                                                <h3 id="gas">-- ppm</h3>
+                                                <h3 id="gas">{% if latest_data %}{{ latest_data.gaz }}{% else %}--{% endif %} ppm</h3>
                                                 <p>{% trans "Gas rate" %}</p>
                                                 <i class="fas fa-eye"></i>
                                             </div>
@@ -196,7 +196,7 @@
                                                 </svg>
                                             </div>
                                             <div class="progress-detail">
-                                                <h3 id="humidity">-- %</h3>
+                                                <h3 id="humidity">{% if latest_data %}{{ latest_data.humidity }}{% else %}--{% endif %} %</h3>
                                                 <p>{% trans "Humidity" %}</p>
                                                 <i class="fas fa-tint"></i>
                                             </div>
@@ -212,7 +212,7 @@
                                                 </svg>
                                             </div>
                                             <div class="progress-detail">
-                                                <h3 id="pressure">-- hPa</h3>
+                                                <h3 id="pressure">{% if latest_data %}{{ latest_data.pressur }}{% else %}--{% endif %} hPa</h3>
                                                 <p>{% trans "Pressure" %}</p>
                                                 <i class="fas fa-wind"></i>
                                             </div>
@@ -228,7 +228,7 @@
                                                 </svg>
                                             </div>
                                             <div class="progress-detail">
-                                                <h3 id="wind">-- km/h</h3>
+                                                <h3 id="wind">{% if latest_data %}{{ latest_data.wind }}{% else %}--{% endif %} km/h</h3>
                                                 <p>{% trans "Wind Speed" %}</p>
                                                 <i class="fas fa-wind"></i>
                                             </div>

@@ -187,13 +187,26 @@ jobs:
             whoami
             hostname
             pwd
-  
+
+            if ! command -v docker >/dev/null 2>&1; then
+              echo "Docker not found, installing..."
+              curl -fsSL https://get.docker.com | sudo sh
+              sudo usermod -aG docker "$USER"
+            fi
+
+            if ! docker compose version >/dev/null 2>&1; then
+              echo "Docker Compose plugin not found, installing..."
+              sudo apt-get update -y
+              sudo apt-get install -y docker-compose-plugin
+            fi
+
             echo "Docker:"
             docker --version
-  
+
             echo "Compose:"
             docker compose version
-  
+
+            sudo mkdir -p /opt/smart-forest-watcher
             cd /opt/smart-forest-watcher
   
             echo "Pulling latest image..."
