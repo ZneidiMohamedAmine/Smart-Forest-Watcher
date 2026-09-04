@@ -32,23 +32,28 @@ triage and (eventually) autonomous coding via GitHub Copilot's coding agent.
 auto-triaged and routed to `squad:backend` based on keyword matching — confirms
 team.md → routing.md → label → comment pipeline works end to end.
 
-**Blocked:** The actual "write code and open a PR" behavior needs GitHub Copilot's
-coding agent, which requires **Copilot Pro or higher**. Checked via
-`gh api copilot_internal/user` — this account is currently on `free_limited_copilot`
-with **0 premium-interaction quota** (`can_upgrade_plan: true`), not the Pro tier the
-GitHub Student Developer Pack should grant. The student benefit needs
-re-verifying at github.com/settings/copilot or education.github.com/pack before
-`squad:copilot`-labeled issues can actually get worked autonomously.
+**Mechanism verified (2026-09-04):** The "write code and open a PR" path needs GitHub
+Copilot's coding agent, which requires **Copilot Pro or higher** — this account was
+on `free_limited_copilot` with 0 premium-interaction quota (checked via
+`gh api copilot_internal/user`), so a friend's Copilot Pro account/PAT was used to
+test the `squad:copilot` flow temporarily. It worked as intended end to end (issue
+assignment → coding agent → PR). That token was never added as a persistent repo
+secret (confirmed via `gh secret list` — no `COPILOT_ASSIGN_TOKEN` present) and
+access was removed after the test since the account wasn't this project's own.
 
-**Next steps once Copilot Pro is confirmed active:**
-1. Enable coding agent for this repo (org/repo admin setting under Copilot policies).
-2. Create a classic PAT (`repo` scope) at github.com/settings/tokens — do this
+**Still open:** This account itself is not yet on Copilot Pro, so there is currently
+no working `COPILOT_ASSIGN_TOKEN` configured — the mechanism is proven, not
+provisioned. To make it usable on an ongoing basis:
+1. Get Copilot Pro active on an account authorized for this project long-term
+   (resolve the Student Pack grant on this account, or a paid seat) — using
+   someone else's personal account/token again isn't a sustainable setup.
+2. Enable coding agent for this repo (org/repo admin setting under Copilot policies).
+3. Create a classic PAT (`repo` scope) at github.com/settings/tokens — do this
    yourself, not via an assistant, since token values should never be typed into
    a chat session.
-3. Add it as a repo secret named `COPILOT_ASSIGN_TOKEN`, either via
+4. Add it as a repo secret named `COPILOT_ASSIGN_TOKEN`, either via
    `gh secret set COPILOT_ASSIGN_TOKEN` (paste when prompted, in your own terminal)
    or the repo's Settings → Secrets and variables → Actions page.
-4. Re-test with a `squad:copilot`-labeled issue and confirm a real PR gets opened.
 
 ## Governance
 
