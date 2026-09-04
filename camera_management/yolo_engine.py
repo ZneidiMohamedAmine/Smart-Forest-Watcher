@@ -51,6 +51,10 @@ def run_inference(image_path: str, conf_threshold: float = 0.45):
             conf  = float(box.conf[0])
             cls   = int(box.cls[0])
             label = result.names.get(cls, str(cls))
+            if label == "other":
+                # Not a real fire/smoke indicator — never surface it (no box drawn,
+                # never stored, never counted toward confidence).
+                continue
             x1, y1, x2, y2 = map(int, box.xyxy[0].tolist())
             boxes.append({"x1": x1, "y1": y1, "x2": x2, "y2": y2,
                           "confidence": conf, "label": label})
