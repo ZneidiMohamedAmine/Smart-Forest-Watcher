@@ -1,0 +1,9 @@
+[extend]
+useDefault = true
+
+[allowlist]
+  description = "Squad's bundled secret-handling docs — illustrative example patterns, not real secrets"
+  paths = [
+    '''\.squad/templates/skills/secret-handling/SKILL\.md''',
+    '''\.github/skills/secret-handling/SKILL\.md''',
+  ]
