@@ -157,6 +157,9 @@
 </div>
 
 {% csrf_token %}
+{# existing_boxes_json (camera_management/views.py) is json.dumps(detection.bounding_boxes) --
+   every field is either numeric (x1/y1/x2/y2/confidence) or a label drawn from the YOLO
+   model's own fixed class names (fire/smoke/other), never attacker-controllable text. #}
 <script id="existingBoxesData" type="application/json">{{ existing_boxes_json|safe }}</script>
 
 <script>

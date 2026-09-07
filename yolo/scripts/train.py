@@ -11,6 +11,7 @@ so re-running with a pinned ref gives reproducible training data.
 """
 import argparse
 import os
+import re
 import subprocess
 from pathlib import Path
 
@@ -18,6 +19,18 @@ import mlflow
 from ultralytics import YOLO
 
 DFIRE_REPO = "https://github.com/gaia-solutions-on-demand/DFireDataset.git"
+
+# Valid git ref chars, and must not start with '-' -- otherwise a value like
+# '--upload-pack=/bin/sh' would be parsed by git as an option instead of a
+# literal branch name (git's own "argument injection" class of bug). This
+# blocks that regardless of subprocess using list-form args.
+_VALID_GIT_REF = re.compile(r"^[A-Za-z0-9._/-]+$")
+
+
+def _validate_git_ref(ref: str) -> str:
+    if ref.startswith("-") or not _VALID_GIT_REF.match(ref):
+        raise ValueError(f"Refusing to use {ref!r} as a git ref: not a plausible branch/tag name")
+    return ref
 
 # Defaults to a local file-based store (e.g. in GitHub Actions, where the
 # mlruns/ folder travels between jobs as an artifact). Set MLFLOW_TRACKING_URI
@@ -36,11 +49,13 @@ def fetch_dataset(dataset_version: str) -> str:
     if not data_dir.exists():
         cmd = ["git", "clone", "--depth", "1"]
         if dataset_version not in ("latest", "", None):
-            cmd += ["--branch", dataset_version]
+            cmd += ["--branch", _validate_git_ref(dataset_version)]
         cmd += [DFIRE_REPO, str(data_dir)]
         # List-form args (no shell=True) -- dataset_version is a CLI arg that
         # reaches this call, and shell=True with string interpolation would
-        # let shell metacharacters in it run arbitrary commands.
+        # let shell metacharacters in it run arbitrary commands. Validated
+        # above against git's own argument-injection risk (a ref starting
+        # with '-' being parsed as a flag instead of a literal name).
         subprocess.run(cmd, check=True)
     else:
         print(f"Reusing existing dataset checkout at {data_dir}")

@@ -36,6 +36,7 @@ def _parse_json(request):
     except json.JSONDecodeError:
         return None
 
+@require_http_methods(['GET', 'POST'])
 def client_login(request):
     if request.method == 'POST':
         form_client = ClientLoginForm(request.POST)
@@ -129,6 +130,7 @@ def sign_out_client(request):
 
 
 
+@require_http_methods(['GET', 'POST'])
 def supervisor_login(request):
     if request.method == 'POST':
         form = SupervisorLoginForm(request.POST)

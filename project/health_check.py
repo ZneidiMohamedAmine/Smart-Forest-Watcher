@@ -2,10 +2,12 @@ import logging
 from django.http import JsonResponse
 from django.db import connections
 from django.core.cache import cache
+from django.views.decorators.http import require_http_methods
 import redis
 
 logger = logging.getLogger(__name__)
 
+@require_http_methods(['GET'])
 def health_check(request):
     """Health check endpoint for monitoring."""
     status = {
@@ -75,6 +77,7 @@ def _check_cache():
         logger.error(f"Cache health check failed: {e}")
         return {'healthy': False, 'message': str(e)}
 
+@require_http_methods(['GET'])
 def readiness_check(request):
     """Readiness check - app is ready to serve traffic."""
     try:
@@ -94,6 +97,7 @@ def readiness_check(request):
         logger.error(f"Readiness check failed: {e}")
         return JsonResponse({'ready': False, 'error': str(e)}, status=503)
 
+@require_http_methods(['GET'])
 def liveness_check(request):
     """Liveness check - app is running."""
     return JsonResponse({'alive': True}, status=200)
