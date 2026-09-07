@@ -10,7 +10,6 @@ from django.core.files.base import ContentFile
 log = logging.getLogger(__name__)
 
 SERVER_CONFIDENCE_THRESHOLD = float(os.environ.get('YOLO_SERVER_CONFIDENCE', 0.45))
-ALERTABLE_CLASSES = {'fire', 'smoke'}
 
 
 @shared_task(name="run_server_inference")
@@ -35,13 +34,9 @@ def run_server_inference(detection_id: int):
         send_camera_alert.delay(detection_id)
         return
 
-    # Only 'fire'/'smoke' detections should trigger a client alert — a
-    # high-confidence 'other' match (minor/ambiguous indicator) must not
-    # be reported to the client as a confirmed fire.
-    alert_conf = max(
-        (b['confidence'] for b in bboxes if b['label'] in ALERTABLE_CLASSES),
-        default=0.0,
-    )
+    # yolo_engine.run_inference already drops 'other' (non-fire) detections,
+    # so every remaining box is a real fire/smoke match.
+    alert_conf = max((b['confidence'] for b in bboxes), default=0.0)
 
     if alert_conf < SERVER_CONFIDENCE_THRESHOLD:
         log.info(

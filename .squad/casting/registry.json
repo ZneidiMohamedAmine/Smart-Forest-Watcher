@@ -1,0 +1,46 @@
+{
+  "agents": {
+    "lead": {
+      "created_at": "2026-09-04T11:18:16.316Z",
+      "persistent_name": "lead",
+      "universe": "preset:default",
+      "status": "active"
+    },
+    "reviewer": {
+      "created_at": "2026-09-04T11:18:16.316Z",
+      "persistent_name": "reviewer",
+      "universe": "preset:default",
+      "status": "active"
+    },
+    "backend": {
+      "created_at": "2026-09-04T11:18:16.316Z",
+      "persistent_name": "backend",
+      "universe": "preset:default",
+      "status": "active"
+    },
+    "mobile": {
+      "created_at": "2026-09-04T11:18:16.316Z",
+      "persistent_name": "mobile",
+      "universe": "preset:default",
+      "status": "active"
+    },
+    "ml": {
+      "created_at": "2026-09-04T11:18:16.316Z",
+      "persistent_name": "ml",
+      "universe": "preset:default",
+      "status": "active"
+    },
+    "security": {
+      "created_at": "2026-09-04T11:18:16.316Z",
+      "persistent_name": "security",
+      "universe": "preset:default",
+      "status": "active"
+    },
+    "docs": {
+      "created_at": "2026-09-04T11:18:16.316Z",
+      "persistent_name": "docs",
+      "universe": "preset:default",
+      "status": "active"
+    }
+  }
+}
