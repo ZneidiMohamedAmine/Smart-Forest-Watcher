@@ -3,6 +3,7 @@ import json
 from django.shortcuts               import render, redirect
 from django.contrib.auth            import login, logout
 from django.http                    import JsonResponse
+from django.utils.http              import url_has_allowed_host_and_scheme
 from django.views.decorators.csrf   import csrf_exempt
 from django.views.decorators.http   import require_http_methods
 from client.models                  import Client, ClientAuthToken
@@ -11,6 +12,16 @@ from supervisor.models.supervisor   import Supervisor
 from django.contrib.auth.hashers    import check_password
 
 logger = logging.getLogger(__name__)
+
+
+def _safe_next(request, next_url, default):
+    """Only follow a user-supplied ?next= if it's a same-origin relative URL --
+    otherwise an attacker-crafted login link could redirect off-site (open redirect)."""
+    if next_url and url_has_allowed_host_and_scheme(
+        next_url, allowed_hosts={request.get_host()}, require_https=request.is_secure()
+    ):
+        return next_url
+    return default
 
 def _cors(response):
     response['Access-Control-Allow-Origin'] = '*'
@@ -37,7 +48,7 @@ def client_login(request):
                     login(request, client.user)
                     request.session['client_authenticated'] = True
                     request.session['supervisor_authenticated'] = False
-                    next_url = request.POST.get('next', 'select_project_of_project')
+                    next_url = _safe_next(request, request.POST.get('next'), 'select_project_of_project')
                     return redirect(next_url)
                 else:
                     form_client.add_error(None, "Invalid email or password!!!")
@@ -48,6 +59,8 @@ def client_login(request):
     return render(request, 'website/client.html', {'form_client': form_client})
 
 
+# CSRF-exempt: called by the Flutter app directly, which has no Django
+# session/CSRF cookie to send. Auth is via email+password in the body.
 @csrf_exempt
 @require_http_methods(['POST', 'OPTIONS'])
 def api_client_login(request):
@@ -83,6 +96,8 @@ def api_client_login(request):
     }))
 
 
+# CSRF-exempt: called by the Flutter app directly, which has no Django
+# session/CSRF cookie to send. Auth is via the Bearer token header.
 @csrf_exempt
 @require_http_methods(['POST', 'OPTIONS'])
 def api_client_logout(request):
@@ -123,7 +138,7 @@ def supervisor_login(request):
             login(request, supervisor.user)
             request.session['supervisor_authenticated'] = True
             request.session['client_authenticated'] = False
-            next_url = request.POST.get('next', 'supervisor:dashboard_super')
+            next_url = _safe_next(request, request.POST.get('next'), 'supervisor:dashboard_super')
             return redirect(next_url)
         return render(request, 'website/supervisor.html', {'form': form})
     form = SupervisorLoginForm()

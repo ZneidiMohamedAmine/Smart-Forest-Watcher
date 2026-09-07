@@ -4,7 +4,6 @@ Client-facing project map API — powers the mobile app's dashboard map
 logged-in client's single project.
 """
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 
 from .notifications import _authenticate, _cors
@@ -15,7 +14,6 @@ from supervisor.models.node import Node
 from camera_management.models import Camera
 
 
-@csrf_exempt
 @require_http_methods(['GET', 'OPTIONS'])
 def project_map(request):
     if request.method == 'OPTIONS':

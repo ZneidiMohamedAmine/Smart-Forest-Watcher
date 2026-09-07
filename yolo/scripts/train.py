@@ -34,11 +34,14 @@ def fetch_dataset(dataset_version: str) -> str:
     """
     data_dir = Path("yolo/data/D-Fire")
     if not data_dir.exists():
-        ref = "" if dataset_version in ("latest", "", None) else f"--branch {dataset_version}"
-        subprocess.run(
-            f"git clone --depth 1 {ref} {DFIRE_REPO} {data_dir}",
-            shell=True, check=True,
-        )
+        cmd = ["git", "clone", "--depth", "1"]
+        if dataset_version not in ("latest", "", None):
+            cmd += ["--branch", dataset_version]
+        cmd += [DFIRE_REPO, str(data_dir)]
+        # List-form args (no shell=True) -- dataset_version is a CLI arg that
+        # reaches this call, and shell=True with string interpolation would
+        # let shell metacharacters in it run arbitrary commands.
+        subprocess.run(cmd, check=True)
     else:
         print(f"Reusing existing dataset checkout at {data_dir}")
 
@@ -59,6 +62,9 @@ def main():
                          help="Starting weights: yolo26n/s/m/l/x.pt, or a path to previous best.pt for fine-tuning")
     parser.add_argument("--output-dir", type=str, default="runs/train")
     args = parser.parse_args()
+    # Resolve CLI-supplied paths to a canonical absolute form immediately --
+    # normalizes away '..' segments before they're used in any file op.
+    args.output_dir = str(Path(args.output_dir).resolve())
 
     data_yaml = fetch_dataset(args.dataset_version)
 

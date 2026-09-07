@@ -21,3 +21,8 @@ GDAL-*.whl
 img/uploads
 img/img
 img/detections
+.squad
+.github
+node_modules
+monitoring
+deploy

@@ -8,6 +8,8 @@ from client.notifications import _authenticate, _cors
 from .models import DeviceToken
 
 
+# CSRF-exempt: called by the Flutter app directly, which has no Django
+# session/CSRF cookie to send.
 @csrf_exempt
 @require_http_methods(['POST', 'OPTIONS'])
 def register_device_token(request):

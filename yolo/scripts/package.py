@@ -27,8 +27,13 @@ def main():
     parser.add_argument("--mlflow-run-id-file", type=str, default="runs/train/mlflow_run_id.txt")
     parser.add_argument("--output-dir", type=str, default="dist")
     args = parser.parse_args()
+    # Resolve CLI-supplied paths to a canonical absolute form immediately --
+    # normalizes away '..' segments before they're used in any file op.
+    args.weights = str(Path(args.weights).resolve())
+    args.metrics = str(Path(args.metrics).resolve())
+    args.mlflow_run_id_file = str(Path(args.mlflow_run_id_file).resolve())
 
-    out_dir = Path(args.output_dir)
+    out_dir = Path(args.output_dir).resolve()
     out_dir.mkdir(parents=True, exist_ok=True)
 
     # Copy raw weights (kept as a Release asset for reproducibility / re-fine-tuning)

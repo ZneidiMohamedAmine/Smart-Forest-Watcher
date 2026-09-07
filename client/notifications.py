@@ -165,6 +165,8 @@ def notify_client_of_false_alarm(detection):
     )
 
 
+# CSRF-exempt: called by the Flutter app directly, which has no Django
+# session/CSRF cookie to send.
 @csrf_exempt
 @require_http_methods(['POST', 'OPTIONS'])
 def send_notification(request):
@@ -192,7 +194,6 @@ def send_notification(request):
     return _cors(JsonResponse(result))
 
 
-@csrf_exempt
 @require_http_methods(['GET', 'OPTIONS'])
 def list_notifications(request):
     if request.method == 'OPTIONS':
@@ -213,7 +214,6 @@ def list_notifications(request):
     }))
 
 
-@csrf_exempt
 @require_http_methods(['GET', 'OPTIONS'])
 def client_summary(request):
     if request.method == 'OPTIONS':

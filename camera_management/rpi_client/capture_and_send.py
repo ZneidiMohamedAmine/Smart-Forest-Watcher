@@ -47,7 +47,7 @@ MODEL_PATH        = "/home/pi/fire_cam/best.pt"   # trained YOLO weights
 CONFIDENCE        = 0.30               # minimum confidence to send alert
 MAX_RETRIES       = 3
 RETRY_DELAY_SEC   = 10
-CAPTURE_PATH      = "/tmp/fire_frame.jpg"
+CAPTURE_PATH      = "/home/pi/fire_cam/fire_frame.jpg"  # not /tmp: a shared, world-writable dir is a symlink-attack risk
 # ─────────────────────────────────────────────────────────────────────────────
 
 logging.basicConfig(

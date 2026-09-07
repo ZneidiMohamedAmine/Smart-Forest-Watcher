@@ -30,6 +30,12 @@ def main():
     parser.add_argument("--baseline-metrics", type=str, default="yolo/current_metrics.json",
                          help="Metrics of the currently deployed model — new model must beat this mAP50 to be promoted")
     args = parser.parse_args()
+    # Resolve CLI-supplied paths to a canonical absolute form immediately --
+    # normalizes away '..' segments before they're used in any file op.
+    args.weights = str(Path(args.weights).resolve())
+    args.metrics_out = str(Path(args.metrics_out).resolve())
+    args.run_id_file = str(Path(args.run_id_file).resolve())
+    args.baseline_metrics = str(Path(args.baseline_metrics).resolve())
 
     baseline_path = Path(args.baseline_metrics)
     baseline_map50 = 0.0

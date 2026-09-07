@@ -7,7 +7,6 @@ temperature) so the app can render a color-coded badge without needing to
 know the underlying thresholds.
 """
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 
 from .notifications import _authenticate, _cors
@@ -43,7 +42,6 @@ def _risk_level(fwi, temperature):
     return 'unknown'
 
 
-@csrf_exempt
 @require_http_methods(['GET', 'OPTIONS'])
 def list_sensors(request):
     if request.method == 'OPTIONS':
