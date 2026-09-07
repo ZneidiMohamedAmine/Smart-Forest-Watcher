@@ -1,0 +1,92 @@
+{
+  "title": "Smart Forest Watcher",
+  "uid": "sfw-overview",
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "30s",
+  "time": { "from": "now-6h", "to": "now" },
+  "panels": [
+    {
+      "id": 1,
+      "title": "Django request rate (by method)",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "targets": [
+        {
+          "expr": "sum(rate(django_http_requests_total_by_method_total[5m])) by (method)",
+          "legendFormat": "{{method}}"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Django request latency p95 (by view)",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum(rate(django_http_requests_latency_seconds_by_view_method_bucket[5m])) by (le, view))",
+          "legendFormat": "{{view}}"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Django 5xx error rate",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+      "targets": [
+        {
+          "expr": "sum(rate(django_http_responses_total_by_status_total{status=~\"5..\"}[5m]))",
+          "legendFormat": "5xx/sec"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Postgres up",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 8 },
+      "targets": [{ "expr": "pg_up" }],
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            { "type": "value", "options": { "0": { "text": "DOWN", "color": "red" }, "1": { "text": "UP", "color": "green" } } }
+          ]
+        }
+      }
+    },
+    {
+      "id": 5,
+      "title": "Redis connected clients",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 6, "x": 18, "y": 8 },
+      "targets": [{ "expr": "redis_connected_clients" }]
+    },
+    {
+      "id": 6,
+      "title": "Redis memory used",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 12 },
+      "targets": [
+        {
+          "expr": "redis_memory_used_bytes",
+          "legendFormat": "used bytes"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Redis commands/sec",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 16 },
+      "targets": [
+        {
+          "expr": "rate(redis_commands_processed_total[5m])",
+          "legendFormat": "commands/sec"
+        }
+      ]
+    }
+  ]
+}
