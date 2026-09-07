@@ -208,15 +208,13 @@ services:
     container_name: fire_postgres_exporter
 
     environment:
-      # Individual PG* vars instead of a DATA_SOURCE_NAME URL -- a password
-      # containing URL-reserved characters (@, :, /, #, %, etc.) breaks URL
-      # parsing when interpolated raw into a DSN string.
-      PGHOST: db
-      PGPORT: "5432"
-      PGUSER: ${POSTGRES_USER}
-      PGPASSWORD: ${POSTGRES_PASSWORD}
-      PGDATABASE: ${POSTGRES_DB}
-      PGSSLMODE: disable
+      # libpq keyword/value format, not a postgresql:// URI -- a password
+      # containing URL-reserved characters (@, :, /, #, %, etc.) breaks URI
+      # parsing, and this exporter build doesn't read PG* env vars on its
+      # own (logs "empty dsn" without DATA_SOURCE_NAME set explicitly).
+      # Password is single-quoted since keyword/value format also breaks
+      # on an unquoted value containing whitespace.
+      DATA_SOURCE_NAME: "host=db port=5432 user=${POSTGRES_USER} password='${POSTGRES_PASSWORD}' dbname=${POSTGRES_DB} sslmode=disable"
 
     depends_on:
       db:
