@@ -9,13 +9,16 @@
     <!-- Styleswitcher
 ================================================== -->
     <div class="colors-switcher">
-        <a id="show-panel" class="hide-panel"><i class="fa fa-tint"></i></a>        
+        <a id="show-panel" class="hide-panel"><i class="fa fa-tint"></i></a>
         <ul class="colors-list">
-            <li><a title="Light Red" onClick="setActiveStyleSheet('light-red'); return false;" class="light-red"></a></li>
+            <li><a title="Light Red" onClick="setActiveStyleSheet('light-red'); return false;" class="light-red"></a>
+            </li>
             <li><a title="Blue" class="blue" onClick="setActiveStyleSheet('blue'); return false;"></a></li>
-            <li class="no-margin"><a title="Light Blue" onClick="setActiveStyleSheet('light-blue'); return false;" class="light-blue"></a></li>
+            <li class="no-margin"><a title="Light Blue" onClick="setActiveStyleSheet('light-blue'); return false;"
+                    class="light-blue"></a></li>
             <li><a title="Green" class="green active" onClick="setActiveStyleSheet('green'); return false;"></a></li>
-            <li class="no-margin"><a title="light-green" class="light-green" onClick="setActiveStyleSheet('light-green'); return false;"></a></li>
+            <li class="no-margin"><a title="light-green" class="light-green"
+                    onClick="setActiveStyleSheet('light-green'); return false;"></a></li>
             <li><a title="Yellow" class="yellow" onClick="setActiveStyleSheet('yellow'); return false;"></a></li>
         </ul>
     </div>
@@ -23,12 +26,13 @@
     <!-- Styleswitcher End
 ================================================== -->
 
-    <!-- Navigation --> 
+    <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -65,7 +69,8 @@
                         <a class="page-scroll" href="#contact">Contact</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="{% url 'client_login' %}"><span style="font-weight: bolder; font-size: 18px;">Login</span></a>
+                        <a class="page-scroll" href="{% url 'client_login' %}"><span
+                                style="font-weight: bolder; font-size: 18px;">Login</span></a>
                     </li>
                 </ul>
             </div>
@@ -96,28 +101,33 @@
                             <h1 class="animated3">
                                 <span>Welcome to <strong>SFG</strong></span>
                             </h1>
-                            <p class="animated2">Where Innovation Meets Sustainability!<br> Join us in revolutionizing intelligent agriculture <br> and protecting our environment for a greener future.</p>
-                            <a href="{% url 'client_login' %}" class="page-scroll btn btn-primary animated1">Start Now</a>
+                            <p class="animated2">Where Innovation Meets Sustainability!<br> Join us in revolutionizing
+                                intelligent agriculture <br> and protecting our environment for a greener future.</p>
+                            <a href="{% url 'client_login' %}" class="page-scroll btn btn-primary animated1">Start
+                                Now</a>
                         </div>
                     </div>
                 </div>
                 <!--/ Carousel item end -->
-                
+
                 <div class="item">
                     <img class="img-responsive" src="{% static 'home/images/forest2.jpg' %}" alt="slider">
-                    
+
                     <div class="slider-content">
                         <div class="col-md-12 text-center">
                             <h1 class="animated1">
                                 <span><strong>SFG</strong> for the highest</span>
                             </h1>
-                                <p class="animated2">Reaching New Heights in Intelligent Agriculture. <br>We strive for excellence, <br>pushing the boundaries of innovation to achieve the highest standards<br> in sustainable farming practices.</p>	
-                                <a href="{% url 'client_login' %}" class="page-scroll btn btn-primary animated3">Start Now</a>
+                            <p class="animated2">Reaching New Heights in Intelligent Agriculture. <br>We strive for
+                                excellence, <br>pushing the boundaries of innovation to achieve the highest
+                                standards<br> in sustainable farming practices.</p>
+                            <a href="{% url 'client_login' %}" class="page-scroll btn btn-primary animated3">Start
+                                Now</a>
                         </div>
                     </div>
                 </div>
                 <!--/ Carousel item end -->
-                
+
                 <div class="item">
                     <img class="img-responsive" src="{% static 'home/images/12.jpg' %}" alt="slider">
                     <div class="slider-content">
@@ -125,9 +135,12 @@
                             <h1 class="animated2">
                                 <span>The way of <strong>Success</strong></span>
                             </h1>
-                            <p class="animated1">Fueling Innovation, Igniting Collaboration. <br>We thrive on pioneering new ideas and fostering a collaborative spirit, <br>paving the path to success in intelligent agriculture.</p>	
-                             <a class="animated3 slider btn btn-primary btn-min-block" href="{% url 'client_login' %}">Start Now</a>
-                                
+                            <p class="animated1">Fueling Innovation, Igniting Collaboration. <br>We thrive on pioneering
+                                new ideas and fostering a collaborative spirit, <br>paving the path to success in
+                                intelligent agriculture.</p>
+                            <a class="animated3 slider btn btn-primary btn-min-block"
+                                href="{% url 'client_login' %}">Start Now</a>
+
                         </div>
                     </div>
                 </div>
@@ -147,50 +160,59 @@
     </section>
     <!-- End Home Page Slider -->
 
-        <!-- Start Feature Section -->
-        <section id="feature" class="feature-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <div class="feature">
-                            <i class="fa fa-magic"></i>
-                            <div class="feature-content">
-                                <h4>Intelligent IoT-Based System</h4>
-                                <p>Highlight the use of an intelligent IoT-based system that utilizes a low-cost Lora sensor node to measure climatic parameters for predicting forest fires and major crop incidents. Emphasize how this advanced technology enhances accuracy and efficiency in fire prediction.</p>
-                            </div>
-                        </div>
-                    </div><!-- /.col-md-3 -->
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <div class="feature">
-                            <i class="fa fa-signal"></i>
-                            <div class="feature-content">
-                                <h4>Long-Range Communication</h4>
-                                <p>Showcase the system's long-range communication capabilities through the Lora network. Explain how this feature enables seamless data transmission over large distances, allowing for effective monitoring and timely alert generation.</p>
-                            </div>
-                        </div>
-                    </div><!-- /.col-md-3 -->
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <div class="feature">
-                            <i class="fa fa-globe"></i>
-                            <div class="feature-content">
-                                <h4>Web Application</h4>
-                                <p>Describe the development of a user-friendly web application that receives fire prediction alerts. Explain how this application allows users to easily understand the fire risk in their region by displaying the most up-to-date information on forest fires.</p>
-                            </div>
-                        </div>
-                    </div><!-- /.col-md-3 -->
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <div class="feature">
-                            <i class="fa fa-clock-o"></i>
-                            <div class="feature-content">
-                                <h4>Real-Time Information</h4>
-                                <p>Highlight how the system provides real-time information on forest fires, allowing users to stay informed about the current fire situations and make informed decisions accordingly.</p>
-                            </div>
+    <!-- Start Feature Section -->
+    <section id="feature" class="feature-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="feature">
+                        <i class="fa fa-magic"></i>
+                        <div class="feature-content">
+                            <h4>Intelligent IoT-Based System</h4>
+                            <p>Highlight the use of an intelligent IoT-based system that utilizes a low-cost Lora sensor
+                                node to measure climatic parameters for predicting forest fires and major crop
+                                incidents. Emphasize how this advanced technology enhances accuracy and efficiency in
+                                fire prediction.</p>
                         </div>
                     </div>
-                </div><!-- /.row -->
-            
-            </div><!-- /.container -->
-        </section>
+                </div><!-- /.col-md-3 -->
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="feature">
+                        <i class="fa fa-signal"></i>
+                        <div class="feature-content">
+                            <h4>Long-Range Communication</h4>
+                            <p>Showcase the system's long-range communication capabilities through the Lora network.
+                                Explain how this feature enables seamless data transmission over large distances,
+                                allowing for effective monitoring and timely alert generation.</p>
+                        </div>
+                    </div>
+                </div><!-- /.col-md-3 -->
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="feature">
+                        <i class="fa fa-globe"></i>
+                        <div class="feature-content">
+                            <h4>Web Application</h4>
+                            <p>Describe the development of a user-friendly web application that receives fire prediction
+                                alerts. Explain how this application allows users to easily understand the fire risk in
+                                their region by displaying the most up-to-date information on forest fires.</p>
+                        </div>
+                    </div>
+                </div><!-- /.col-md-3 -->
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="feature">
+                        <i class="fa fa-clock-o"></i>
+                        <div class="feature-content">
+                            <h4>Real-Time Information</h4>
+                            <p>Highlight how the system provides real-time information on forest fires, allowing users
+                                to stay informed about the current fire situations and make informed decisions
+                                accordingly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.row -->
+
+        </div><!-- /.container -->
+    </section>
     <!-- End Feature Section -->
 
     <!-- Start Call to Action Section -->
@@ -198,7 +220,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>Experience the transformative power of Smart Agriculture, where cutting-edge technology and data-driven solutions revolutionize farming practices. <br> Embrace innovation, increase efficiency, and cultivate a sustainable future for agriculture.</h1>
+                    <h1>Experience the transformative power of Smart Agriculture, where cutting-edge technology and
+                        data-driven solutions revolutionize farming practices. <br> Embrace innovation, increase
+                        efficiency, and cultivate a sustainable future for agriculture.</h1>
                     <button type="submit" class="btn btn-primary">Read more</button>
                 </div>
             </div>
@@ -214,76 +238,88 @@
                     <div class="section-title text-center">
                         <h3>Issues</h3>
                         <p>Environmental Impact: Addressing CO2 Emissions and Forest Fire Consequences.</p>
-                    </div>                        
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    
+
                     <!-- Start Portfolio items -->
                     <ul id="portfolio-list">
                         <li>
                             <div class="portfolio-item">
-                                <img src="{% static 'home/images/issues/co22.jpg' %}" class="img-responsive" alt="..." />
+                                <img src="{% static 'home/images/issues/co22.jpg' %}" class="img-responsive"
+                                    alt="..." />
                                 <div class="portfolio-caption">
                                     <h4>CO2 emissions and climate change</h4>
-                                    <a href="#portfolio-modal1" data-toggle="modal" class="link-1"><i class="fa fa-magic"></i></a>
+                                    <a href="#portfolio-modal1" data-toggle="modal" class="link-1"><i
+                                            class="fa fa-magic"></i></a>
                                     <a href="#" class="link-2"><i class="fa fa-link"></i></a>
                                 </div>
                             </div>
                         </li>
                         <li>
                             <div class="portfolio-item">
-                                <img src="{% static 'home/images/issues/co32.jpg' %}" class="img-responsive" alt="..." />
+                                <img src="{% static 'home/images/issues/co32.jpg' %}" class="img-responsive"
+                                    alt="..." />
                                 <div class="portfolio-caption">
                                     <h4>Forest and climate change</h4>
-                                    <a href="#portfolio-modal2" data-toggle="modal" class="link-1"><i class="fa fa-magic"></i></a>
+                                    <a href="#portfolio-modal2" data-toggle="modal" class="link-1"><i
+                                            class="fa fa-magic"></i></a>
                                     <a href="#" class="link-2"><i class="fa fa-link"></i></a>
                                 </div>
                             </div>
                         </li>
                         <li>
                             <div class="portfolio-item">
-                                <img src="{% static 'home/images/issues/ticc2.png' %}" class="img-responsive" alt="..." />
+                                <img src="{% static 'home/images/issues/ticc2.png' %}" class="img-responsive"
+                                    alt="..." />
                                 <div class="portfolio-caption">
                                     <h4>The Growing Threat of Global CO2 Emissions</h4>
-                                    <a href="#portfolio-modal3" data-toggle="modal" class="link-1"><i class="fa fa-magic"></i></a>
+                                    <a href="#portfolio-modal3" data-toggle="modal" class="link-1"><i
+                                            class="fa fa-magic"></i></a>
                                     <a href="#" class="link-2"><i class="fa fa-link"></i></a>
                                 </div>
                             </div>
                         </li>
                         <li>
                             <div class="portfolio-item">
-                                <img src="{% static 'home/images/issues/fire12.jpg' %}" class="img-responsive" alt="..." />
+                                <img src="{% static 'home/images/issues/fire12.jpg' %}" class="img-responsive"
+                                    alt="..." />
                                 <div class="portfolio-caption">
                                     <h4>How Forest Fires Contribute to Rising CO2 Emissions</h4>
-                                    <a href="#portfolio-modal4" data-toggle="modal" class="link-1"><i class="fa fa-magic"></i></a>
+                                    <a href="#portfolio-modal4" data-toggle="modal" class="link-1"><i
+                                            class="fa fa-magic"></i></a>
                                     <a href="#" class="link-2"><i class="fa fa-link"></i></a>
                                 </div>
                             </div>
                         </li>
                         <li>
                             <div class="portfolio-item">
-                                <img src="{% static 'home/images/issues/fire22.jpg' %}" class="img-responsive" alt="..." />
+                                <img src="{% static 'home/images/issues/fire22.jpg' %}" class="img-responsive"
+                                    alt="..." />
                                 <div class="portfolio-caption">
                                     <h4>The huge desaster</h4>
-                                    <a href="#portfolio-modal5" data-toggle="modal" class="link-1"><i class="fa fa-magic"></i></a>
+                                    <a href="#portfolio-modal5" data-toggle="modal" class="link-1"><i
+                                            class="fa fa-magic"></i></a>
                                     <a href="#" class="link-2"><i class="fa fa-link"></i></a>
                                 </div>
                             </div>
                         </li>
                         <li>
                             <div class="portfolio-item">
-                                <img src="{% static 'home/images/issues/fire42.jpg' %}" class="img-responsive" alt="..." />
+                                <img src="{% static 'home/images/issues/fire42.jpg' %}" class="img-responsive"
+                                    alt="..." />
                                 <div class="portfolio-caption">
                                     <h4>Not only co2 ...</h4>
-                                    <a href="#portfolio-modal6" data-toggle="modal" class="link-1"><i class="fa fa-magic"></i></a>
+                                    <a href="#portfolio-modal6" data-toggle="modal" class="link-1"><i
+                                            class="fa fa-magic"></i></a>
                                     <a href="#" class="link-2"><i class="fa fa-link"></i></a>
                                 </div>
                             </div>
                         </li>
-                        
-                        
+
+
                     </ul>
                     <!-- End Portfolio items -->
                 </div>
@@ -291,7 +327,7 @@
         </div>
     </section>
     <!-- End Issues Section -->
-    
+
     <!-- Start Issues Modal Section -->
     <div class="section-modal modal fade" id="portfolio-modal1" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
@@ -301,21 +337,27 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="container">
                 <div class="row">
                     <div class="section-title text-center">
                         <h3>CO2 emissions and climate change</h3>
                         <span class="text-muted">Planet conditions...</span>
-                        <p> Carbon dioxide emissions are the primary driver of global climate change. It’s widely recognized that to avoid the worst impacts of climate change, the world needs to urgently reduce emissions.
-                            Since humans are adding more CO2 to the atmosphere, that helps explain why temperatures are increasing around the world. Global warming describes the current rise in the average temperature of Earth's air and oceans, which is often described as the most recent example of climate change.
+                        <p> Carbon dioxide emissions are the primary driver of global climate change. It’s widely
+                            recognized that to avoid the worst impacts of climate change, the world needs to urgently
+                            reduce emissions.
+                            Since humans are adding more CO2 to the atmosphere, that helps explain why temperatures are
+                            increasing around the world. Global warming describes the current rise in the average
+                            temperature of Earth's air and oceans, which is often described as the most recent example
+                            of climate change.
                         </p>
                     </div>
                 </div>
-                <div style="display: flex; justify-content: center; align-items: center; height: 100vh; margin-top: -200px;">
+                <div
+                    style="display: flex; justify-content: center; align-items: center; height: 100vh; margin-top: -200px;">
                     <img src="{% static 'home/images/issues/co22.jpg' %}" class="img-responsive" alt="...">
                 </div>
-            </div>                
+            </div>
         </div>
     </div>
     <!-- End Issues Modal Section -->
@@ -329,23 +371,27 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="container">
                 <div class="row">
                     <div class="section-title text-center">
                         <h3>Forest and climate change</h3>
                         <span class="text-muted">Forests act as carbon sinks...</span>
-                        <p> Forests capture carbon from the atmosphere in the trees and soils. Some of this carbon ends up on the ground as fallen litter,
+                        <p> Forests capture carbon from the atmosphere in the trees and soils. Some of this carbon ends
+                            up on the ground as fallen litter,
                             and accumulates in the soil. Soils are one of the biggest carbon reservoirs on earth,
                             storing more of this element than the atmosphere and the aboveground biomass put together.
-                            Deforestation and forest degradation account for about 10 percent of global greenhouse gas emissions caused by humans. Protecting and restoring forests can help mitigate climate change by absorbing carbon dioxide and providing other ecosystem services.
+                            Deforestation and forest degradation account for about 10 percent of global greenhouse gas
+                            emissions caused by humans. Protecting and restoring forests can help mitigate climate
+                            change by absorbing carbon dioxide and providing other ecosystem services.
                         </p>
                     </div>
                 </div>
-                <div style="display: flex; justify-content: center; align-items: center; height: 100vh; margin-top: -200px;">
+                <div
+                    style="display: flex; justify-content: center; align-items: center; height: 100vh; margin-top: -200px;">
                     <img src="{% static 'home/images/issues/co32.jpg' %}" class="img-responsive" alt="...">
                 </div>
-            </div>                
+            </div>
         </div>
     </div>
     <!-- End Issues Modal Section -->
@@ -359,19 +405,21 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="container">
                 <div class="row">
                     <div class="section-title text-center">
                         <h3>The Growing Threat of Global CO2 Emissions</h3>
                         <span class="text-muted">Forests act as carbon sinks...</span>
-                        <p> This alarming trend shows no signs of slowing down. Join the fight against climate change and help protect our planet  </p>
+                        <p> This alarming trend shows no signs of slowing down. Join the fight against climate change
+                            and help protect our planet </p>
                     </div>
                 </div>
-                <div style="display: flex; justify-content: center; align-items: center; height: 100vh; margin-top: -200px;">
+                <div
+                    style="display: flex; justify-content: center; align-items: center; height: 100vh; margin-top: -200px;">
                     <img src="{% static 'home/images/issues/ticc2.png' %}" class="img-responsive" alt="...">
                 </div>
-            </div>                
+            </div>
         </div>
     </div>
     <!-- End Issues Modal Section -->
@@ -385,21 +433,23 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="container">
                 <div class="row">
                     <div class="section-title text-center">
                         <h3>How Forest Fires Contribute to Rising CO2 Emissions</h3>
                         <span class="text-muted">Planet conditions...</span>
-                        <p> Forest fires can release significant amounts of carbon dioxide (CO2) into the atmosphere. 
-                            When trees and other vegetation burn, they release stored carbon into the air, adding to the amount of CO2 already present. 
+                        <p> Forest fires can release significant amounts of carbon dioxide (CO2) into the atmosphere.
+                            When trees and other vegetation burn, they release stored carbon into the air, adding to the
+                            amount of CO2 already present.
                         </p>
                     </div>
                 </div>
-                <div style="display: flex; justify-content: center; align-items: center; height: 100vh; margin-top: -200px;">
+                <div
+                    style="display: flex; justify-content: center; align-items: center; height: 100vh; margin-top: -200px;">
                     <img src="{% static 'home/images/issues/fire12.jpg' %}" class="img-responsive" alt="...">
                 </div>
-            </div>                
+            </div>
         </div>
     </div>
     <!-- End Issues Modal Section -->
@@ -413,20 +463,23 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="container">
                 <div class="row">
                     <div class="section-title text-center">
                         <h3>The huge desaster</h3>
-                        <p> The amount of CO2 released during a forest fire depends on the severity and duration of the fire, as well as the type and amount of vegetation burned. 
-                            Large-scale forest fires can release millions of tonnes of CO2 into the atmosphere, contributing to global warming and climate change. 
+                        <p> The amount of CO2 released during a forest fire depends on the severity and duration of the
+                            fire, as well as the type and amount of vegetation burned.
+                            Large-scale forest fires can release millions of tonnes of CO2 into the atmosphere,
+                            contributing to global warming and climate change.
                         </p>
                     </div>
                 </div>
-                <div style="display: flex; justify-content: center; align-items: center; height: 100vh; margin-top: -200px;">
+                <div
+                    style="display: flex; justify-content: center; align-items: center; height: 100vh; margin-top: -200px;">
                     <img src="{% static 'home/images/issues/fire22.jpg' %}" class="img-responsive" alt="...">
                 </div>
-            </div>                
+            </div>
         </div>
     </div>
     <!-- End Issues Modal Section -->
@@ -440,71 +493,95 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="container">
                 <div class="row">
                     <div class="section-title text-center">
                         <h3>Not only co2 ...</h3>
-                        <p> In addition to CO2, forest fires can also release other greenhouse gases like methane (CH4) and nitrous oxide (N2O) into the atmosphere. 
+                        <p> In addition to CO2, forest fires can also release other greenhouse gases like methane (CH4)
+                            and nitrous oxide (N2O) into the atmosphere.
                             These gases can trap heat and contribute to global warming.
                         </p>
                     </div>
                 </div>
-                <div style="display: flex; justify-content: center; align-items: center; height: 100vh; margin-top: -200px;">
+                <div
+                    style="display: flex; justify-content: center; align-items: center; height: 100vh; margin-top: -200px;">
                     <img src="{% static 'home/images/issues/fire42.jpg' %}" class="img-responsive" alt="...">
                 </div>
-            </div>                
+            </div>
         </div>
     </div>
-<!-- End Issues Modal Section -->
+    <!-- End Issues Modal Section -->
 
 
     <!-- --------------------------------------------------------------------------------------- -->
 
-<!-- ------------------------------------------------------------------------------------------------------------------------------------- -->
+    <!-- ------------------------------------------------------------------------------------------------------------------------------------- -->
     <!-- Start About Us Section -->
     <section id="about-us" class="about-us-section-1">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-sm-12">
                     <div class="section-title text-center">
-                            <h3>About Us</h3>
-                            <p><strong>Smart For Green</strong> is a startup created in 2022 within the local innovation center of Ras Jebel-Bizerte, its main activity was a design office that offers a multitude of services related to intelligent agriculture aimed at preventing fires and ensuring protection against forest fires. The Smart for Green startup is led by a talented and determined team of professionals who are passionate about their mission. Each one of them brings a unique expertise and an overwhelming passion to the company,
-                                and I am delighted to be working together to achieve a common vision
-                            </p>
-                        </div>
+                        <h3>About Us</h3>
+                        <p><strong>Smart For Green</strong> is a startup created in 2022 within the local innovation
+                            center of Ras Jebel-Bizerte, its main activity was a design office that offers a multitude
+                            of services related to intelligent agriculture aimed at preventing fires and ensuring
+                            protection against forest fires. The Smart for Green startup is led by a talented and
+                            determined team of professionals who are passionate about their mission. Each one of them
+                            brings a unique expertise and an overwhelming passion to the company,
+                            and I am delighted to be working together to achieve a common vision
+                        </p>
+                    </div>
                 </div>
             </div>
             <div class="row">
-                
+
                 <div class="col-md-4">
                     <div class="welcome-section text-center">
-                        <img src="{% static 'home/images/about/b.jpg' %}" class="img-responsive" alt=".." style="height: 200px;">
+                        <img src="{% static 'home/images/about/b.jpg' %}" class="img-responsive" alt=".."
+                            style="height: 200px;">
                         <h4>Startup Philosophy</h4>
                         <div class="border"></div>
-                        <p>At Smart for Green, our philosophy centers around the belief that combining intelligent agriculture and environmental preservation is the key to a sustainable future. We are driven by the passion to leverage technology and data-driven insights to optimize agricultural practices, protect against forest fires, and ensure the long-term viability of our ecosystem.</p>                    </div>
+                        <p>At Smart for Green, our philosophy centers around the belief that combining intelligent
+                            agriculture and environmental preservation is the key to a sustainable future. We are driven
+                            by the passion to leverage technology and data-driven insights to optimize agricultural
+                            practices, protect against forest fires, and ensure the long-term viability of our
+                            ecosystem.</p>
+                    </div>
                 </div>
-                
+
                 <div class="col-md-4">
                     <div class="welcome-section text-center">
-                        <img src="{% static 'home/images/about/bb.jpg' %}" class="img-responsive" alt=".." style="height: 200px;">
+                        <img src="{% static 'home/images/about/bb.jpg' %}" class="img-responsive" alt=".."
+                            style="height: 200px;">
                         <h4>Startup Mission & Vission</h4>
                         <div class="border"></div>
-                        <p>Our mission at Smart for Green is to revolutionize the agricultural landscape by integrating smart farming practices that improve productivity, quality, and sustainability while safeguarding the environment. We envision a future where our intelligent solutions empower farmers, protect natural resources, and contribute to a greener and more prosperous world</p>
+                        <p>Our mission at Smart for Green is to revolutionize the agricultural landscape by integrating
+                            smart farming practices that improve productivity, quality, and sustainability while
+                            safeguarding the environment. We envision a future where our intelligent solutions empower
+                            farmers, protect natural resources, and contribute to a greener and more prosperous world
+                        </p>
                     </div>
                 </div>
-                
+
                 <div class="col-md-4">
                     <div class="welcome-section text-center">
-                        <img src="{% static 'home/images/about/bbb.jpg' %}" class="img-responsive" alt=".." style="height: 200px;">
+                        <img src="{% static 'home/images/about/bbb.jpg' %}" class="img-responsive" alt=".."
+                            style="height: 200px;">
                         <h4>Startup Value & Rules</h4>
                         <div class="border"></div>
-                        <p>At Smart for Green, our values are rooted in integrity, innovation, and collaboration. We strive to conduct business ethically and transparently, always placing the needs of our customers and the environment at the forefront. Our team is committed to pushing boundaries, embracing creativity, and fostering a culture of continuous learning. We operate with a strong sense of teamwork, embracing diverse perspectives, and working together to achieve our common goals.</p>
+                        <p>At Smart for Green, our values are rooted in integrity, innovation, and collaboration. We
+                            strive to conduct business ethically and transparently, always placing the needs of our
+                            customers and the environment at the forefront. Our team is committed to pushing boundaries,
+                            embracing creativity, and fostering a culture of continuous learning. We operate with a
+                            strong sense of teamwork, embracing diverse perspectives, and working together to achieve
+                            our common goals.</p>
                     </div>
                 </div>
-                
-            </div><!-- /.row -->            
-            
+
+            </div><!-- /.row -->
+
         </div><!-- /.container -->
     </section>
     <!-- End About Us Section -->
@@ -518,12 +595,12 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12">
                     <div class="section-title text-center">
-                            <h3>Our Team</h3>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate</p>
-                        </div>
+                        <h3>Our Team</h3>
+                        <p>Duis aute irure dolor in reprehenderit in voluptate</p>
+                    </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-md-12">
                     <div id="team-section">
@@ -531,7 +608,7 @@
                             <div class="team-member">
                                 <img src="{% static 'home/images/team/me.jpg' %}" class="img-responsive" alt="">
                                 <div class="team-details">
-                                    <h4>Mohamed Omar Ben Ali</h4>
+                                    <h4>Mohamed Hedi Gharbi</h4>
                                     <p>Embedded systems and IOT Developer</p>
                                     <ul>
                                         <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -571,7 +648,7 @@
                                         <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
                                     </ul>
                                 </div>
-                            </div>    
+                            </div>
                             <div class="team-member">
                                 <img src="{% static 'home/images/team/med_ali.jpg' %}" class="img-responsive" alt="">
                                 <div class="team-details">
@@ -585,7 +662,7 @@
                                         <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
                                     </ul>
                                 </div>
-                            </div>    
+                            </div>
                             <div class="team-member">
                                 <img src="{% static 'home/images/team/hedi.jpg' %}" class="img-responsive" alt="">
                                 <div class="team-details">
@@ -599,7 +676,7 @@
                                         <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
                                     </ul>
                                 </div>
-                            </div>    
+                            </div>
                             <div class="team-member">
                                 <img src="{% static 'home/images/team/nader.jpg' %}" class="img-responsive" alt="">
                                 <div class="team-details">
@@ -613,7 +690,7 @@
                                         <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
                                     </ul>
                                 </div>
-                            </div>    
+                            </div>
                             <div class="team-member">
                                 <img src="{% static 'home/images/team/sabri.jpg' %}" class="img-responsive" alt="">
                                 <div class="team-details">
@@ -627,7 +704,7 @@
                                         <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
                                     </ul>
                                 </div>
-                            </div>    
+                            </div>
                             <div class="team-member">
                                 <img src="{% static 'home/images/team/wael.jpg' %}" class="img-responsive" alt="">
                                 <div class="team-details">
@@ -641,7 +718,7 @@
                                         <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
                                     </ul>
                                 </div>
-                            </div>    
+                            </div>
                             <div class="team-member">
                                 <img src="{% static 'home/images/team/oussema.jpg' %}" class="img-responsive" alt="">
                                 <div class="team-details">
@@ -655,7 +732,7 @@
                                         <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
                                     </ul>
                                 </div>
-                            </div>    
+                            </div>
                             <div class="team-member">
                                 <img src="{% static 'home/images/team/rania.jpg' %}" class="img-responsive" alt="">
                                 <div class="team-details">
@@ -669,16 +746,16 @@
                                         <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
                                     </ul>
                                 </div>
-                            </div>    
+                            </div>
 
-                            
+
                         </div>
 
-                    
+
                     </div>
                 </div>
             </div>
-                
+
         </div>
     </section>
     <!-- End Team Member Section -->
@@ -691,17 +768,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-sm-12">
-                    
-                        <div class="section-title text-center">
-                            <h3>Our Sollution</h3>
-                            <p class="white-text"><strong>FFFP</strong> Forest and Farm Fire Protection</p>
-                        </div>
-                    
+
+                    <div class="section-title text-center">
+                        <h3>Our Sollution</h3>
+                        <p class="white-text"><strong>FFFP</strong> Forest and Farm Fire Protection</p>
+                    </div>
+
                 </div>
             </div>
-                    
-            </div>
+
         </div>
+    </div>
     </div>
     <!-- End Solution Table Section -->
 
@@ -713,37 +790,50 @@
                 <!-- Testimonial 1 -->
                 <div class="testimonials item">
                     <div class="testimonial-content">
-                        <img src="{% static 'home/images/testimonial/sol.jpg' %}"  alt="..." style="width: 400px;">
+                        <img src="{% static 'home/images/testimonial/sol.jpg' %}" alt="..." style="width: 400px;">
 
                         <div class="testimonial-author">
                             <div class="author">FFFP</div>
-                            <div class="designation"><strong>F</strong>orest and <strong>F</strong>arm <strong>F</strong> ire <strong>P</strong>rotection</div>
+                            <div class="designation"><strong>F</strong>orest and <strong>F</strong>arm
+                                <strong>F</strong> ire <strong>P</strong>rotection</div>
                         </div>
-                        <p>The placement of the sensors in the target areas allows <br>the collection of precise and instantaneous data on the state of the forest, <br>measuring  humidity, temperature, pressure and gas level.</p>
+                        <p>The placement of the sensors in the target areas allows <br>the collection of precise and
+                            instantaneous data on the state of the forest, <br>measuring humidity, temperature, pressure
+                            and gas level.</p>
                     </div>
                 </div>
                 <!-- Testimonial 2 -->
                 <div class="testimonials item">
                     <div class="testimonial-content">
-                        <img src="{% static 'home/images/testimonial/sol.jpg' %}"  alt="..." style="width: 400px;">
+                        <img src="{% static 'home/images/testimonial/sol.jpg' %}" alt="..." style="width: 400px;">
                         <div class="testimonial-author">
                             <div class="author">FFFP</div>
-                            <div class="designation"><strong>F</strong>orest and <strong>F</strong>arm <strong>F</strong> ire <strong>P</strong>rotection</div>
+                            <div class="designation"><strong>F</strong>orest and <strong>F</strong>arm
+                                <strong>F</strong> ire <strong>P</strong>rotection</div>
                         </div>
-                        <p>Once these data are collected and with the analysis of meteorological data during a heat wave,<br> the system will be able to predict if there is a potential danger in specific areas, at this stage,<br> the system allows to have a dashboard for real-time supervision and to alert the responders.</p>
-                    
-                        </div>
+                        <p>Once these data are collected and with the analysis of meteorological data during a heat
+                            wave,<br> the system will be able to predict if there is a potential danger in specific
+                            areas, at this stage,<br> the system allows to have a dashboard for real-time supervision
+                            and to alert the responders.</p>
+
+                    </div>
                 </div>
                 <!-- Testimonial 3 -->
                 <div class="testimonials item">
                     <div class="testimonial-content">
                         <!-- <img src="images/testimonial/face_3.png" alt="" > -->
-                        <img src="{% static 'home/images/testimonial/sol.jpg' %}"  alt="..." style="width: 400px;">
+                        <img src="{% static 'home/images/testimonial/sol.jpg' %}" alt="..." style="width: 400px;">
                         <div class="testimonial-author">
                             <div class="author">FFFP</div>
-                            <div class="designation"><strong>F</strong>orest and <strong>F</strong>arm <strong>F</strong> ire <strong>P</strong>rotection</div>
+                            <div class="designation"><strong>F</strong>orest and <strong>F</strong>arm
+                                <strong>F</strong> ire <strong>P</strong>rotection</div>
                         </div>
-                        <p>In case of fire outbreak, <br>the FFFP solution also allows detection with thermal cameras and notifies the forest rangers <br>and firefighters of the region (Civil Protection)<br> with a provisioning of information on the state of the fire with measurements of <br>the temperature in the center of the fire, <br>the rate of CO2 (carbon dioxide) which allows safe interventions of firefighters knowing the direction of <br>the wind and the speed of propagation.</p>
+                        <p>In case of fire outbreak, <br>the FFFP solution also allows detection with thermal cameras
+                            and notifies the forest rangers <br>and firefighters of the region (Civil Protection)<br>
+                            with a provisioning of information on the state of the fire with measurements of <br>the
+                            temperature in the center of the fire, <br>the rate of CO2 (carbon dioxide) which allows
+                            safe interventions of firefighters knowing the direction of <br>the wind and the speed of
+                            propagation.</p>
                     </div>
                 </div>
             </div>
@@ -751,97 +841,97 @@
         </div>
     </div>
     <!-- End Testimonial Section -->
-    
+
     <!-- Start About Us Section 2 -->
     <div class="about-us-section-2">
         <div class="container">
             <div class="row">
-                
-                
+
+
                 <div class="col-md-6">
                     <div class="skill-shortcode">
-                        
+
                         <!-- Progress Bar -->
                         <div class="skill">
-                            <p>Lora E5/STM32wl</p>          
-                            <div class="progress">         
-                                <div class="progress-bar" role="progressbar"  data-percentage="95">
-                                    <span class="progress-bar-span" >95%</span>
+                            <p>Lora E5/STM32wl</p>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" data-percentage="95">
+                                    <span class="progress-bar-span">95%</span>
                                     <span class="sr-only">95% Complete</span>
                                 </div>
-                            </div>  
+                            </div>
                         </div>
-                        
+
                         <!-- Progress Bar -->
                         <div class="skill">
-                            <p>Lora</p>          
-                            <div class="progress">         
-                                <div class="progress-bar" role="progressbar"  data-percentage="80">
-                                    <span class="progress-bar-span" >80%</span>
+                            <p>Lora</p>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" data-percentage="80">
+                                    <span class="progress-bar-span">80%</span>
                                     <span class="sr-only">80% Complete</span>
                                 </div>
-                            </div>  
+                            </div>
                         </div>
-                        
+
                         <!-- Progress Bar -->
                         <div class="skill">
-                            <p>HTML & CSS</p>          
-                            <div class="progress">         
-                                <div class="progress-bar" role="progressbar"  data-percentage="60">
-                                    <span class="progress-bar-span" >60%</span>
+                            <p>HTML & CSS</p>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" data-percentage="60">
+                                    <span class="progress-bar-span">60%</span>
                                     <span class="sr-only">60%</span>
                                 </div>
-                            </div>  
+                            </div>
                         </div>
-                        
+
                         <!-- Progress Bar -->
                         <div class="skill">
-                            <p>Django</p>          
-                            <div class="progress">         
-                                <div class="progress-bar" role="progressbar"  data-percentage="50">
-                                    <span class="progress-bar-span" >50%</span>
+                            <p>Django</p>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" data-percentage="50">
+                                    <span class="progress-bar-span">50%</span>
                                     <span class="sr-only">50% Complete</span>
                                 </div>
-                            </div>  
+                            </div>
                         </div>
-                        
+
                         <!-- Progress Bar -->
                         <div class="skill">
-                            <p>GeoDjango</p>          
-                            <div class="progress">         
-                                <div class="progress-bar" role="progressbar"  data-percentage="60">
-                                    <span class="progress-bar-span" >60%</span>
+                            <p>GeoDjango</p>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" data-percentage="60">
+                                    <span class="progress-bar-span">60%</span>
                                     <span class="sr-only">60% Complete</span>
                                 </div>
-                            </div>  
+                            </div>
                         </div>
 
                         <!-- Progress Bar -->
                         <div class="skill">
-                            <p>Leaflet</p>          
-                            <div class="progress">         
-                                <div class="progress-bar" role="progressbar"  data-percentage="70">
-                                    <span class="progress-bar-span" >70%</span>
+                            <p>Leaflet</p>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" data-percentage="70">
+                                    <span class="progress-bar-span">70%</span>
                                     <span class="sr-only">70% Complete</span>
                                 </div>
-                            </div>  
+                            </div>
                         </div>
 
                         <!-- Progress Bar -->
                         <div class="skill">
-                            <p>embedded C</p>          
-                            <div class="progress">         
-                                <div class="progress-bar" role="progressbar"  data-percentage="90">
-                                    <span class="progress-bar-span" >90%</span>
+                            <p>embedded C</p>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" data-percentage="90">
+                                    <span class="progress-bar-span">90%</span>
                                     <span class="sr-only">90% Complete</span>
                                 </div>
-                            </div>  
+                            </div>
                         </div>
 
-                                                            
+
                     </div>
                 </div>
-                
+
                 <div class="col-md-6">
                     <div id="carousel-example-generic" class="carousel slide about-slide" data-ride="carousel">
                         <!-- Indicators -->
@@ -854,24 +944,27 @@
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner">
                             <div class="item active">
-                                <img src="{% static 'home/images/testimonial/sol.jpg' %}"  class="img-responsive" alt="...">
+                                <img src="{% static 'home/images/testimonial/sol.jpg' %}" class="img-responsive"
+                                    alt="...">
                             </div>
                             <div class="item">
-                                <img src="{% static 'home/images/testimonial/sol.jpg' %}" class="img-responsive" alt="...">
+                                <img src="{% static 'home/images/testimonial/sol.jpg' %}" class="img-responsive"
+                                    alt="...">
                             </div>
                             <div class="item">
-                                <img src="{% static 'home/images/testimonial/sol.jpg' %}" class="img-responsive" alt="...">
+                                <img src="{% static 'home/images/testimonial/sol.jpg' %}" class="img-responsive"
+                                    alt="...">
                             </div>
                         </div>
-    
+
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
     <!-- Start About Us Section 2 -->
-    
+
     <!-- Start Latest News Section -->
     <section id="latest-news" class="latest-news-section">
         <div class="container">
@@ -887,54 +980,64 @@
                 <div class="latest-news">
                     <div class="col-md-12" style="height: 465.9px;">
                         <div class="latest-post">
-                            <img src="{% static 'home/images/latest/prix.jpeg' %}" class="img-responsive" alt="" style="height: 239.59px;">
+                            <img src="{% static 'home/images/latest/prix.jpeg' %}" class="img-responsive" alt=""
+                                style="height: 239.59px;">
                             <h4><a href="#">1st Prize at the National GreenTic Competition</a></h4>
                             <div class="post-details">
-                                <span class="date"><strong>15</strong> <br>Oct , 2022</span>                                
+                                <span class="date"><strong>15</strong> <br>Oct , 2022</span>
                             </div>
                             <div style="height: 99px;">
-                                <p>Smart For Green crowns top prize nationally at International Salon for Agricultural Investment and Technology.</p>
+                                <p>Smart For Green crowns top prize nationally at International Salon for Agricultural
+                                    Investment and Technology.</p>
                             </div>
                             <a href="#" class="btn btn-primary">Read More</a>
                         </div>
                     </div>
                     <div class="col-md-12" style="height: 465.9px;">
                         <div class="latest-post">
-                            <img src="{% static 'home/images/latest/pp.jpeg' %}" class="img-responsive" alt="" style="height: 239.59px;">
+                            <img src="{% static 'home/images/latest/pp.jpeg' %}" class="img-responsive" alt=""
+                                style="height: 239.59px;">
                             <h4 style="height: 64px;"><a href="#">1st winner of "GO GREEN"</a></h4>
                             <div class="post-details">
-                                <span class="date"><strong>17</strong> <br>Nov , 2022</span> 
+                                <span class="date"><strong>17</strong> <br>Nov , 2022</span>
                             </div>
                             <div style="height: 99px;">
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                                    laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+                                    architecto beatae vitae dicta sunt explicabo.</p>
                             </div>
                             <a href="#" class="btn btn-primary">Read More</a>
                         </div>
                     </div>
                     <div class="col-md-12" style="height: 465.9px;">
                         <div class="latest-post">
-                            <img src="{% static 'home/images/latest/tds.jpg' %}" class="img-responsive" alt="" style="height: 239.59px;">
+                            <img src="{% static 'home/images/latest/tds.jpg' %}" class="img-responsive" alt=""
+                                style="height: 239.59px;">
                             <h4><a href="#">1st Prize at the Tunisia Digital Summit for the best Startup</a></h4>
                             <div class="post-details">
                                 <span class="date"><strong>21</strong> <br>juin , 2023</span>
-                                
+
                             </div>
                             <div style="height: 99px;">
-                                <p>This winner is offered by the Minister of Communication Technologies Mr. NIZAR BEN NEJI and the Minister of the Environment Mm Laila Chikhaoui under the patronage of the Head of Government Mm Najla Bouden.</p>
+                                <p>This winner is offered by the Minister of Communication Technologies Mr. NIZAR BEN
+                                    NEJI and the Minister of the Environment Mm Laila Chikhaoui under the patronage of
+                                    the Head of Government Mm Najla Bouden.</p>
                             </div>
                             <a href="#" class="btn btn-primary">Read More</a>
                         </div>
                     </div>
                     <div class="col-md-12" style="height: 465.9px;">
                         <div class="latest-post">
-                            <img src="{% static 'home/images/latest/startup.jpg' %}" class="img-responsive" alt="" style="height: 239.59px;">
+                            <img src="{% static 'home/images/latest/startup.jpg' %}" class="img-responsive" alt=""
+                                style="height: 239.59px;">
                             <h4><a href="#">Smart For Green is an officially certified Startup</a></h4>
                             <div class="post-details">
                                 <span class="date"><strong>14</strong> <br>Sept, 2023</span>
-                                
+
                             </div>
                             <div style="height: 99px;">
-                                <p>Smart For Green received the “Startup” label (June 2023 session) from the Minister of ICT, Mr. Nizar ben Neji.</p>
+                                <p>Smart For Green received the “Startup” label (June 2023 session) from the Minister of
+                                    ICT, Mr. Nizar ben Neji.</p>
                             </div>
                             <a href="#" class="btn btn-primary">Read More</a>
                         </div>
@@ -948,7 +1051,7 @@
 
 
     <!-- contact -->
-    
+
     <section id="contact" class="contact">
         <div class="container">
             <div class="row">
@@ -974,7 +1077,8 @@
                         <i class="fa fa-map-marker"></i>
                         <div class="feature-content">
                             <h3 style="color: white;">Address</h3>
-                            <p style="color: white;">Smart For Green<br>Lot fathallah,Ras Jebel<br>7070, Bizerte, Tunisie</p>
+                            <p style="color: white;">Smart For Green<br>Lot fathallah,Ras Jebel<br>7070, Bizerte,
+                                Tunisie</p>
                         </div>
                     </div>
                 </div><!-- /.col-md-3 -->
@@ -1002,14 +1106,18 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 col-xs-12">
-                        <span class="copyright">Copyright &copy; <a href="{% url 'home' %}">SmartForGreen</a> 2022</span>
+                        <span class="copyright">Copyright &copy; <a href="{% url 'home' %}">SmartForGreen</a>
+                            2022</span>
                     </div>
                     <div class="col-md-4 col-xs-12">
                         <div class="footer-social text-center">
                             <ul>
-                                <li><a href="https://www.youtube.com/@smartforgreen" target="_blank"><i class="fa fa-youtube"></i></a></li>
-                                <li><a href="https://www.facebook.com/SmartForGreen" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="https://www.linkedin.com/company/smart4green/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="https://www.youtube.com/@smartforgreen" target="_blank"><i
+                                            class="fa fa-youtube"></i></a></li>
+                                <li><a href="https://www.facebook.com/SmartForGreen" target="_blank"><i
+                                            class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://www.linkedin.com/company/smart4green/" target="_blank"><i
+                                            class="fa fa-linkedin"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -1046,8 +1154,8 @@
     <script src="{% static 'home/js/jquery.easing.1.3.js' %}"></script>
     <script src="{% static 'home/js/cbpAnimatedHeader.js' %}"></script>
     <script src="{% static 'home/js/owl.carousel.min.js' %}"></script>
-	<script src="{% static 'home/js/jquery.fitvids.js' %}"></script>
-	<script src="{% static 'home/js/styleswitcher.js' %}"></script>
+    <script src="{% static 'home/js/jquery.fitvids.js' %}"></script>
+    <script src="{% static 'home/js/styleswitcher.js' %}"></script>
     <script src="{% static 'home/js/jquery.appear.js' %}"></script>
     <script src="{% static 'home/js/count-to.js' %}"></script>
     <script src="{% static 'home/js/classie.js' %}"></script>
