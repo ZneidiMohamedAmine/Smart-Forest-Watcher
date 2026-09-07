@@ -209,6 +209,8 @@ jobs:
           timeout: 30s
           command_timeout: 10m
           script: |
+            set -euo pipefail
+
             echo "===== SSH SUCCESS ====="
             whoami
             hostname
@@ -235,9 +237,12 @@ jobs:
             cd /opt/smart-forest-watcher
 
             echo "Pulling latest image..."
-            docker compose  pull
-  
+            docker compose --env-file config.env pull
+
             echo "Restarting containers..."
-            docker compose  up -d
-  
+            docker compose --env-file config.env up -d
+
+            echo "Container status:"
+            docker compose --env-file config.env ps
+
             echo "Deployment finished"
