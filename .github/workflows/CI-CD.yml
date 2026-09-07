@@ -173,13 +173,39 @@ jobs:
     runs-on: ubuntu-latest
   
     steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Prepare deploy directory
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ubuntu
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: 2222
+          timeout: 30s
+          script: |
+            sudo mkdir -p /opt/smart-forest-watcher
+            sudo chown ubuntu:ubuntu /opt/smart-forest-watcher
+
+      - name: Copy compose files and Prometheus config to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ubuntu
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: 2222
+          source: "docker-compose.yml,docker-compose.mlops.yml,monitoring/prometheus.yml"
+          target: /opt/smart-forest-watcher
+          strip_components: 0
+
       - name: Deploy to server
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ubuntu
           key: ${{ secrets.SERVER_SSH_KEY }}
-          port: 22
+          port: 2222
           timeout: 30s
           command_timeout: 10m
           script: |
@@ -206,9 +232,8 @@ jobs:
             echo "Compose:"
             docker compose version
 
-            sudo mkdir -p /opt/smart-forest-watcher
             cd /opt/smart-forest-watcher
-  
+
             echo "Pulling latest image..."
             docker compose  pull
   
