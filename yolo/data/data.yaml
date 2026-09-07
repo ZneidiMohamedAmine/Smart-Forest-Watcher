@@ -5,10 +5,10 @@
 # NOTE: verify the class index order (0/1) against the actual label files you pull --
 # the repo's README doesn't pin this down explicitly, so double check a few .txt
 # annotations against their images before trusting this mapping.
-path: data/D-Fire   # Ultralytics resolves this relative to yolo/ (this file's parent
-                     # dir), not relative to this file itself -- verified against the
-                     # actual CI error, which showed it landing one level too high
-                     # with the previous '../data/D-Fire'.
+path: D-Fire   # placeholder -- yolo/scripts/train.py's fetch_dataset() rewrites this
+               # to an absolute path at runtime before use. Ultralytics resolves a
+               # relative 'path:' against its own datasets_dir setting, not against
+               # this file's location, so no relative value here is ever reliable.
 train: train/images
 val: test/images       # D-Fire ships train/ and test/ splits, no separate val/
 

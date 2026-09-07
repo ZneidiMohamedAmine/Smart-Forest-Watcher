@@ -60,13 +60,25 @@ def fetch_dataset(dataset_version: str) -> str:
     else:
         print(f"Reusing existing dataset checkout at {data_dir}")
 
-    data_yaml = Path("yolo/data/data.yaml")
-    if not data_yaml.exists():
+    template_yaml = Path("yolo/data/data.yaml")
+    if not template_yaml.exists():
         raise FileNotFoundError(
-            f"Expected dataset config at {data_yaml}. "
+            f"Expected dataset config at {template_yaml}. "
             "See yolo/data/data.yaml for the expected D-Fire layout."
         )
-    return str(data_yaml)
+
+    # Ultralytics resolves a relative 'path:' against its own global
+    # datasets_dir setting (<cwd>/datasets by default), not against the yaml
+    # file's location -- so a relative path here is never reliably correct
+    # regardless of where this script is invoked from. Generate a copy with
+    # an absolute path instead, sidestepping that resolution entirely.
+    import yaml as _yaml
+    config = _yaml.safe_load(template_yaml.read_text())
+    config["path"] = str(data_dir.resolve())
+    generated_yaml = Path("runs") / "data.yaml"
+    generated_yaml.parent.mkdir(parents=True, exist_ok=True)
+    generated_yaml.write_text(_yaml.safe_dump(config))
+    return str(generated_yaml)
 
 
 def main():
