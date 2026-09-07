@@ -208,7 +208,15 @@ services:
     container_name: fire_postgres_exporter
 
     environment:
-      DATA_SOURCE_NAME: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}?sslmode=disable"
+      # Individual PG* vars instead of a DATA_SOURCE_NAME URL -- a password
+      # containing URL-reserved characters (@, :, /, #, %, etc.) breaks URL
+      # parsing when interpolated raw into a DSN string.
+      PGHOST: db
+      PGPORT: "5432"
+      PGUSER: ${POSTGRES_USER}
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+      PGDATABASE: ${POSTGRES_DB}
+      PGSSLMODE: disable
 
     depends_on:
       db:
