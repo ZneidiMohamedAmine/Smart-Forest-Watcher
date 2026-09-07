@@ -182,7 +182,7 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ubuntu
           key: ${{ secrets.SERVER_SSH_KEY }}
-          port: 2222
+          port: 22
           timeout: 30s
           script: |
             sudo mkdir -p /opt/smart-forest-watcher
@@ -194,7 +194,7 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ubuntu
           key: ${{ secrets.SERVER_SSH_KEY }}
-          port: 2222
+          port: 22
           source: "docker-compose.yml,docker-compose.mlops.yml,monitoring/prometheus.yml"
           target: /opt/smart-forest-watcher
           strip_components: 0
@@ -205,7 +205,7 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ubuntu
           key: ${{ secrets.SERVER_SSH_KEY }}
-          port: 2222
+          port: 22
           timeout: 30s
           command_timeout: 10m
           script: |
