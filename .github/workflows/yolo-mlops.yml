@@ -26,6 +26,10 @@ on:
 env:
   PYTHON_VERSION: "3.11"
   MODEL_NAME: "smart-forest-yolo"
+  # A newer mlflow now hard-blocks the filesystem tracking backend unless
+  # explicitly opted into -- this pipeline uses file:./mlruns on purpose
+  # (ephemeral runner, no real MLflow server; see train.py's comment).
+  MLFLOW_ALLOW_FILE_STORE: "true"
 
 jobs:
   # ────────────────────────────────────────────────────────────
