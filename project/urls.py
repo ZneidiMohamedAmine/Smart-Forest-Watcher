@@ -1,7 +1,8 @@
 from django.contrib import admin
-from django.urls    import path, include
+from django.urls    import path, re_path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.static import serve
 from project.health_check import health_check, readiness_check, liveness_check
 
 urlpatterns = [
@@ -20,8 +21,13 @@ urlpatterns = [
 ]
 
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
 if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+else:
+    # static() is a no-op when DEBUG=False; no nginx/reverse proxy fronts media
+    # files in this deployment, so serve them directly via Django instead.
+    urlpatterns += [
+        re_path(r'^%s(?P<path>.*)$' % settings.MEDIA_URL.lstrip('/'), serve, {'document_root': settings.MEDIA_ROOT}),
+    ]
 
