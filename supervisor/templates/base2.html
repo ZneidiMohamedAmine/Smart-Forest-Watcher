@@ -322,6 +322,13 @@
                     <span>{% trans "TTN Sensor Apps" %}</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{% url 'supervisor:list_drones' %}"
+                    class="nav-link {% if request.resolver_match.url_name == 'list_drones' %}active{% endif %}">
+                    <i class="fas fa-helicopter"></i>
+                    <span>{% trans "Drones" %}</span>
+                </a>
+            </li>
             <li class="mt-4 border-top border-secondary pt-3">
                 <a href="{% url 'logout_supervisor' %}" class="nav-link text-danger">
                     <i class="fas fa-sign-out-alt"></i>

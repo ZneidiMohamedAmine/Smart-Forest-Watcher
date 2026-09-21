@@ -539,18 +539,36 @@
 
             <!-- Body -->
             <div class="det-body">
-                <!-- Camera -->
+                <!-- Camera or Drone -->
                 <div class="det-meta-row">
+                    {% if det.drone %}
+                    <i class="fas fa-helicopter"></i>
+                    <span><strong>{% trans "Drone:" %}</strong> {{ det.drone.name }} <span class="text-muted">({{ det.drone.drone_id }})</span></span>
+                    {% else %}
                     <i class="fas fa-video"></i>
                     <span><strong>{% trans "Camera:" %}</strong> {{ det.camera.name }} <span class="text-muted">({{ det.camera.camera_id }})</span></span>
+                    {% endif %}
                 </div>
                 <!-- Project -->
                 <div class="det-meta-row">
                     <i class="fas fa-project-diagram"></i>
-                    <span><strong>{% trans "Project:" %}</strong> {{ det.camera.project.name }}</span>
+                    <span><strong>{% trans "Project:" %}</strong> {{ det.project.name }}</span>
                 </div>
                 <!-- GPS -->
-                {% if det.camera.latitude and det.camera.longitude %}
+                {% if det.drone %}
+                    {% if det.drone.latitude and det.drone.longitude %}
+                    <div class="det-meta-row">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span><strong>{% trans "Position:" %}</strong>
+                            <a href="https://maps.google.com/?q={{ det.drone.latitude }},{{ det.drone.longitude }}"
+                                target="_blank" class="text-success text-decoration-none">
+                                {{ det.drone.latitude|floatformat:4 }}, {{ det.drone.longitude|floatformat:4 }}
+                                <i class="fas fa-external-link-alt ms-1" style="font-size:0.7rem;"></i>
+                            </a>
+                        </span>
+                    </div>
+                    {% endif %}
+                {% elif det.camera.latitude and det.camera.longitude %}
                 <div class="det-meta-row">
                     <i class="fas fa-map-marker-alt"></i>
                     <span><strong>{% trans "Position:" %}</strong>

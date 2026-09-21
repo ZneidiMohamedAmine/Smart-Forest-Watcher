@@ -2,6 +2,7 @@ from django.contrib.gis.db import models
 from django.contrib.auth.models import User
 from supervisor.models.project   import Project
 from supervisor.models.parcelle  import Parcelle
+from drone_management.models     import Drone
 
 
 class Camera(models.Model):
@@ -27,11 +28,18 @@ class Camera(models.Model):
 
 class Detection(models.Model):
     """
-    Stores fire detection images for a camera.
+    Stores fire detection images for a camera OR a drone — exactly one of
+    `camera`/`drone` is set per row (enforced in the two upload endpoints,
+    not a DB constraint, matching this codebase's existing light-validation
+    style). `project` is denormalized from whichever source is set so every
+    view can filter/order by project without caring which source it came
+    from — see camera_management/views.py's detection_history/review_queue.
     ForeignKey allows a full history — the latest is ordered first by detected_at.
     bounding_boxes: list of {x1, y1, x2, y2, confidence} dicts from YOLO output.
     """
-    camera           = models.ForeignKey(Camera, on_delete=models.CASCADE, related_name='detections')
+    camera           = models.ForeignKey(Camera, on_delete=models.CASCADE, related_name='detections', null=True, blank=True)
+    drone            = models.ForeignKey(Drone,  on_delete=models.CASCADE, related_name='detections', null=True, blank=True)
+    project          = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='detections', null=True, blank=True)
     confidence_score = models.FloatField()
     bounding_boxes   = models.JSONField(blank=True, null=True)
     image            = models.ImageField(upload_to='detections/')
@@ -41,8 +49,14 @@ class Detection(models.Model):
     is_confirmed      = models.BooleanField(null=True, blank=True) # None=pending, True=confirmed, False=rejected
 
 
+    @property
+    def source(self):
+        """The Camera or Drone this detection came from, whichever is set."""
+        return self.camera or self.drone
+
     def __str__(self):
-        return f"🔥 Fire @ {self.camera.name}  |  conf={self.confidence_score:.2f}  |  {self.detected_at:%Y-%m-%d %H:%M}"
+        source_name = self.source.name if self.source else 'unknown source'
+        return f"🔥 Fire @ {source_name}  |  conf={self.confidence_score:.2f}  |  {self.detected_at:%Y-%m-%d %H:%M}"
 
 
 class StagedCorrection(models.Model):

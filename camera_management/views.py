@@ -177,7 +177,7 @@ def delete_detection(request, detection_id):
 
     # Ensure client owns the project
     try:
-        project_client = detection.camera.project.client
+        project_client = detection.project.client
     except Exception as exc:
         log.error("delete_detection: could not resolve project.client for detection %d: %s", detection_id, exc)
         return JsonResponse({'error': 'Server error resolving ownership'}, status=500)
@@ -222,8 +222,8 @@ def detection_history(request):
 
     my_projects = accessible_projects(request.user)
 
-    qs = Detection.objects.filter(camera__project__in=my_projects).select_related(
-        'camera', 'camera__project', 'camera__project__client'
+    qs = Detection.objects.filter(project__in=my_projects).select_related(
+        'camera', 'drone', 'project', 'project__client'
     ).order_by('-detected_at')
 
     # ── Filters ───────────────────────────────────────────────────────────────
@@ -233,7 +233,7 @@ def detection_history(request):
     date_to    = request.GET.get('date_to')
 
     if project_id:
-        qs = qs.filter(camera__project__polygon_id=project_id)
+        qs = qs.filter(project__polygon_id=project_id)
 
     if status == 'confirmed':
         qs = qs.filter(is_confirmed=True)
@@ -287,10 +287,10 @@ def delete_detection_supervisor(request, detection_id):
         return JsonResponse({'error': 'POST only'}, status=405)
 
     from .models import Detection
-    detection = Detection.objects.select_related('camera__project').filter(id=detection_id).first()
+    detection = Detection.objects.select_related('project').filter(id=detection_id).first()
     if detection is None:
         return JsonResponse({'error': f'Detection {detection_id} not found'}, status=404)
-    if not can_access_project(request.user, detection.camera.project):
+    if not can_access_project(request.user, detection.project):
         return JsonResponse({'error': 'Not authorized for this project.'}, status=403)
 
     detection.delete()
@@ -305,10 +305,10 @@ def update_detection_status(request, detection_id):
         return JsonResponse({'error': 'POST only'}, status=405)
 
     from .models import Detection
-    detection = Detection.objects.select_related('camera__project').filter(id=detection_id).first()
+    detection = Detection.objects.select_related('project').filter(id=detection_id).first()
     if detection is None:
         return JsonResponse({'error': f'Detection {detection_id} not found'}, status=404)
-    if not can_access_project(request.user, detection.camera.project):
+    if not can_access_project(request.user, detection.project):
         return JsonResponse({'error': 'Not authorized for this project.'}, status=403)
 
     try:
@@ -350,8 +350,8 @@ def review_queue(request):
 
     qs = (
         Detection.objects
-        .filter(staged_corrections__isnull=True, camera__project__in=accessible_projects(request.user))
-        .select_related('camera', 'camera__project')
+        .filter(staged_corrections__isnull=True, project__in=accessible_projects(request.user))
+        .select_related('camera', 'drone', 'project')
         .order_by('-detected_at')
     )
 
@@ -374,8 +374,8 @@ def review_detection(request, detection_id):
     """
     from .models import Detection, StagedCorrection
 
-    detection = get_object_or_404(Detection.objects.select_related('camera__project'), pk=detection_id)
-    if not can_access_project(request.user, detection.camera.project):
+    detection = get_object_or_404(Detection.objects.select_related('project'), pk=detection_id)
+    if not can_access_project(request.user, detection.project):
         return JsonResponse({'error': 'Not authorized for this project.'}, status=403)
 
     if request.method == 'POST':
@@ -437,7 +437,7 @@ def bulk_review_no_class(request):
     detections = Detection.objects.filter(
         id__in=detection_ids,
         staged_corrections__isnull=True,
-        camera__project__in=accessible_projects(request.user),
+        project__in=accessible_projects(request.user),
     )
 
     processed_ids = []

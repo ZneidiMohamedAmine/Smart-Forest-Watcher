@@ -25,26 +25,30 @@ def send_camera_alert(detection_id: int):
     from camera_management.models import Detection   # late import avoids circular
     try:
         detection = Detection.objects.select_related(
-            'camera__project__client',
-            'camera__parcelle',
+            'camera__parcelle', 'drone', 'project__client',
         ).get(pk=detection_id)
     except Detection.DoesNotExist:
         return
 
     camera  = detection.camera
-    project = camera.project or (camera.parcelle.project if camera.parcelle else None)
-    if not project:
+    drone   = detection.drone
+    source  = camera or drone
+    source_type  = 'camera' if camera else 'drone'
+    source_label = 'Camera' if camera else 'Drone'
+    project = detection.project
+    if not source or not project:
         return
 
     client  = project.client
-    parcelle_name = camera.parcelle.name if camera.parcelle else 'Unknown'
+    parcelle_name = camera.parcelle.name if (camera and camera.parcelle) else None
 
     # ── 2. WebSocket push ────────────────────────────────────────────────────
     payload = json.dumps({
         "type":               "camera_alert",
-        "camera_id":          camera.camera_id,
-        "camera_name":        camera.name,
-        "parcelle":           parcelle_name,
+        "source_type":        source_type,
+        "camera_id":          camera.camera_id if camera else None,
+        "camera_name":        source.name,
+        "parcelle":           parcelle_name or 'N/A',
         "project":            project.name,
         "confidence":         detection.confidence_score,
         "image_url":          detection.image.url,
@@ -60,10 +64,11 @@ def send_camera_alert(detection_id: int):
         {"type": "camera_message", "text": payload}
     )
     # ── 3. Email alert ───────────────────────────────────────────────────────
-    subject  = f"🔥 Fire Detected — {camera.name} ({project.name})"
+    subject  = f"🔥 Fire Detected — {source.name} ({project.name})"
+    location_bit = f"in parcelle '{parcelle_name}', " if parcelle_name else ""
     message  = (
-        f"Fire was detected by camera '{camera.name}' "
-        f"in parcelle '{parcelle_name}', project '{project.name}'.\n\n"
+        f"Fire was detected by {source_type} '{source.name}' "
+        f"{location_bit}project '{project.name}'.\n\n"
         f"Confidence: {detection.confidence_score * 100:.1f}%\n"
         f"Detected at: {detection.detected_at:%Y-%m-%d %H:%M UTC}\n\n"
         f"Please check the dashboard immediately."

@@ -108,22 +108,26 @@ def send_mobile_notification(user_id, title, body='', data=None, camera=None, de
 
 def notify_client_for_detection(detection):
     camera = detection.camera
-    project = camera.project or (camera.parcelle.project if camera.parcelle else None)
+    drone  = detection.drone
+    source = camera or drone
+    source_type = 'camera' if camera else 'drone'
+    project = detection.project
     client = project.client if project else None
-    if not client or not client.email:
+    if not source or not client or not client.email:
         return None
 
-    parcelle_name = camera.parcelle.name if camera.parcelle else 'Unknown'
-    title = f"Fire Detected — {camera.name} ({project.name})"
+    parcelle_name = camera.parcelle.name if (camera and camera.parcelle) else None
+    title = f"Fire Detected — {source.name} ({project.name})"
+    location_bit = f" in '{parcelle_name}'" if parcelle_name else ""
     body = (
-        f"Camera '{camera.name}' detected fire in '{parcelle_name}'.\n"
+        f"{source_type.capitalize()} '{source.name}' detected fire{location_bit}.\n"
         f"Confidence: {detection.confidence_score * 100:.1f}%\n"
         f"Time: {detection.detected_at:%Y-%m-%d %H:%M UTC}"
     )
     data = {
-        'source': 'camera',
-        'camera_id': camera.camera_id,
-        'camera_name': camera.name,
+        'source': source_type,
+        'camera_id': camera.camera_id if camera else None,
+        'camera_name': source.name,
         'parcelle': parcelle_name,
         'project': project.name,
         'confidence': detection.confidence_score,
@@ -142,17 +146,20 @@ def notify_client_for_detection(detection):
 def notify_client_of_false_alarm(detection):
     """A supervisor reviewed a prior fire alert and marked it a false positive."""
     camera = detection.camera
-    project = camera.project or (camera.parcelle.project if camera.parcelle else None)
+    drone  = detection.drone
+    source = camera or drone
+    source_type = 'camera' if camera else 'drone'
+    project = detection.project
     client = project.client if project else None
-    if not client or not client.email:
+    if not source or not client or not client.email:
         return None
 
-    title = f"False Alarm — {camera.name} ({project.name})"
-    body = f"The fire alert from camera '{camera.name}' on {detection.detected_at:%Y-%m-%d %H:%M UTC} was reviewed and confirmed to be a false alarm."
+    title = f"False Alarm — {source.name} ({project.name})"
+    body = f"The fire alert from {source_type} '{source.name}' on {detection.detected_at:%Y-%m-%d %H:%M UTC} was reviewed and confirmed to be a false alarm."
     data = {
-        'source': 'camera',
-        'camera_id': camera.camera_id,
-        'camera_name': camera.name,
+        'source': source_type,
+        'camera_id': camera.camera_id if camera else None,
+        'camera_name': source.name,
         'project': project.name,
     }
     return send_mobile_notification(

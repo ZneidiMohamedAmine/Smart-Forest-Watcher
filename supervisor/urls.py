@@ -1,6 +1,7 @@
 from django.urls    import path
 from .              import views
 from camera_management import views as cam_views
+from drone_management   import views as drone_views
 
 
 app_name = 'supervisor'
@@ -54,6 +55,12 @@ urlpatterns = [
     path('ttn_credentials/', views.list_ttn_credentials, name='list_ttn_credentials'),
     path('ttn_credentials/add/', views.add_ttn_credential, name='add_ttn_credential'),
     path('ttn_credentials/delete/<int:pk>/', views.delete_ttn_credential, name='delete_ttn_credential'),
+
+        #######* CRUD OF Drones  ##########
+    path('drones/', drone_views.list_drones, name='list_drones'),
+    path('drones/add/', drone_views.add_drone, name='add_drone'),
+    path('drones/<int:pk>/edit/', drone_views.update_drone, name='update_drone'),
+    path('drones/<int:pk>/delete/', drone_views.delete_drone, name='delete_drone'),
 ]
 
 

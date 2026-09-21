@@ -242,8 +242,8 @@
                 {% endif %}
             </div>
             <div class="review-body" onclick="toggleCardSelection(event, {{ det.id }})">
-                <div class="fw-bold mb-1">{{ det.camera.name }}</div>
-                <div class="review-meta">{{ det.camera.project.name }} &middot; {{ det.detected_at|date:"N j, g:i a" }}</div>
+                <div class="fw-bold mb-1">{% if det.drone %}<i class="fas fa-helicopter"></i> {{ det.drone.name }}{% else %}{{ det.camera.name }}{% endif %}</div>
+                <div class="review-meta">{{ det.project.name }} &middot; {{ det.detected_at|date:"N j, g:i a" }}</div>
                 <div class="review-meta">{{ det.bounding_boxes|length }} {% trans "box(es) from YOLO" %}</div>
             </div>
         </div>

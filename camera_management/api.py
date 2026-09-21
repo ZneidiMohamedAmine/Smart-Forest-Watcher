@@ -86,6 +86,7 @@ async def receive_detection(request):
     def save_detection():
         return Detection.objects.create(
             camera           = camera,
+            project          = camera.project,
             confidence_score = confidence,
             bounding_boxes   = bounding_boxes,
             image            = image,
