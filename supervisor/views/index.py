@@ -9,6 +9,7 @@ from supervisor.models.parcelle     import Parcelle
 from supervisor.models.node         import Node
 from supervisor.models.data         import Data
 from camera_management.models       import Camera, Detection
+from drone_management.models        import Drone
 
 @login_required(login_url='supervisor_login')
 @supervisor_required
@@ -29,6 +30,13 @@ def index(request):
 @supervisor_required
 def get_all_assets(request):
     projects = accessible_projects(request.user).prefetch_related(
+        Prefetch(
+            'drones',
+            queryset=Drone.objects.prefetch_related(
+                Prefetch('detections', queryset=Detection.objects.order_by('-detected_at'), to_attr='latest_detections')
+            ),
+            to_attr='prefetched_drones',
+        ),
         Prefetch(
             'parcelle',
             queryset=Parcelle.objects.prefetch_related(
@@ -51,6 +59,30 @@ def get_all_assets(request):
     data = []
     
     for project in projects:
+        drone_data = []
+        for drone in project.prefetched_drones:
+            latest_detection = drone.latest_detections[0] if drone.latest_detections else None
+            image_url = None
+            if latest_detection and latest_detection.image:
+                try:
+                    image_url = latest_detection.image.url
+                except ValueError:
+                    pass
+
+            drone_data.append({
+                'id':                 drone.id,
+                'name':               drone.name,
+                'drone_id':           drone.drone_id,
+                'is_active':          drone.is_active,
+                'latitude':           float(drone.latitude) if drone.latitude else None,
+                'longitude':          float(drone.longitude) if drone.longitude else None,
+                'battery_level':      drone.battery_level,
+                'last_seen':          drone.last_seen.strftime('%Y-%m-%d %H:%M:%S') if drone.last_seen else None,
+                'has_alert':          latest_detection is not None and latest_detection.is_confirmed is not False,
+                'latest_alert_image': image_url,
+                'latest_alert_time':  latest_detection.detected_at.strftime('%Y-%m-%d %H:%M:%S') if latest_detection else None,
+            })
+
         parcelles_data = []
         parcelles = project.prefetched_parcelles
         for parcelle in parcelles:
@@ -98,7 +130,8 @@ def get_all_assets(request):
         data.append({
             'project_id': project.pk,
             'project_name': project.name,
-            'parcelles': parcelles_data
+            'parcelles': parcelles_data,
+            'drones': drone_data
         })
         
     return JsonResponse({'projects': data}, status=200)

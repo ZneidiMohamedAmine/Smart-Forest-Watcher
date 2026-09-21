@@ -59,6 +59,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 className: '',
                 iconSize: [40, 40], iconAnchor: [20, 40], popupAnchor: [0, -40]
             });
+            const droneIcon = L.divIcon({
+                html: '<div style="background-color: white; border-radius: 50%; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.5); border: 2px solid #0ea5e9; font-size: 20px;">🚁</div>',
+                className: '',
+                iconSize: [36, 36], iconAnchor: [18, 36], popupAnchor: [0, -36]
+            });
 
             function getColorFromPrediction(fwi_predit) {
                 if (fwi_predit < 11.2) return 'green';
@@ -130,6 +135,35 @@ document.addEventListener('DOMContentLoaded', function() {
                     `;
             }
 
+            function generateDronePopupContent(drone, projectName) {
+                let alertContent = '';
+                if (drone.has_alert && drone.latest_alert_image) {
+                    alertContent = `
+                        <div style="margin-top: 10px; text-align: center;">
+                            <p style="font-weight: bold; color: red; margin-bottom: 5px;">🔥 Latest Alert (${drone.latest_alert_time})</p>
+                            <img src="${drone.latest_alert_image}" style="width: 100%; max-width: 200px; border-radius: 5px; border: 2px solid red;" alt="Alert Image" />
+                        </div>
+                    `;
+                }
+
+                return `
+                        <div class="node-popup">
+                            <div class="node-label" style="background-color: ${drone.has_alert ? 'red' : '#0ea5e9'}; color: white; padding: 2px 6px; border-radius:3px; display:inline-block; font-weight:bold; margin-bottom:5px;">Drone</div><br>
+                            <b>Project:</b> ${projectName}<br>
+                            <b>Name:</b> ${drone.name}<br>
+                            <b>Drone ID:</b> ${drone.drone_id || 'N/A'}<br>
+                            <b>Status:</b> ${drone.is_active ? 'Active' : 'Inactive'}<br>
+                            <b>Battery:</b> ${drone.battery_level != null ? drone.battery_level + '%' : 'N/A'}<br>
+                            <b>Last seen:</b> ${drone.last_seen || 'N/A'}<br>
+                            <b>Alert State:</b>
+                            <span style="color: ${drone.has_alert ? 'red' : 'green'}; font-weight: bold;">
+                                ${drone.has_alert ? '🔥 FIRE DETECTED' : 'Safe'}
+                            </span><br>
+                            ${alertContent}
+                        </div>
+                    `;
+            }
+
             // Fetch and render all assets globally
             fetch('/dashboard_super/get_all_assets/')
                 .then(r => r.json())
@@ -138,6 +172,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     const bounds = [];
 
                     data.projects.forEach(project => {
+                        // Render Drones — project-level, not tied to a parcelle since they move freely
+                        (project.drones || []).forEach(d => {
+                            if (d.latitude && d.longitude) {
+                                const dMarker = L.marker([d.latitude, d.longitude], {
+                                    icon: d.has_alert ? fireIcon : droneIcon
+                                });
+                                const popupHTML = generateDronePopupContent(d, project.project_name);
+                                dMarker.bindPopup(popupHTML);
+                                displayLayerGroup.addLayer(dMarker);
+                                bounds.push([d.latitude, d.longitude]);
+                            }
+                        });
+
                         project.parcelles.forEach(p => {
                             if (p.coordinates && p.coordinates.length > 0) {
                                 const poly = L.polygon(p.coordinates, { color: 'blue', weight: 2, fillOpacity: 0.1 });

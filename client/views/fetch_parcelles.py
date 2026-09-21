@@ -10,6 +10,7 @@ from supervisor.models.project          import Project
 from supervisor.models.parcelle         import Parcelle
 from supervisor.models.node             import Node
 from camera_management.models          import Camera, Detection
+from drone_management.models           import Drone
 
 
 
@@ -106,10 +107,43 @@ def fetch_parcelles_for_project(request):
         })
     
 
+    # Fetch Drones for the project — project-level, not tied to a parcelle
+    drones = Drone.objects.filter(project=project).prefetch_related(
+        Prefetch('detections', queryset=Detection.objects.order_by('-detected_at'), to_attr='latest_detections')
+    )
+    drone_data = []
+    for d in drones:
+        latest_detection = d.latest_detections[0] if d.latest_detections else None
+        image_url = None
+        if latest_detection and latest_detection.image:
+            try:
+                image_url = latest_detection.image.url
+            except ValueError:
+                pass
+
+        is_online = False
+        if d.last_seen:
+            is_online = (timezone.now() - d.last_seen) < timedelta(minutes=60)
+
+        drone_data.append({
+            'id': d.id,
+            'name': d.name,
+            'drone_id': d.drone_id,
+            'latitude': float(d.latitude) if d.latitude else None,
+            'longitude': float(d.longitude) if d.longitude else None,
+            'battery_level': d.battery_level,
+            'has_alert': latest_detection is not None and latest_detection.is_confirmed is not False,
+            'is_active': d.is_active,
+            'is_online': is_online and d.is_active,
+            'latest_alert_image': image_url,
+            'latest_alert_time': latest_detection.detected_at.strftime('%Y-%m-%d %H:%M:%S') if latest_detection else None
+        })
+
     return JsonResponse({
         'parcelles': parcelle_data,
         'city': city_data,
         'cameras': camera_data,
+        'drones': drone_data,
     })
 
 

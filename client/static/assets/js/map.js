@@ -116,6 +116,11 @@ document.addEventListener('DOMContentLoaded', function () {
         className: '',
         iconSize: [40, 40], iconAnchor: [20, 40], popupAnchor: [0, -40]
       });
+      const droneIcon = L.divIcon({
+        html: '<div style="background-color: white; border-radius: 50%; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.5); border: 2px solid #0ea5e9; font-size: 20px;">🚁</div>',
+        className: '',
+        iconSize: [36, 36], iconAnchor: [18, 36], popupAnchor: [0, -36]
+      });
 
       const markers = {}
       const polygons = {}
@@ -169,6 +174,23 @@ document.addEventListener('DOMContentLoaded', function () {
             // Index camera for locate logic
             if (!markers[camera.name]) markers[camera.name] = [];
             markers[camera.name].push(marker);
+          });
+        }
+
+        // --- ADDED: Creation of Drone markers — project-level, not tied to a parcelle ---
+        if (data.drones && data.drones.length > 0) {
+          data.drones.forEach(drone => {
+            if (drone.latitude == null || drone.longitude == null) return;
+            const marker = L.marker([drone.latitude, drone.longitude], {
+              icon: drone.has_alert ? fireIcon : droneIcon
+            });
+            const popupContent = generateDronePopupContent(drone);
+            marker.bindPopup(popupContent).addTo(map);
+            bounds.push([drone.latitude, drone.longitude]);
+
+            // Index drone for locate logic
+            if (!markers[drone.name]) markers[drone.name] = [];
+            markers[drone.name].push(marker);
           });
         }
 
@@ -304,6 +326,35 @@ document.addEventListener('DOMContentLoaded', function () {
                 </span><br>
                 ${alertContent}
                 ${camera.has_alert && !camera.latest_alert_image ? `<br><div class="alert alert-danger p-1 text-center" style="font-size:10px;">${t.check_logs || 'Check detection logs for images.'}</div>` : ''}
+            </div>
+        `
+  }
+
+  function generateDronePopupContent(drone) {
+    const t = window.MAP_TRANSLATIONS || {};
+    let alertContent = '';
+    if (drone.has_alert && drone.latest_alert_image) {
+      alertContent = `
+            <div style="margin-top: 10px; text-align: center;">
+                <p style="font-weight: bold; color: red; margin-bottom: 5px;">🔥 Latest Alert (${drone.latest_alert_time})</p>
+                <img src="${drone.latest_alert_image}" style="width: 100%; max-width: 200px; border-radius: 5px; border: 2px solid red;" alt="Alert Image" />
+            </div>
+        `;
+    }
+
+    return `
+            <div class="node-popup">
+                <div class="node-label" style="background-color: ${drone.has_alert ? 'red' : '#0ea5e9'}; color: white;">${t.drone || 'Drone'}</div>
+                <span class="badge ${drone.is_online ? 'bg-success' : 'bg-danger'}" style="float:right; color:white; font-size:9px; padding:2px 5px; border-radius:4px;">${drone.is_online ? (t.online || 'Online') : (t.offline || 'Offline')}</span><br>
+                <b>${t.name || 'Name'}:</b> ${drone.name}<br>
+                <b>Drone ID:</b> ${drone.drone_id}<br>
+                <b>Battery:</b> ${drone.battery_level != null ? drone.battery_level + '%' : 'N/A'}<br>
+                <b>${t.status || 'Status'}:</b> <span style="color: ${drone.is_online ? 'green' : 'red'}; font-weight: bold;">${drone.is_online ? (t.online || 'Online') : (t.offline || 'Offline')}</span><br>
+                <b>${t.alert_state || 'Alert State'}:</b>
+                <span style="color: ${drone.has_alert ? 'red' : 'green'}; font-weight: bold;">
+                    ${drone.has_alert ? (t.fire_detected_label || '🔥 FIRE DETECTED') : (t.safe_label || 'Safe')}
+                </span><br>
+                ${alertContent}
             </div>
         `
   }
